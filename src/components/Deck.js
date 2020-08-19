@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useSprings } from "react-spring/hooks";
-import { useGesture } from "react-with-gesture";
+import React, { useState } from "./node_modules/react";
+import { useSprings } from "./node_modules/react-spring/hooks";
+import { useGesture } from "./node_modules/react-with-gesture";
 
 import Card from "./Card";
 import Navigation from "./Navigation";
