@@ -1,19 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import HomeIcon from '@material-ui/icons/Home';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import PersonIcon from '@material-ui/icons/Person';
 
-const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
-});
+import "../styles/Navigation.css";
 
 export default function BottomNavigationSimple() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   return (
@@ -22,12 +16,11 @@ export default function BottomNavigationSimple() {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
-      showLabels
-      className={classes.root}
+      className={`bottomNavigation`}
     >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      <BottomNavigationAction icon={<NotificationsIcon />} />
+      <BottomNavigationAction icon={<HomeIcon />} />
+      <BottomNavigationAction icon={<PersonIcon />} />
     </BottomNavigation>
   );
 }

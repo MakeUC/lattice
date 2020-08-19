@@ -1,7 +1,7 @@
-import React from "./node_modules/react";
-import { string, number, array } from "./node_modules/prop-types";
-import { animated, interpolate } from "./node_modules/react-spring/hooks";
-import Carousel from "./node_modules/nuka-carousel";
+import React from "react";
+import { string, number, array } from "prop-types";
+import { animated, interpolate } from "react-spring/hooks";
+import Carousel from "nuka-carousel";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { name, age, distance, text, pics } = data[i];

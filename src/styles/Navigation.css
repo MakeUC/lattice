@@ -1,0 +1,8 @@
+.bottomNavigation {
+    height: max-content !important;
+    width: 100%;
+    position: fixed !important;
+    bottom: 0 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
