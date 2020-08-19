@@ -1,0 +1,6 @@
+.bottomNavigationSimple{
+    height: max-content !important;
+    width: 100%;
+    position: fixed !important;
+    bottom: 0 !important;
+}

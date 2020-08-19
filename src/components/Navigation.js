@@ -6,6 +6,8 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import './Navigation.css'
+
 const useStyles = makeStyles({
   root: {
     width: 500,
@@ -13,8 +15,8 @@ const useStyles = makeStyles({
 });
 
 export default function BottomNavigationSimple() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const classes = useStyles();
 
   return (
     <BottomNavigation
@@ -23,7 +25,7 @@ export default function BottomNavigationSimple() {
         setValue(newValue);
       }}
       showLabels
-      className={classes.root}
+      className={`bottomNavigationSimple`}
     >
       <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />

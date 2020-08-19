@@ -9,8 +9,8 @@
     "@material-ui/icons": "^4.9.1",
     "nuka-carousel": "^4.7.0",
     "prop-types": "^15.7.2",
-    "react": "16.7.0-alpha.0",
-    "react-dom": "16.7.0-alpha.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
     "react-scripts": "^3.4.3",
     "react-spring": "^7.2.8",
     "react-with-gesture": "^4.0.2"

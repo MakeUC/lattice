@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSprings } from "react-spring/hooks";
 import { useGesture } from "react-with-gesture";
+import BottomNavigationSimple from "./Navigation";
 
 import Card from "./Card";
 import data from "../data.js";
 
 import "../styles/Deck.css";
+import NativeSelectInput from "@material-ui/core/NativeSelect/NativeSelectInput";
 
 const to = (i) => ({
   x: 0,
@@ -71,18 +73,20 @@ function Deck() {
     }
   );
 
-  return props.map(({ x, y, rot, scale }, i) => (
-    <Card
-      i={i}
-      x={x}
-      y={y}
-      rot={rot}
-      scale={scale}
-      trans={trans}
-      data={data}
-      bind={bind}
-    />
-  ));
+  return (
+      props.map(({x, y, rot, scale}, i) => (
+            <Card
+                i={i}
+                x={x}
+                y={y}
+                rot={rot}
+                scale={scale}
+                trans={trans}
+                data={data}
+                bind={bind}
+            />
+        ))
+  );
 }
 
 export default Deck;
