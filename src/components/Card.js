@@ -1,34 +1,96 @@
 import React from "react";
-import { string, number, array } from "prop-types";
+import { string, array } from "prop-types";
 import { animated, interpolate } from "react-spring/hooks";
-import Carousel from "nuka-carousel";
+
+import "../styles/Card.css";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
-  const { name, age, distance, text, pics } = data[i];
+  const { skills, name, idea, lookingFor } = data[i];
 
   return (
     <animated.div
       key={i}
       style={{
-        transform: interpolate([x, y], (x, y) => `translate3d(${x}px,${y}px,0)`)
+        transform: interpolate(
+          [x, y],
+          (x, y) => `translate3d(${x}px,${y}px,0)`
+        ),
       }}
     >
       <animated.div
         {...bind(i)}
         style={{
-          transform: interpolate([rot, scale], trans)
+          transform: interpolate([rot, scale], trans),
         }}
       >
-        <div className="card">
-          <Carousel>
-            {pics.map((pic, index) => (
-              <img src={pic} key={index} alt="profilePicture" />
+        <div
+          style={{
+            textAlign: `center`,
+          }}
+        >
+          <h1
+            style={{
+              fontWeight: `800px`,
+            }}
+          >
+            {name}
+          </h1>
+          <h3>Project Idea</h3>
+          <div
+            style={{
+              marginTop: `-5px`,
+              marginLeft: `15px`,
+              marginRight: `15px`,
+              marginBottom: `35px`,
+              borderRadius: `10px`,
+            }}
+          >
+            <h3>{idea}</h3>
+          </div>
+          <h3>Offering</h3>
+          <div
+            style={{
+              padding: `25px`,
+              marginTop: `-45px`,
+              marginLeft: `15px`,
+              marginRight: `15px`,
+              display: `flex`,
+              overflow: `hidden`,
+              borderRadius: `10px`,
+            }}
+          >
+            {skills.map((skill) => (
+              <i
+                className={skill.icon}
+                style={{
+                  padding: `10px`,
+                  fontSize: `50px`,
+                }}
+              ></i>
             ))}
-          </Carousel>
-          <h2>{name},</h2>
-          <h2>{age}</h2>
-          <h5>{distance}</h5>
-          <h5>{text}</h5>
+          </div>
+          <h3>Looking For</h3>
+          <div
+            style={{
+              padding: `25px`,
+              marginTop: `-45px`,
+              marginLeft: `15px`,
+              marginRight: `15px`,
+              display: `flex`,
+              overflow: `hidden`,
+              borderRadius: `10px`,
+            }}
+          >
+            {lookingFor.map((look) => (
+              <i
+                className={look.icon}
+                style={{
+                  padding: `10px`,
+                  fontSize: `50px`,
+                }}
+              ></i>
+            ))}
+          </div>
         </div>
       </animated.div>
     </animated.div>
@@ -36,11 +98,10 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
 };
 
 Card.propTypes = {
+  skills: array,
   name: string,
-  age: number,
-  distance: string,
-  text: string,
-  pics: array
+  idea: string,
+  lookingFor: array,
 };
 
 export default Card;
