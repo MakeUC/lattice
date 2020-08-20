@@ -1,6 +1,6 @@
 # Lattice Client
 
-> React PWA to match developers for team formation purposes. 
+React PWA to match developers for team formation purposes. 
 
 ## Getting Started
 
