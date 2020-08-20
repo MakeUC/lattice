@@ -1,13 +1,10 @@
 import React from "react";
-import Deck from "./components/Deck";
-import Navigation from "./components/Navigation";
+
+import Home from "./pages/home/Home";
 
 const App = () => {
     return (
-        <>
-            <Deck />
-            <Navigation />
-        </>
+        <Home />
     )
 }
 
