@@ -2,19 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import LaunchIcon from '@material-ui/icons/Launch';
 
 const action = (
-    <>
-        <Button color="secondary" size="small">
-            Remove
-        </Button>
-        <Button color="secondary" size="small">
-            View
-        </Button>
-        <Button color="secondary" size="small">
-            Send Message
-        </Button>
-    </>
+  <Button color="secondary" size="small">
+      <LaunchIcon />
+  </Button>
 );
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +24,7 @@ export default function LongTextSnackbar() {
 
   return (
     <div className={classes.root}>
-      <SnackbarContent message="Slack Username" action={action} />
+      <SnackbarContent message="You matched with {{ user.name }}" action={action} />
     </div>
   );
 }
