@@ -7,6 +7,8 @@ import "../styles/Card.css";
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { skills, name, idea, lookingFor } = data[i];
 
+  const skillRows = [ skills.slice(0, 3), skills.slice(3, 6) ];
+
   return (
     <animated.div
       key={i}
@@ -45,30 +47,33 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
               borderRadius: `10px`,
             }}
           >
-            <h3>{idea}</h3>
+            <p>{idea}</p>
           </div>
           <h3>Offering</h3>
-          <div
-            style={{
-              padding: `25px`,
-              marginTop: `-45px`,
-              marginLeft: `15px`,
-              marginRight: `15px`,
-              display: `flex`,
-              overflow: `hidden`,
-              borderRadius: `10px`,
-            }}
-          >
-            {skills.map((skill) => (
-              <i
-                className={skill.icon}
-                style={{
-                  padding: `10px`,
-                  fontSize: `50px`,
-                }}
-              ></i>
-            ))}
-          </div>
+          {skillRows.map(row => row.length &&
+            <div
+              style={{
+                padding: `25px`,
+                marginTop: `-45px`,
+                marginLeft: `15px`,
+                marginRight: `15px`,
+                display: `flex`,
+                borderRadius: `10px`
+              }}
+            >
+              {row.map(skill => (
+                <>
+                  <i
+                    className={skill.icon}
+                    style={{
+                      padding: `10px`,
+                      fontSize: `50px`,
+                    }}
+                  ></i>
+                </>
+              ))}
+            </div>
+          )}
           <h3>Looking For</h3>
           <div
             style={{

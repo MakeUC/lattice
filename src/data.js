@@ -349,7 +349,7 @@ export default [
     lookingFor: [js, typescript, net],
   },
   {
-    skills: [python, cpp, net],
+    skills: [python, cpp, net, js, java, aws],
     name: "John",
     idea:
       " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
