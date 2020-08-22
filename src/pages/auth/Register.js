@@ -5,7 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import SlackIcon from "@material-ui/icons/AlternateEmail";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PassOutlinedIcon from "@material-ui/icons/VpnKeyOutlined";
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRightOutlined';
 import { Button } from "@material-ui/core";
+
+import SkillList from "../../components/SkillList";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -54,6 +57,24 @@ export default function InputWithIcon() {
           </Grid>
           <Grid item>
             <TextField id="input-with-icon-grid" label="Confirm Password" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <KeyboardArrowRightIcon />
+          </Grid>
+          <Grid item>
+            <TextField id="input-with-icon-grid" label="Project Idea" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <SkillList />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <SkillList />
           </Grid>
         </Grid>
       </div>
