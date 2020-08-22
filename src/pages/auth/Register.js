@@ -1,14 +1,14 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import SlackIcon from "@material-ui/icons/AlternateEmail";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import PassOutlinedIcon from "@material-ui/icons/VpnKeyOutlined";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import SlackIcon from '@material-ui/icons/AlternateEmail';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PassOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRightOutlined';
-import { Button } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
-import SkillList from "../../components/SkillList";
+import SkillList from '../../components/SkillList';
 
 const useStyles = makeStyles((theme) => ({
   margin: {

@@ -1,16 +1,10 @@
-import React from "react";
-import Deck from "../../components/Deck";
-import Navigation from "../../components/Navigation";
-import AppBar from "../../components/AppBar";
-import Profile from '../profile/Profile';
+import React from 'react';
+import Deck from '../../components/Deck';
 
-export default function Home() {
+export default function() {
   return (
     <>
-      <AppBar />
-      {/* <Deck /> */}
-      <Profile />
-      <Navigation />
+      <Deck />
     </>
   );
 }

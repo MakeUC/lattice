@@ -1,9 +1,8 @@
-import React from "react";
-
-import Home from "./pages/home/Home";
+import React from 'react';
+import Layout from './layout/Layout';
 
 const App = () => {
-  return <Home />;
+  return <Layout />;
 };
 
 export default App;
