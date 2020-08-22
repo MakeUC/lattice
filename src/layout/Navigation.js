@@ -13,11 +13,17 @@ function NavAction({ navigate, ...rest }) {
 }
 
 export default function() {
-  return (
+  return <>
     <BottomNavigation className="bottomNavigation" >
-      <Link to="/notifications" icon={<NotificationsIcon />} component={NavAction} />
-      <Link to="/" icon={<HomeIcon />} component={NavAction} />
-      <Link to="/profile" icon={<PersonIcon />} component={NavAction} />
+      <Link to="/notifications">
+        <NavAction icon={<NotificationsIcon />} />
+      </Link>
+      <Link to="/">
+        <NavAction icon={<HomeIcon />} />
+      </Link>
+      <Link to="/profile">
+        <NavAction icon={<PersonIcon />} />
+      </Link>
     </BottomNavigation>
-  );
+  </>;
 }
