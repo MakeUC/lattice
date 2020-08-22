@@ -70,18 +70,21 @@ function Deck() {
     }
   );
 
-  return props.map(({ x, y, rot, scale }, i) => (
-    <Card
-      i={i}
-      x={x}
-      y={y}
-      rot={rot}
-      scale={scale}
-      trans={trans}
-      data={data}
-      bind={bind}
-    />
-  ));
+  return <div className="deck">
+    {props.map(({ x, y, rot, scale }, i) => (
+      <Card
+        key={i}
+        i={i}
+        x={x}
+        y={y}
+        rot={rot}
+        scale={scale}
+        trans={trans}
+        data={data}
+        bind={bind}
+      />
+    ))}
+  </div>;
 }
 
 export default Deck;

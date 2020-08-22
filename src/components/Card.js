@@ -50,8 +50,9 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
             <p>{idea}</p>
           </div>
           <h3>Offering</h3>
-          {skillRows.map(row => row.length &&
+          {skillRows.map((row, index) => row.length &&
             <div
+              key={index}
               style={{
                 padding: `25px`,
                 marginTop: `-45px`,
@@ -62,15 +63,14 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
               }}
             >
               {row.map(skill => (
-                <>
-                  <i
-                    className={skill.icon}
-                    style={{
-                      padding: `10px`,
-                      fontSize: `50px`,
-                    }}
-                  ></i>
-                </>
+                <i
+                  key={skill.title}
+                  className={skill.icon}
+                  style={{
+                    padding: `10px`,
+                    fontSize: `50px`,
+                  }}
+                />
               ))}
             </div>
           )}
@@ -88,6 +88,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
           >
             {lookingFor.map((look) => (
               <i
+                key={look.title}
                 className={look.icon}
                 style={{
                   padding: `10px`,
