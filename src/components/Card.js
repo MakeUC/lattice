@@ -1,13 +1,29 @@
-import React from 'react';
-import { string, array } from 'prop-types';
-import { animated, interpolate } from 'react-spring/hooks';
+import React from "react";
+import { string, array } from "prop-types";
+import { animated, interpolate } from "react-spring/hooks";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
-import '../styles/Card.css';
+import "../styles/Card.css";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { skills, name, idea, lookingFor } = data[i];
 
-  const skillRows = [ skills.slice(0, 3), skills.slice(3, 6) ];
+  const skillRows = [skills.slice(0, 3), skills.slice(3, 6)];
+
+  const classes = useStyles();
 
   return (
     <animated.div
@@ -32,7 +48,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
         >
           <h1
             style={{
-              fontWeight: `800px`,
+              fontSize: `28px`,
+              fontWeight: `600px`,
             }}
           >
             {name}
@@ -45,34 +62,45 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
               marginRight: `15px`,
               marginBottom: `35px`,
               borderRadius: `10px`,
+              paddingBottom: `0px`,
             }}
           >
-            <p>{idea}</p>
-          </div>
-          <h3>Offering</h3>
-          {skillRows.map((row, index) => row.length &&
-            <div
-              key={index}
+            <p
               style={{
-                padding: `25px`,
-                marginTop: `-45px`,
-                marginLeft: `15px`,
-                marginRight: `15px`,
-                display: `flex`,
-                borderRadius: `10px`
+                fontSize: `13px`,
               }}
             >
-              {row.map(skill => (
-                <i
-                  key={skill.title}
-                  className={skill.icon}
+              {idea}
+            </p>
+          </div>
+          <h3>Offering</h3>
+          {skillRows.map(
+            (row, index) =>
+              row.length && (
+                <div
+                  key={index}
                   style={{
-                    padding: `10px`,
-                    fontSize: `50px`,
+                    padding: `25px`,
+                    paddingBottom: `10px`,
+                    marginTop: `-45px`,
+                    marginLeft: `15px`,
+                    marginRight: `15px`,
+                    display: `flex`,
+                    borderRadius: `10px`,
                   }}
-                />
-              ))}
-            </div>
+                >
+                  {row.map((skill) => (
+                    <i
+                      key={skill.title}
+                      className={skill.icon}
+                      style={{
+                        padding: `10px`,
+                        fontSize: `50px`,
+                      }}
+                    />
+                  ))}
+                </div>
+              )
           )}
           <h3>Looking For</h3>
           <div

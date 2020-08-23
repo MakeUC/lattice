@@ -1,7 +1,7 @@
-import React from 'react';
-import Deck from '../../components/Deck';
+import React from "react";
+import Deck from "../../components/Deck";
 
-export default function() {
+export default function () {
   return (
     <>
       <Deck />
