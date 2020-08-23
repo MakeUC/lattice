@@ -1,29 +1,13 @@
 import React from "react";
 import { string, array } from "prop-types";
 import { animated, interpolate } from "react-spring/hooks";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 
 import "../styles/Card.css";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { skills, name, idea, lookingFor } = data[i];
 
   const skillRows = [skills.slice(0, 3), skills.slice(3, 6)];
-
-  const classes = useStyles();
 
   return (
     <animated.div
