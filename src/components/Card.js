@@ -2,7 +2,7 @@ import React from "react";
 import { string, array } from "prop-types";
 import { animated, interpolate } from "react-spring/hooks";
 
-import "../styles/Card.css";
+import "../styles/Card.scss";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { skills, name, idea, lookingFor } = data[i];
@@ -25,19 +25,14 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
           transform: interpolate([rot, scale], trans),
         }}
       >
-        <div
+        <div className="font-opensans"
           style={{
             textAlign: `center`,
           }}
         >
-          <h1
-            style={{
-              fontSize: `28px`,
-              fontWeight: `600px`,
-            }}
-          >
+          <h2 className="name">
             {name}
-          </h1>
+          </h2>
           <h3>Project Idea</h3>
           <div
             style={{
@@ -94,7 +89,6 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
               marginLeft: `15px`,
               marginRight: `15px`,
               display: `flex`,
-              overflow: `hidden`,
               borderRadius: `10px`,
             }}
           >

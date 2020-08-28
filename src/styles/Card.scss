@@ -1,0 +1,21 @@
+@import "~tachyons";
+@import "variables";
+@import "font";
+
+.name {
+  @extend .font-merriweather;
+  @extend .font-primary;
+  @extend .tc;
+  text-decoration: underline;
+  text-decoration-color: $secondary-dark;
+}
+
+h2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600px;
+}
