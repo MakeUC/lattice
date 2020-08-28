@@ -110,7 +110,6 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
               marginLeft: `15px`,
               marginRight: `15px`,
               display: `flex`,
-              overflow: `hidden`,
               borderRadius: `10px`,
             }}
           >

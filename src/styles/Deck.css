@@ -12,7 +12,6 @@ body {
   user-select: none;
   font-family: Raleway, sans-serif;
   position: fixed;
-  overflow: hidden;
   background: #211d39;
 }
 
@@ -70,7 +69,6 @@ h5:last-of-type {
 
 .card > div {
   height: 100px !important;
-  overflow: none !important;
   display: flex !important;
   flex-wrap: flex !important;
 }
