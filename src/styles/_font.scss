@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap");
+@import "variables";
+
+.font-merriweather {
+  font-family: 'Merriweather', serif;
+}
+
+.font-opensans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.font-black {
+  color: $black;
+}
+
+.font-primary-dark {
+  color: $primary-dark;
+}
+
+.font-primary {
+  color: $primary;
+}
+
+.font-secondary {
+  color: $secondary;
+}
+
+.font-secondary-dark {
+  color: $secondary-dark;
+}
+
+.font-white {
+  color: $white;
+}
+
+.font-gray {
+  color: $gray;
+}

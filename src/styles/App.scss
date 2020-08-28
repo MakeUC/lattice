@@ -1,49 +1,6 @@
 @import "~tachyons";
-@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap");
-
-$black: #000;
-$primary-dark: #211D39;
-$primary: #8174ff;
-$secondary-dark: #8ae9c1;
-$secondary: #a0eec0;
-$white: #fff8f8;
-$gray: #616161;
-
-.font-merriweather {
-  font-family: 'Merriweather', serif;
-}
-
-.font-opensans {
-  font-family: "Open Sans", sans-serif;
-}
-
-.font-black {
-  color: $black;
-}
-
-.font-primary-dark {
-  color: $primary-dark;
-}
-
-.font-primary {
-  color: $primary;
-}
-
-.font-secondary {
-  color: $secondary;
-}
-
-.font-secondary-dark {
-  color: $secondary-dark;
-}
-
-.font-white {
-  color: $white;
-}
-
-.font-gray {
-  color: $gray;
-}
+@import "variables";
+@import "font";
 
 .title {
   @extend .font-merriweather;
