@@ -26,21 +26,21 @@ export default function InputWithIcon() {
                         Discover and connect with MakeUC 2020 hackers from across the world!
                     </p>
                     <div className={classes.margin}>
-                        <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                            <Grid className="register-icon" item>
+                        <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                            <Grid className="lattice-icon" item>
                                 <MailOutlineIcon/>
                             </Grid>
-                            <p className="register-form-label mb0 font-gray">Email Address</p>
-                            <Grid item className="register-form-input">
+                            <p className="lattice-form-label mb0 font-gray">Email Address</p>
+                            <Grid item className="lattice-form-input">
                                 <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                            <Grid item className="register-icon">
+                        <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                            <Grid item className="lattice-icon">
                                 <PassOutlinedIcon/>
                             </Grid>
-                            <p className="register-form-label mb0 font-gray">Password</p>
-                            <Grid item className="register-form-input">
+                            <p className="lattice-form-label mb0 font-gray">Password</p>
+                            <Grid item className="lattice-form-input">
                                 <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                             </Grid>
                         </Grid>

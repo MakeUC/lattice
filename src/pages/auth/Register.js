@@ -10,7 +10,7 @@ import {Button, Container} from '@material-ui/core';
 
 import SkillList from '../../components/SkillList';
 
-import "../../styles/Register.scss"
+import "../../styles/Form.scss"
 import {AssignmentTurnedIn} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,56 +27,56 @@ export default function InputWithIcon() {
             <div className="bg-white mt5 pa3 pl5 pr5 register br3">
                 <h1 className="title">Create Account</h1>
                 <div className={classes.margin + " font-opensans"}>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid className="register-icon" item>
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid className="lattice-icon" item>
                             <MailOutlineIcon/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Email Address</p>
-                        <Grid item className="register-form-input">
+                        <p className="lattice-form-label mb0 font-gray">Email Address</p>
+                        <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid item className="register-icon">
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid item className="lattice-icon">
                             <SlackIcon/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Slack Username</p>
-                        <Grid item className="register-form-input">
+                        <p className="lattice-form-label mb0 font-gray">Slack Username</p>
+                        <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid item className="register-icon">
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid item className="lattice-icon">
                             <PassOutlinedIcon/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Password</p>
-                        <Grid item className="register-form-input">
+                        <p className="lattice-form-label mb0 font-gray">Password</p>
+                        <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid item className="register-icon">
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid item className="lattice-icon">
                             <PassOutlinedIcon/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Confirm Password</p>
-                        <Grid item className="register-form-input">
+                        <p className="lattice-form-label mb0 font-gray">Confirm Password</p>
+                        <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid item className="register-icon">
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid item className="lattice-icon">
                             <KeyboardArrowRightIcon/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Project Idea</p>
-                        <Grid item className="register-form-input">
+                        <p className="lattice-form-label mb0 font-gray">Project Idea</p>
+                        <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={4} className="mb3 register-form-band" alignItems="flex-end">
-                        <Grid className="register-icon" item>
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid className="lattice-icon" item>
                             <AssignmentTurnedIn/>
                         </Grid>
-                        <p className="register-form-label mb0 font-gray">Skill List</p>
+                        <p className="lattice-form-label mb0 font-gray">Skill List</p>
                         <Grid item>
                             <SkillList/>
                         </Grid>
