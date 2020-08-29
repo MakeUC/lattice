@@ -70,7 +70,7 @@ function Deck() {
     }
   );
 
-  return <div className="deck">
+  return <div className="deck" style={{ position: `fixed` }}>
     {props.map(({ x, y, rot, scale }, i) => (
       <Card
         key={i}

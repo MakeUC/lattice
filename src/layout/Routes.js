@@ -21,15 +21,18 @@ export default function({ children }) {
         </Route>
         <Route path="/notifications">
           <Notifications />
+          {children}
         </Route>
         <Route path="/profile">
           <Profile />
+          {children}
         </Route>
         <Route path="/">
           <Home />
+          {children}
         </Route>
       </Switch>
-      {children}
+      {/* {children} */}
     </BrowserRouter>
   );
 }

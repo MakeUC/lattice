@@ -11,14 +11,19 @@ body {
   width: 100%;
   user-select: none;
   font-family: Raleway, sans-serif;
-  position: fixed;
-  background: #211d39;
+  /* position: fixed; */
+  /* background: #211d39; */
+  background-image: url('https://makeuc.io/static/background-8ec48e44041d9171d929a7f0ca69549a.png');
+}
+
+.deck {
+  padding-top: 50px;
 }
 
 .deck > div {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  /* height: 90vh; */
   will-change: transform;
   display: flex;
   align-items: center;

@@ -55,7 +55,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
           <h3>Offering</h3>
           {skillRows.map(
             (row, index) =>
-              row.length && (
+              !!row.length && (
                 <div
                   key={index}
                   style={{
