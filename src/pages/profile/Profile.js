@@ -19,8 +19,8 @@ export default function InputWithIcon() {
     const classes = useStyles();
 
     return (
-        <Container>
-            <div className="bg-white mt5 pa3 pl5 pr5 register br3">
+        <Container className="nav-bar-margin">
+            <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Lattice Account</h1>
                 <div className="mb4">
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
@@ -36,7 +36,7 @@ export default function InputWithIcon() {
                         <p className="lattice-form-label mb0 font-gray">MakeUC</p>
                     </Grid>
                 </div>
-                <Button variant="contained" className="center profile-button" color="primary">Change Username</Button>
+                <Button variant="contained" className="center profile-button" color="primary">Edit Profile</Button>
                 <Button variant="contained" className="center profile-button" color="primary">Change Password</Button>
             </div>
         </Container>

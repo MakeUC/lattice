@@ -19,7 +19,7 @@ export default function InputWithIcon() {
 
     return (
         <Container>
-            <div className="bg-white mt5 pa3 pl5 pr5 register br3">
+            <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Lattice Log In</h1>
                 <div className="font-opensans tc mb4">
                     <p className="mb4">

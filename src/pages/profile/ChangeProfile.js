@@ -22,9 +22,9 @@ export default function InputWithIcon() {
     const classes = useStyles();
 
     return (
-        <Container className={classes.root}>
+        <Container className={classes.root + " nav-bar-margin"}>
             <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
-                <h1 className="title">Create Account</h1>
+                <h1 className="title">Your Profile</h1>
                 <div className={classes.margin + " font-opensans"}>
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                         <Grid className="lattice-icon" item>
@@ -47,20 +47,61 @@ export default function InputWithIcon() {
                     </Grid>
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                         <Grid item className="lattice-icon">
-                            <PassOutlinedIcon/>
+                            <KeyboardArrowRightIcon/>
                         </Grid>
-                        <p className="lattice-form-label mb0 font-gray">Password</p>
+                        <p className="lattice-form-label mb0 font-gray">Project Idea</p>
                         <Grid item className="lattice-form-input">
                             <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
                         </Grid>
                     </Grid>
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
-                        <Grid item className="lattice-icon">
-                            <PassOutlinedIcon/>
+                        <Grid className="lattice-icon" item>
+                            <AssignmentTurnedIn/>
                         </Grid>
-                        <p className="lattice-form-label mb0 font-gray">Confirm Password</p>
+                        <p className="lattice-form-label mb0 font-gray">Providing</p>
+                        <div className="lattice-form-note">Please select only 6. Anymore would be ignored</div>
                         <Grid item className="lattice-form-input">
-                            <TextField id="input-with-icon-grid" fullWidth variant="outlined"/>
+                            <Autocomplete
+                                multiple
+                                id="tags-outlined"
+                                options={allSkills} // TODO: Need to be taken from DB ideally
+                                getOptionLabel={(option) => option.title}
+                                defaultValue={[allSkills[3]]}
+                                filterSelectedOptions
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        variant="outlined"
+                                        label=""
+                                        placeholder="Skills"
+                                    />
+                                )}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                        <Grid className="lattice-icon" item>
+                            <AssignmentTurnedIn/>
+                        </Grid>
+                        <p className="lattice-form-label mb0 font-gray">Looking For</p>
+                        <div className="lattice-form-note">Please select only 3. Anymore would be ignored</div>
+                        <Grid item className="lattice-form-input">
+                            <Autocomplete
+                                multiple
+                                id="tags-outlined"
+                                options={allSkills} // TODO: Need to be taken from DB ideally
+                                getOptionLabel={(option) => option.title}
+                                defaultValue={[allSkills[3]]}
+                                filterSelectedOptions
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        variant="outlined"
+                                        label=""
+                                        placeholder="Skills"
+                                    />
+                                )}
+                            />
                         </Grid>
                     </Grid>
                 </div>
@@ -78,7 +119,3 @@ const allSkills = [
     {title: 'Node'},
     {title: 'Python'},
 ];
-/*
-
-
- */

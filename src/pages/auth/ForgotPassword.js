@@ -16,7 +16,7 @@ export default function () {
 
     return (
         <Container>
-            <div className="bg-white mt5 pa3 pl5 pr5 register br3">
+            <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Reset Password</h1>
                 <div className="mb4">
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
