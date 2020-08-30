@@ -36,7 +36,7 @@ export default function InputWithIcon() {
                         <p className="lattice-form-label mb0 font-gray">MakeUC</p>
                     </Grid>
                 </div>
-                <Button variant="contained" className="center profile-button" color="primary">Change Username</Button>
+                <Button variant="contained" className="center profile-button" color="primary">Edit Profile</Button>
                 <Button variant="contained" className="center profile-button" color="primary">Change Password</Button>
             </div>
         </Container>
