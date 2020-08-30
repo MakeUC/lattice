@@ -23,7 +23,7 @@ export default function InputWithIcon() {
 
     return (
         <Container className={classes.root}>
-            <div className="bg-white mt3 mt5-ns pa3 pl5-ns pr5-ns br3">
+            <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Create Account</h1>
                 <div className={classes.margin + " font-opensans"}>
                     <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
