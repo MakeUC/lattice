@@ -22,7 +22,7 @@ export default function InputWithIcon() {
     const classes = useStyles();
 
     return (
-        <Container className={classes.root}>
+        <Container className={classes.root + " nav-bar-margin"}>
             <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Your Profile</h1>
                 <div className={classes.margin + " font-opensans"}>

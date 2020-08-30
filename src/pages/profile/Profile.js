@@ -19,7 +19,7 @@ export default function InputWithIcon() {
     const classes = useStyles();
 
     return (
-        <Container>
+        <Container className="nav-bar-margin">
             <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
                 <h1 className="title">Lattice Account</h1>
                 <div className="mb4">

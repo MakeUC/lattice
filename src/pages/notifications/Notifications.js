@@ -28,7 +28,7 @@ export default function LongTextSnackbar() {
     const classes = useStyles();
 
     return (
-        <Container className={classes.root}>
+        <Container className={classes.root + " nav-bar-margin"}>
             <div className="pa4">
                 <SnackbarContent className={classes.snackbar} message="You matched with {{ user.name }}" action={action}/>
             </div>
