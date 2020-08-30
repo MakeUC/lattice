@@ -5,6 +5,8 @@ import Login from '../pages/auth/Login';
 import Notifications from '../pages/notifications/Notifications';
 import Profile from '../pages/profile/Profile';
 import Home from '../pages/home/Home';
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import ChangeProfile from "../pages/profile/ChangeProfile";
 
 export default function({ children }) {
   return (
@@ -17,7 +19,7 @@ export default function({ children }) {
           <Login />
         </Route>
         <Route path="/auth/reset">
-          {/* <Reset /> */}
+          <ForgotPassword />
         </Route>
         <Route path="/notifications">
           <Notifications />
@@ -27,12 +29,15 @@ export default function({ children }) {
           <Profile />
           {children}
         </Route>
+        <Route path="/your_profile">
+          <ChangeProfile />
+          {children}
+        </Route>
         <Route path="/">
           <Home />
           {children}
         </Route>
       </Switch>
-      {/* {children} */}
     </BrowserRouter>
   );
 }
