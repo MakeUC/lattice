@@ -336,7 +336,7 @@ const net = {
 export default [
   {
     skills: [js, aws, java],
-    name: "Jane",
+    name: "Alice",
     idea:
       " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
     lookingFor: [cpp, java, aws],
@@ -350,9 +350,58 @@ export default [
   },
   {
     skills: [python, cpp, net, js, java, aws],
-    name: "John",
+    name: "Cheryl",
     idea:
       " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
     lookingFor: [cpp, java, aws],
   },
+  {
+    skills: [js, aws, java],
+    name: "Dave",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [cpp, java, aws],
+  },
+  {
+    skills: [js, java, typescript],
+    name: "Eddie",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [js, typescript, net],
+  },
+  {
+    skills: [python, cpp, net, js, java, aws],
+    name: "Frank",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [cpp, java, aws],
+  },
+  {
+    skills: [python, cpp, net, js, java, aws],
+    name: "Grant",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [cpp, java, aws],
+  },
+  {
+    skills: [js, aws, java],
+    name: "Henry",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [cpp, java, aws],
+  },
+  {
+    skills: [js, java, typescript],
+    name: "Issac",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [js, typescript, net],
+  },
+  {
+    skills: [python, cpp, net, js, java, aws],
+    name: "John",
+    idea:
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan.",
+    lookingFor: [cpp, java, aws],
+  }
 ];
