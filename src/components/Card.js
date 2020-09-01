@@ -26,7 +26,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
           boxShadow: interpolate(
             [x], (x) => {
               if(x > -5 && x < 5) return null;
-              const color = x > 0 ? `rgba(0, 200, 0, 0.5)` : `rgba(255, 0, 0, 0.5)`;
+              const opacity = Math.abs(x)/300;
+              const color = x > 0 ? `rgba(0, 255, 0, ${opacity})` : `rgba(255, 0, 0, ${opacity})`;
               return `${x*1.5}px 0 80px -80px ${color} inset`;
             }
           )
