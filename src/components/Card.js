@@ -16,13 +16,20 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
         transform: interpolate(
           [x, y],
           (x, y) => `translate3d(${x}px,${y}px,0)`
-        ),
+        )
       }}
     >
       <animated.div
         {...bind(i)}
         style={{
           transform: interpolate([rot, scale], trans),
+          boxShadow: interpolate(
+            [x], (x) => {
+              if(x > -5 && x < 5) return null;
+              const color = x > 0 ? `rgba(0, 200, 0, 0.5)` : `rgba(255, 0, 0, 0.5)`;
+              return `${x*1.5}px 0 80px -80px ${color} inset`;
+            }
+          )
         }}
       >
         <div className="font-opensans"

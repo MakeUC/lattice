@@ -8,7 +8,7 @@ import '../styles/Deck.css';
 
 const to = (i) => ({
   x: 0,
-  y: i * -10,
+  y: i * -3,
   scale: 1,
   rot: -5 + Math.random() * 10,
   delay: i * 100,
@@ -29,6 +29,14 @@ function Deck() {
     from: from(i),
   }));
 
+  const onSwipe = (profile, direction) => {
+    console.log(`onSwipe: ${profile.name} is gone to ${direction}`);
+  };
+
+  const onFinish = () => {
+    console.log(`onFinish: End of cards`);
+  };
+
   const bind = useGesture(
     ({
       args: [index],
@@ -42,6 +50,7 @@ function Deck() {
       const dir = xDir < 0 ? -1 : 1;
 
       if (!down && trigger) {
+        onSwipe(data[index], dir);
         gone.add(index);
       }
 
@@ -65,6 +74,7 @@ function Deck() {
       });
 
       if (!down && gone.size === data.length) {
+        onFinish();
         setTimeout(() => gone.clear() || set((i) => to(i)), 600);
       }
     }

@@ -43,8 +43,8 @@ body {
   max-height: 550px;
   will-change: transform;
   border-radius: 10px;
-  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
-    0 10px 10px -10px rgba(9, 9, 150, 0.3);
+  box-shadow: 0 12.5px 40px -10px rgba(160, 238, 192, 0.2),
+    0 10px 10px -10px rgba(33, 29, 57, 0.3);
 }
 
 img {
