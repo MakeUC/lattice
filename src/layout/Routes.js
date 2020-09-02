@@ -7,35 +7,47 @@ import Profile from '../pages/profile/Profile';
 import Home from '../pages/home/Home';
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ChangeProfile from "../pages/profile/ChangeProfile";
+import AuthRoute from './AuthRoute';
+import AppRoute from './AppRoute';
 
 export default function({ children }) {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/auth/register">
-          <Register />
+        <Route path="/auth/register/:registrantId">
+          <AuthRoute>
+            <Register />
+          </AuthRoute>
         </Route>
         <Route path="/auth/login">
-          <Login />
+          <AuthRoute>
+            <Login />
+          </AuthRoute>
         </Route>
         <Route path="/auth/reset">
-          <ForgotPassword />
+          <AuthRoute>
+            <ForgotPassword />
+          </AuthRoute>
         </Route>
         <Route path="/notifications">
-          <Notifications />
-          {children}
+          <AppRoute>
+            <Notifications />
+          </AppRoute>
         </Route>
         <Route path="/profile">
-          <Profile />
-          {children}
+          <AppRoute>
+            <Profile />
+          </AppRoute>
         </Route>
         <Route path="/your_profile">
-          <ChangeProfile />
-          {children}
+          <AppRoute>
+            <ChangeProfile />
+          </AppRoute>
         </Route>
         <Route path="/">
-          <Home />
-          {children}
+          <AppRoute>
+            <Home />
+          </AppRoute>
         </Route>
       </Switch>
     </BrowserRouter>
