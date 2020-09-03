@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem(tokenStorageKey);
-    setToken(``);
+    setToken(null);
   };
 
   const contextValue = {

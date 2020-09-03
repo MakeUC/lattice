@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 export default function({ children }) {
   const { token } = useAuth();
 
-  if(!token) return <Redirect to="/auth/login" />;
+  if(token === null) return <Redirect to="/auth/login" />;
 
   return <>{children}<Navigation /></>;
 };

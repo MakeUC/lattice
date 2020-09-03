@@ -2,7 +2,7 @@ import React from "react";
 import { string, array } from "prop-types";
 import { animated, interpolate } from "react-spring/hooks";
 
-import "../styles/Card.scss";
+import "../../styles/Card.scss";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
   const { skills, name, idea, lookingFor } = data[i];
