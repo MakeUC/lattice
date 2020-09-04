@@ -1,6 +1,7 @@
 import Axios from 'axios';
+import { apiHost } from './Api';
 
-const apiUrl = `http://localhost:3000/auth`;
+const apiUrl = `${apiHost}/auth`;
 
 export default {
 
