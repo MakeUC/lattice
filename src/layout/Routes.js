@@ -10,9 +10,9 @@ import ChangeProfile from "../pages/profile/ChangeProfile";
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
 
-export default function({ children }) {
+export default function() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/lattice-client">
       <Switch>
         <Route path="/auth/register/:registrantId">
           <AuthRoute>
