@@ -1,11 +1,11 @@
 import React from 'react';
+import Providers from './Providers';
 import Routes from './Routes';
-import Navigation from './Navigation';
 
 export default function() {
   return <>
-    <Routes>
-      <Navigation />
-    </Routes>
+    <Providers>
+      <Routes />
+    </Providers>
   </>;
 }
