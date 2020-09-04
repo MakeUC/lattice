@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c6093866fc619d06feb6ae2671fd9d48",
+    "revision": "62b2a88bd1514de07275e9bee618a3de",
     "url": "/lattice-client/index.html"
   },
   {
