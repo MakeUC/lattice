@@ -15,11 +15,11 @@ export default function () {
           <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
             {!profile.started ? 
               <>
-                Welcome! Let's get you set up. Head over to your <Link to="/your_profile">profile page</Link> to get started.
+                Welcome! Let's get you set up. Head over to your <Link to="/profile/edit">profile page</Link> to get started.
               </> :
               !profile.completed ?
                 <>
-                  Welcome back! Head over to your <Link to="/your_profile">profile page</Link> to complete your profile and start searching for potential teammates!
+                  Welcome back! Head over to your <Link to="/profile/edit">profile page</Link> to complete your profile and start searching for potential teammates!
                 </> :
                 <>
                   Welcome back! Mark your profile "visible" from your <Link to="/profile">profile page</Link> to start searching for potential teammates!

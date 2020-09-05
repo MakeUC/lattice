@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +12,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { AssignmentTurnedIn } from "@material-ui/icons";
 import { useProfile } from "../../providers/ProfileProvider";
 import { allSkills } from '../../data';
+import ConfirmationDialog from './dialogs/profile-save-confirmation';
 
 import "../../styles/Form.scss"
 
@@ -27,6 +29,8 @@ export default function() {
 
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState(``);
+  const [ showConfirmationModal, setShowModal ] = useState(false);
+  const [ redirect, setRedirect ] = useState();
 
   useEffect(()=> {
     register({ name: `skills` }, {
@@ -58,11 +62,18 @@ export default function() {
       const lookingFor = data.lookingFor.map(s => s.title);
 
       await updateProfile({ ...data, skills, lookingFor });
+
+      setShowModal(true);
     } catch(err) {
       setFailedToSubmit(err.message);
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const onModalDismiss = () => {
+    setShowModal(false);
+    setRedirect(`/profile`);
   };
 
   const profileSkills = watch(`skills`) || [];
@@ -208,6 +219,17 @@ export default function() {
           }
         </div>
       </form>
+      <ConfirmationDialog show={showConfirmationModal} onClose={onModalDismiss}>
+        <h2>Success</h2>
+        <p>Your profile was sucessfully updated.</p>
+        <Button
+          variant="contained"
+          className="center"
+          color="primary"
+          onClick={onModalDismiss}
+        >Next</Button>
+      </ConfirmationDialog>
+      {redirect && <Redirect to={redirect} />}
     </Container>
   );
 };

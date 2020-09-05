@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 import SlackIcon from '@material-ui/icons/AlternateEmail';
@@ -7,19 +8,36 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Button, Container } from '@material-ui/core';
 
-import '../../styles/Profile.scss'
 import { useAuth } from '../../providers/AuthProvider';
 import { useProfile } from '../../providers/ProfileProvider';
 import PromiseButton from '../../components/PromiseButton';
-import { Redirect } from 'react-router-dom';
+import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
+import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
+import LogoutConfirmation from './dialogs/logout-confirmation';
+
+import '../../styles/Profile.scss'
 
 export default function() {
-  const { logout } = useAuth();
   const { isLoading, profile, toggleVisibility } = useProfile();
+  const { logout } = useAuth();
 
   const [ redirect, setRedirect ] = useState();
+  const toggleVisibilityConfirmationDialog = useDialogControl();
+  const toggleVisibilityAlertDialog = useDialogControl();
+  const logoutConfirmationDialog = useDialogControl();
 
-  const redirectToProfileForm = () => setRedirect(`/your_profile`);
+  const redirectToProfileForm = () => setRedirect(`/profile/edit`);
+
+  const onToggleVisibility = async () => {
+    await toggleVisibility();
+    toggleVisibilityConfirmationDialog.dismiss();
+    toggleVisibilityAlertDialog.open();
+  };
+
+  const onLogout = async () => {
+    await logout();
+    logoutConfirmationDialog.dismiss();
+  };
 
   return (
     <Container className="nav-bar-margin">
@@ -59,7 +77,7 @@ export default function() {
                 variant="contained"
                 className="center profile-button"
                 color="primary"
-                onClick={toggleVisibility}
+                onClick={toggleVisibilityConfirmationDialog.open}
               >
                 {profile.visible ?
                   <>
@@ -77,16 +95,41 @@ export default function() {
                 color="primary"
               >Change Password</Button>
 
-              <PromiseButton
+              <Button
                 variant="contained"
                 className="center profile-button"
                 color="primary"
-                onClick={logout}
-              >Logout</PromiseButton>
+                onClick={logoutConfirmationDialog.open}
+              >Logout</Button>
             </>
           }
+          <ToggleVisibilityConfirmation
+            show={toggleVisibilityConfirmationDialog.show}
+            onClose={toggleVisibilityConfirmationDialog.dismiss}
+            onSuccess={onToggleVisibility}
+            visible={profile.visible}
+          />
+          <ToggleVisibilityAlert
+            show={toggleVisibilityAlertDialog.show}
+            onClose={toggleVisibilityAlertDialog.dismiss}
+            visible={profile.visible}
+          />
+          <LogoutConfirmation
+            show={logoutConfirmationDialog.show}
+            onClose={logoutConfirmationDialog.dismiss}
+            onSuccess={onLogout}
+          />
           {redirect && <Redirect to={redirect} />}
       </div>
     </Container>
   );
 }
+
+function useDialogControl(defaultShow = false) {
+  const [ show, setShow ] = useState(defaultShow);
+  
+  const open = () => setShow(true);
+  const dismiss = () => setShow(false);
+
+  return { show, open, dismiss };
+};

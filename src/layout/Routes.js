@@ -34,14 +34,14 @@ export default function() {
             <Notifications />
           </AppRoute>
         </Route>
+        <Route path="/profile/edit">
+          <AppRoute>
+            <ChangeProfile />
+          </AppRoute>
+        </Route>
         <Route path="/profile">
           <AppRoute>
             <Profile />
-          </AppRoute>
-        </Route>
-        <Route path="/your_profile">
-          <AppRoute>
-            <ChangeProfile />
           </AppRoute>
         </Route>
         <Route path="/">
