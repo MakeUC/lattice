@@ -12,7 +12,7 @@ import AppRoute from './AppRoute';
 
 export default function() {
   return (
-    <BrowserRouter basename="/lattice-client">
+    <BrowserRouter basename="/lattice">
       <Switch>
         <Route path="/auth/register/:registrantId">
           <AuthRoute>
