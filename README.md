@@ -1,12 +1,12 @@
-# Lattice Client
+# Lattice
 
 React PWA to match developers for team formation purposes. 
 
 ## Getting Started
 
 ```sh
-git clone https://github.com/makeuc/lattice-client.git
-cd lattice-client
+git clone https://github.com/makeuc/lattice.git
+cd lattice
 npm install
 npm start
 ```
