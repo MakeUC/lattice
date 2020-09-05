@@ -5,7 +5,7 @@ import { useProfile } from "../../providers/ProfileProvider";
 import { Container } from "@material-ui/core";
 
 export default function () {
-  const { profile } = useProfile();
+  const { isLoading, profile } = useProfile();
 
   return (
     <>
@@ -13,17 +13,18 @@ export default function () {
         <Deck /> :
         <Container className="nav-bar-margin">
           <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
-            {!profile.started ? 
-              <>
-                Welcome! Let's get you set up. Head over to your <Link to="/profile/edit">profile page</Link> to get started.
-              </> :
-              !profile.completed ?
+            {isLoading ? `Loading...` :
+              !profile.started ? 
                 <>
-                  Welcome back! Head over to your <Link to="/profile/edit">profile page</Link> to complete your profile and start searching for potential teammates!
+                  Welcome! Let's get you set up. Head over to your <Link to="/profile/edit">profile page</Link> to get started.
                 </> :
-                <>
-                  Welcome back! Mark your profile "visible" from your <Link to="/profile">profile page</Link> to start searching for potential teammates!
-                </>
+                !profile.completed ?
+                  <>
+                    Welcome back! Head over to your <Link to="/profile/edit">profile page</Link> to complete your profile and start searching for potential teammates!
+                  </> :
+                  <>
+                    Welcome back! Mark your profile "visible" from your <Link to="/profile">profile page</Link> to start searching for potential teammates!
+                  </>
             }
           </div>
         </Container>
