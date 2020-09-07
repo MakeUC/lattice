@@ -10,8 +10,8 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import { Button, Container, InputAdornment, Box } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { AssignmentTurnedIn } from "@material-ui/icons";
+
 import { useProfile } from "../../providers/ProfileProvider";
-import { allSkills } from '../../data';
 import ConfirmationDialog from './dialogs/profile-save-confirmation';
 
 import "../../styles/Form.scss"
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function() {
   const classes = useStyles();
   const { register, setValue, handleSubmit, errors, reset, watch } = useForm();
-  const { isLoading, profile, updateProfile } = useProfile();
+  const { isLoading, profile, skills, updateProfile } = useProfile();
 
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState(``);
@@ -35,20 +35,20 @@ export default function() {
   useEffect(()=> {
     register({ name: `skills` }, {
       required: true,
-      validate: d => d.length <= 6
+      validate: value => value.length <= 6
     });
     register({ name: `lookingFor` }, {
       required: true,
-      validate: d => d.length <= 3
+      validate: value => value.length <= 3
     });
   }, [ register ]);
 
   useEffect(() => {
-    const skills = allSkills.filter(skill => profile?.skills?.includes(skill.title));
-    const lookingFor = allSkills.filter(skill => profile?.lookingFor?.includes(skill.title));
+    const profileSkills = skills.filter(skill => profile?.skills?.includes(skill.title));
+    const profileLookingFor = skills.filter(skill => profile?.lookingFor?.includes(skill.title));
 
-    reset({ ...profile, skills, lookingFor });
-  }, [ reset, profile ]);
+    reset({ ...profile, skills: profileSkills, lookingFor: profileLookingFor });
+  }, [ reset, skills, profile ]);
 
   useEffect(() => {
     setFailedToSubmit(!!Object.keys(errors).length && `Please fix the above errors`);
@@ -134,7 +134,7 @@ export default function() {
                       multiple
                       filterSelectedOptions
                       id="tags-outlined"
-                      options={allSkills} // TODO: Need to be taken from DB ideally
+                      options={skills} // TODO: Need to be taken from DB ideally
                       getOptionLabel={(option) => option.title}
                       value={profileSkills}
                       renderInput={(params) => (
@@ -163,7 +163,7 @@ export default function() {
                     <Autocomplete
                       multiple
                       id="tags-outlined"
-                      options={allSkills} // TODO: Need to be taken from DB ideally
+                      options={skills} // TODO: Need to be taken from DB ideally
                       getOptionLabel={(option) => option.title}
                       filterSelectedOptions
                       value={profileLookingFor}

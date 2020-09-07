@@ -4,6 +4,21 @@ import { apiHost } from './Api';
 const apiUrl = `${apiHost}/profile`;
 
 export default {
+  async getProfiles({ token }) {
+    try {
+      const res = await Axios({
+        url: `${apiUrl}/list`,
+        method: `GET`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return res.data;
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
+  },
 
   async getProfile({ token }) {
     try {
@@ -65,6 +80,22 @@ export default {
         }
       });
   
+      return res.data;
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
+  },
+
+  async getSkills({ token }) {
+    try {
+      const res = await Axios({
+        url: `${apiUrl}/skills`,
+        method: `GET`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
       return res.data;
     } catch (err) {
       throw new Error(err.response.data.message);

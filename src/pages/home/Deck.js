@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useSprings } from 'react-spring/hooks';
 import { useGesture } from 'react-with-gesture';
 
+import { useProfile } from "../../providers/ProfileProvider";
 import Card from './Card';
-import data from '../../data';
+
 import '../../styles/Deck.css';
 
 const to = (i) => ({
@@ -21,7 +22,9 @@ const trans = (r, s) =>
     r / 10
   }deg) rotateZ(${r}deg) scale(${s})`;
 
-function Deck() {
+function Deck({ data }) {
+  const { swipeProfile, getProfiles } = useProfile();
+
   const [gone] = useState(() => new Set());
 
   const [props, set] = useSprings(data.length, (i) => ({
@@ -30,11 +33,12 @@ function Deck() {
   }));
 
   const onSwipe = (profile, direction) => {
-    console.log(`onSwipe: ${profile.name} is gone to ${direction}`);
+    swipeProfile(profile, (direction === 1));
   };
 
   const onFinish = () => {
     console.log(`onFinish: End of cards`);
+    getProfiles();
   };
 
   const bind = useGesture(
