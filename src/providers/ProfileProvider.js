@@ -4,9 +4,7 @@ import { useAuth } from './AuthProvider';
 
 const context = createContext({
   isLoading: true, failedToLoad: null, profile: {},
-  skills: [], profiles: [], swipedProfiles: [],
-  getProfile() {}, updateProfile() {}, toggleVisibility() {},
-  getSkills() {}, getProfiles() {}, swipeProfile() {}
+  getProfile() {}, updateProfile() {}, toggleVisibility() {}
 });
 
 export function ProfileProvider({ children }) {
@@ -15,10 +13,6 @@ export function ProfileProvider({ children }) {
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
   const [ profile, setProfile ] = useState({});
-  const [ skills, setSkills ] = useState([]);
-
-  const [ profiles, setProfiles ] = useState([]);
-  const [ swipedProfiles, setSwipedProfiles ] = useState([]);
 
   const getProfile = useCallback(async () => {
     try {
@@ -39,28 +33,9 @@ export function ProfileProvider({ children }) {
     }
   }, [ token ]);
 
-  const getSkills = useCallback(async () => {
-    const skills = await ProfileService.getSkills({ token });
-    setSkills(skills);
-  }, [ token ]);
-  
-  const getProfiles = useCallback(async () => {
-    setProfiles([]);
-    const profiles = await ProfileService.getProfiles({ token });
-    setProfiles(profiles);
-  }, [ token ]);
-
   useEffect(() => {
     token && getProfile();
   }, [ token, getProfile ]);
-
-  useEffect(() => {
-    token && getSkills();
-  }, [ token, getSkills ]);
-
-  useEffect(() => {
-    token && getProfiles();
-  }, [ token, getProfiles ]);
 
   const updateProfile = async profile => {
     const newProfile = await ProfileService.updateProfile({ token, profile });
@@ -72,17 +47,9 @@ export function ProfileProvider({ children }) {
     setProfile(newProfile);
   };
 
-  const swipeProfile = async (to, match) => {
-    if(swipedProfiles.includes(to)) return;
-    console.log(`swiping ${to.name} ${match}`);
-    setSwipedProfiles(swiped => [ ...swiped, to ]);
-  };
-
   const contextValue = {
     isLoading, failedToLoad, profile,
-    skills, profiles, swipedProfiles,
-    getProfile, getSkills, getProfiles,
-    updateProfile, toggleVisibility, swipeProfile
+    getProfile, updateProfile, toggleVisibility
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

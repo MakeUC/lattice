@@ -6,6 +6,7 @@ import { useProfile } from "../../providers/ProfileProvider";
 import Card from './Card';
 
 import '../../styles/Deck.css';
+import { useMatch } from '../../providers/MatchProvider';
 
 const to = (i) => ({
   x: 0,
@@ -23,7 +24,8 @@ const trans = (r, s) =>
   }deg) rotateZ(${r}deg) scale(${s})`;
 
 function Deck({ data }) {
-  const { swipeProfile, getProfiles } = useProfile();
+  const { getProfiles } = useProfile();
+  const { swipeProfile } = useMatch();
 
   const [gone] = useState(() => new Set());
 
@@ -33,6 +35,7 @@ function Deck({ data }) {
   }));
 
   const onSwipe = (profile, direction) => {
+    console.log({profile,direction})
     swipeProfile(profile, (direction === 1));
   };
 

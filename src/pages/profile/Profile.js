@@ -10,7 +10,6 @@ import { Button, Container } from '@material-ui/core';
 
 import { useAuth } from '../../providers/AuthProvider';
 import { useProfile } from '../../providers/ProfileProvider';
-import PromiseButton from '../../components/PromiseButton';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
@@ -73,7 +72,7 @@ export default function() {
                 onClick={redirectToProfileForm}
               >Edit Profile</Button>
 
-              <PromiseButton
+              <Button
                 variant="contained"
                 className="center profile-button"
                 color="primary"
@@ -87,7 +86,7 @@ export default function() {
                     <VisibilityOffIcon /> &nbsp; Mark Visible
                   </>
                 }
-              </PromiseButton>
+              </Button>
 
               <Button
                 variant="contained"
