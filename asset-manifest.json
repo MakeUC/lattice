@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/lattice/static/css/main.1f08a3e2.chunk.css",
-    "main.js": "/lattice/static/js/main.2b03af84.chunk.js",
-    "main.js.map": "/lattice/static/js/main.2b03af84.chunk.js.map",
+    "main.js": "/lattice/static/js/main.93a15bf6.chunk.js",
+    "main.js.map": "/lattice/static/js/main.93a15bf6.chunk.js.map",
     "runtime-main.js": "/lattice/static/js/runtime-main.48f5cec4.js",
     "runtime-main.js.map": "/lattice/static/js/runtime-main.48f5cec4.js.map",
-    "static/js/2.375e89ab.chunk.js": "/lattice/static/js/2.375e89ab.chunk.js",
-    "static/js/2.375e89ab.chunk.js.map": "/lattice/static/js/2.375e89ab.chunk.js.map",
+    "static/js/2.ef4b3704.chunk.js": "/lattice/static/js/2.ef4b3704.chunk.js",
+    "static/js/2.ef4b3704.chunk.js.map": "/lattice/static/js/2.ef4b3704.chunk.js.map",
     "index.html": "/lattice/index.html",
-    "precache-manifest.cabfcbec75183e31be761d6c603b6c6f.js": "/lattice/precache-manifest.cabfcbec75183e31be761d6c603b6c6f.js",
+    "precache-manifest.ac043d65de24506501c78d6c07bbd9e8.js": "/lattice/precache-manifest.ac043d65de24506501c78d6c07bbd9e8.js",
     "service-worker.js": "/lattice/service-worker.js",
     "static/css/main.1f08a3e2.chunk.css.map": "/lattice/static/css/main.1f08a3e2.chunk.css.map",
-    "static/js/2.375e89ab.chunk.js.LICENSE.txt": "/lattice/static/js/2.375e89ab.chunk.js.LICENSE.txt"
+    "static/js/2.ef4b3704.chunk.js.LICENSE.txt": "/lattice/static/js/2.ef4b3704.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.48f5cec4.js",
-    "static/js/2.375e89ab.chunk.js",
+    "static/js/2.ef4b3704.chunk.js",
     "static/css/main.1f08a3e2.chunk.css",
-    "static/js/main.2b03af84.chunk.js"
+    "static/js/main.93a15bf6.chunk.js"
   ]
 }
