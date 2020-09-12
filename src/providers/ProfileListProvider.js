@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import ProfileService from '../services/ProfileService';
 import { useAuth } from './AuthProvider';
+import { useProfile } from './ProfileProvider';
 
 const context = createContext({
   isLoading: true, failedToLoad: null,
@@ -10,8 +11,9 @@ const context = createContext({
 
 export function ProfileListProvider({ children }) {
   const { token } = useAuth();
+  const { profile } = useProfile();
 
-  const [ isLoading, setLoading ] = useState(true);
+  const [ isLoading, setLoading ] = useState(false);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
   const [ skills, setSkills ] = useState([]);
 
@@ -23,6 +25,7 @@ export function ProfileListProvider({ children }) {
   }, [ token ]);
   
   const getProfiles = useCallback(async () => {
+    if(!profile?.visible) return;
     try {
       setLoading(true);
       setFailedToLoad(null);
@@ -35,7 +38,7 @@ export function ProfileListProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [ token ]);
+  }, [ profile.visible, token ]);
 
   useEffect(() => {
     token && getSkills();

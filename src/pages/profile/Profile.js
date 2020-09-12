@@ -10,6 +10,7 @@ import { Button, Container } from '@material-ui/core';
 
 import { useAuth } from '../../providers/AuthProvider';
 import { useProfile } from '../../providers/ProfileProvider';
+import useDialogControl from '../../components/DialogControl.hook';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
@@ -122,13 +123,4 @@ export default function() {
       </div>
     </Container>
   );
-}
-
-function useDialogControl(defaultShow = false) {
-  const [ show, setShow ] = useState(defaultShow);
-  
-  const open = () => setShow(true);
-  const dismiss = () => setShow(false);
-
-  return { show, open, dismiss };
 };

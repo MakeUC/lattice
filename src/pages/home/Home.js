@@ -5,6 +5,8 @@ import { Container, Button } from "@material-ui/core";
 import { useProfile } from "../../providers/ProfileProvider";
 import { useProfileList } from "../../providers/ProfileListProvider";
 import Deck from "./Deck";
+import { useMatch } from "../../providers/MatchProvider";
+import PromiseButton from "../../components/PromiseButton";
 
 export default function () {
   const profileState = useProfile();
@@ -13,20 +15,23 @@ export default function () {
   const [ hydratedProfiles, setHydratedProfiles ] = useState();
 
   const { profile } = profileState;
-  const { skills, profiles } = profileListState;
+  const { isLoading, skills, profiles } = profileListState;
 
   useEffect(() => {
     if(skills.length) {
-      const hydratedProiles = profiles.map(profile => {
+      console.log({ profiles });
+      const hydratedProfiles = profiles.map(profile => {
         const profileSkills = skills.filter(skill => profile?.skills?.includes(skill.title));
         const profileLookingFor = skills.filter(skill => profile?.lookingFor?.includes(skill.title));
     
         return { ...profile, skills: profileSkills, lookingFor: profileLookingFor };
       });
 
-      setHydratedProfiles(hydratedProiles);
+      setHydratedProfiles(hydratedProfiles);
     }
   }, [ profiles, skills ]);
+
+  console.log({ hydratedProfiles });
 
   return (
     <>
@@ -35,12 +40,12 @@ export default function () {
       <ResetText />
       <ErrorText />
 
-      {profile?.visible && !!hydratedProfiles?.length &&
+      {profile?.visible && !isLoading && !!hydratedProfiles?.length &&
         <Deck data={hydratedProfiles} />
       }
     </>
   );
-}
+};
 
 function TextBox({ children }) {
   return <Container className="nav-bar-margin">
@@ -48,7 +53,7 @@ function TextBox({ children }) {
       {children}
     </div>
   </Container>;
-}
+};
 
 function SetupText() {
   const { isLoading, profile } = useProfile();
@@ -91,15 +96,17 @@ function LoadingText() {
 };
 
 function ResetText() {
+  const { profile } = useProfile();
   const { isLoading, profiles } = useProfileList();
+  const { reset } = useMatch();
 
   return (
-    (!isLoading && !profiles.length) ?
+    (profile?.visible && !isLoading && !profiles.length) ?
     <TextBox>
       <p>
         That's everybody! If you still haven't found your teammates, you can reset all your left swipes and start over.
       </p>
-      <Button variant="contained" color="primary">Reset</Button>
+      <PromiseButton variant="contained" color="primary" onClick={reset}>Reset</PromiseButton>
 
       <p>
         Or if you have already found your teammates, you can mark your profile as not visible.

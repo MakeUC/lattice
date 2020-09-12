@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useSprings } from 'react-spring/hooks';
 import { useGesture } from 'react-with-gesture';
 
-import { useProfile } from "../../providers/ProfileProvider";
-import Card from './Card';
-
-import '../../styles/Deck.css';
 import { useMatch } from '../../providers/MatchProvider';
+import { useProfileList } from '../../providers/ProfileListProvider';
+import Card from './Card';
+import '../../styles/Deck.css';
 
 const to = (i) => ({
   x: 0,
@@ -24,7 +23,7 @@ const trans = (r, s) =>
   }deg) rotateZ(${r}deg) scale(${s})`;
 
 function Deck({ data }) {
-  const { getProfiles } = useProfile();
+  const { getProfiles } = useProfileList();
   const { swipeProfile } = useMatch();
 
   const [gone] = useState(() => new Set());
@@ -34,9 +33,8 @@ function Deck({ data }) {
     from: from(i),
   }));
 
-  const onSwipe = (profile, direction) => {
-    console.log({profile,direction})
-    swipeProfile(profile, (direction === 1));
+  const onSwipe = async (profile, direction) => {
+    await swipeProfile(profile, (direction === 1));
   };
 
   const onFinish = () => {
@@ -56,8 +54,10 @@ function Deck({ data }) {
       const trigger = velocity > 0.2;
       const dir = xDir < 0 ? -1 : 1;
 
+      let swipePromise = null;
+
       if (!down && trigger) {
-        onSwipe(data[index], dir);
+        swipePromise = onSwipe(data[index], dir).then(() => console.log(`swiped`));
         gone.add(index);
       }
 
@@ -81,8 +81,8 @@ function Deck({ data }) {
       });
 
       if (!down && gone.size === data.length) {
-        onFinish();
-        setTimeout(() => gone.clear() || set((i) => to(i)), 600);
+        swipePromise?.then(onFinish);   // eslint-disable-line no-unused-expressions
+        // setTimeout(() => gone.clear() || set((i) => to(i)), 600);
       }
     }
   );

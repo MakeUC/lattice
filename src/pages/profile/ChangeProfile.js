@@ -15,6 +15,7 @@ import { useProfile } from "../../providers/ProfileProvider";
 import ConfirmationDialog from './dialogs/profile-save-confirmation';
 
 import "../../styles/Form.scss"
+import { useProfileList } from '../../providers/ProfileListProvider';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
 export default function() {
   const classes = useStyles();
   const { register, setValue, handleSubmit, errors, reset, watch } = useForm();
-  const { isLoading, profile, skills, updateProfile } = useProfile();
+  const { isLoading, profile, updateProfile } = useProfile();
+  const { skills } = useProfileList();
 
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState(``);
@@ -44,8 +46,8 @@ export default function() {
   }, [ register ]);
 
   useEffect(() => {
-    const profileSkills = skills.filter(skill => profile?.skills?.includes(skill.title));
-    const profileLookingFor = skills.filter(skill => profile?.lookingFor?.includes(skill.title));
+    const profileSkills = skills?.filter(skill => profile?.skills?.includes(skill.title));
+    const profileLookingFor = skills?.filter(skill => profile?.lookingFor?.includes(skill.title));
 
     reset({ ...profile, skills: profileSkills, lookingFor: profileLookingFor });
   }, [ reset, skills, profile ]);
