@@ -20,10 +20,14 @@ export function ProfileListProvider({ children }) {
   const [ profiles, setProfiles ] = useState([]);
 
   const getSkills = useCallback(async () => {
-    const skills = await ProfileService.getSkills({ token });
-    setSkills(skills);
+    try {
+      const skills = await ProfileService.getSkills({ token });
+      setSkills(skills);
+    } catch (err) {
+      console.error(err);
+    }
   }, [ token ]);
-  
+
   const getProfiles = useCallback(async () => {
     if(!profile?.visible) return;
     try {

@@ -38,12 +38,19 @@ export function NotificationProvider({ children }) {
   const readNotifications = async () => {
     if(!token) return;
 
-    await NotificationService.readNotifications({ token });
-    setNotifications(
-      notifications => notifications.map(
-        notification => ({ ...notification, read: true })
-      )
-    );
+    const unreadCount = notifications.filter(({ notification: { read } }) => !read).length;
+    if(!unreadCount) return;
+    
+    try {
+      await NotificationService.readNotifications({ token });
+      setNotifications(
+        notifications => notifications.map(
+          notification => ({ ...notification, read: true })
+        )
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const contextValue = {

@@ -35,7 +35,8 @@ export default function() {
   
   const [ openNotification, setOpenNotification ] = useState(null);
 
-  useEffect(() => { readNotifications() }, [ readNotifications ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { readNotifications() }, []);
 
   const openNotificationDetails = notification => {
     setOpenNotification(notification);
@@ -57,8 +58,9 @@ export default function() {
           <div className="pa4">
             {notifications.map(notification =>
               <SnackbarContent
+                key={notification.id}
                 className={classes.snackbar}
-                message={`You matched with ${notification.to.name}`}
+                message={`You matched with ${notification.to.name} ${notification.notification.read ? `` : `(NEW)`}`}
                 action={action}
                 onClick={() => openNotificationDetails(notification)}
               />

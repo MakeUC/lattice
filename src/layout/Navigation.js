@@ -35,7 +35,7 @@ const NotificationAction = () => {
   const [ unreadCount, setUnreadCount ] = useState(0);
  
   useEffect(() => {
-    const unreadCount = notifications.filter(({ read }) => !read).length;
+    const unreadCount = notifications.filter(({ notification: { read } }) => !read).length;
     setUnreadCount(unreadCount);
   }, [ notifications ]);
   

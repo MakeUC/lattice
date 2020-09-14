@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AuthService from '../services/AuthService';
+import PushService from '../services/PushService';
 
 const tokenStorageKey = `lattice-token`;
 
@@ -20,18 +21,28 @@ export function AuthProvider({ children }) {
     setToken(token);
   }, []);
 
+  useEffect(() => {
+    (async function() {
+      try {
+        token && await PushService.createSubscription(token);
+      } catch(err) {
+        console.error(err);
+      }
+    })();
+  }, [ token ]);
+
   const getRegistrantEmail = registrantId => AuthService.getRegistrantEmail(registrantId);
 
   const register = async (registrantId, password) => {
     const token = await AuthService.register(registrantId, password);
-    setToken(token);
     localStorage.setItem(tokenStorageKey, token);
+    setToken(token);
   };
 
   const login = async (email, password) => {
     const token = await AuthService.login(email, password);
-    setToken(token);
     localStorage.setItem(tokenStorageKey, token);
+    setToken(token);
   };
 
   const logout = () => {

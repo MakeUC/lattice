@@ -19,7 +19,6 @@ export default function () {
 
   useEffect(() => {
     if(skills.length) {
-      console.log({ profiles });
       const hydratedProfiles = profiles.map(profile => {
         const profileSkills = skills.filter(skill => profile?.skills?.includes(skill.title));
         const profileLookingFor = skills.filter(skill => profile?.lookingFor?.includes(skill.title));
@@ -30,8 +29,6 @@ export default function () {
       setHydratedProfiles(hydratedProfiles);
     }
   }, [ profiles, skills ]);
-
-  console.log({ hydratedProfiles });
 
   return (
     <>
@@ -56,10 +53,10 @@ function TextBox({ children }) {
 };
 
 function SetupText() {
-  const { isLoading, profile } = useProfile();
+  const { isLoading, failedToLoad, profile } = useProfile();
 
   return (
-    !isLoading ? (
+    (!isLoading && !failedToLoad) ? (
       !profile.started ? 
       <TextBox>
         Welcome! Let's get you set up. Head over to your <Link to="/profile/edit">profile page</Link> to get started.
@@ -124,13 +121,13 @@ function ErrorText() {
     profileState.failedToLoad ?
     <TextBox>
       There was an error fetching your profile
-      <Button variant="contained" color="primary">Retry</Button>
+      <Button variant="contained" color="primary" onClick={profileState.getProfile}>Retry</Button>
     </TextBox> :
 
     profileListState.failedToLoad ?
     <TextBox>
       There was an error fetching hackers
-      <Button variant="contained" color="primary">Retry</Button>
+      <Button variant="contained" color="primary" onClick={profileListState.getProfiles}>Retry</Button>
     </TextBox> : null
   );
 };
