@@ -6,6 +6,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import Container from "@material-ui/core/Container";
 
 import { useNotification } from '../../providers/NotificationProvider';
+import { useProfileList } from '../../providers/ProfileListProvider';
 import useDialogControl from '../../components/DialogControl.hook';
 import NotificationDetailsDialog from './dialogs/notification-details';
 
@@ -32,6 +33,7 @@ export default function() {
   const classes = useStyles();
   const { isLoading, failedToLoad, notifications, getNotifications, readNotifications } = useNotification();
   const dialogControl = useDialogControl();
+  const { skills } = useProfileList();
   
   const [ openNotification, setOpenNotification ] = useState(null);
 
@@ -39,7 +41,12 @@ export default function() {
   useEffect(() => { readNotifications() }, []);
 
   const openNotificationDetails = notification => {
-    setOpenNotification(notification);
+    const profile = notification.to;
+    const profileSkills = skills.filter(skill => profile.skills?.includes(skill.title));
+    const profileLookingFor = skills.filter(skill => profile.lookingFor?.includes(skill.title));
+    const hydratedProfile = { ...profile, skills: profileSkills, lookingFor: profileLookingFor };
+
+    setOpenNotification({ ...notification, hydratedProfile });
     dialogControl.open();
   };
 
@@ -70,7 +77,7 @@ export default function() {
       <NotificationDetailsDialog
         show={dialogControl.show}
         onClose={dialogControl.dismiss}
-        matchedUser={openNotification?.to}
+        matchedUser={openNotification?.hydratedProfile}
       />
     </Container>
   );
