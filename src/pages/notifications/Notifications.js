@@ -9,6 +9,7 @@ import { useNotification } from '../../providers/NotificationProvider';
 import { useProfileList } from '../../providers/ProfileListProvider';
 import useDialogControl from '../../components/DialogControl.hook';
 import NotificationDetailsDialog from './dialogs/notification-details';
+import Spinner from '../../components/Spinner';
 
 const action = (
   <Button className="font-secondary-dark" size="small">
@@ -54,7 +55,7 @@ export default function() {
     <Container className={classes.root + " nav-bar-margin"}>
       {
         isLoading ?
-          <TextBox>Fetching notifications...</TextBox> :
+          <TextBox>Fetching notifications... <br /> <Spinner /></TextBox> :
 
         failedToLoad ? 
           <TextBox>

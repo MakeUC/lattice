@@ -7,6 +7,7 @@ import { useProfileList } from "../../providers/ProfileListProvider";
 import Deck from "./Deck";
 import { useMatch } from "../../providers/MatchProvider";
 import PromiseButton from "../../components/PromiseButton";
+import Spinner from "../../components/Spinner";
 
 export default function () {
   const profileState = useProfile();
@@ -82,12 +83,12 @@ function LoadingText() {
   return (
     profileState.isLoading ?
     <TextBox>
-      Fetching your profile...
+      Fetching your profile... <br /> <Spinner />
     </TextBox> :
 
     profileListState.isLoading ?
     <TextBox>
-      Finding the best hackers for you...
+      Finding the best hackers for you... <br /> <Spinner />
     </TextBox> : null
   );
 };

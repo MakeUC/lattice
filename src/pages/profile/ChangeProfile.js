@@ -16,6 +16,7 @@ import ConfirmationDialog from './dialogs/profile-save-confirmation';
 
 import "../../styles/Form.scss"
 import { useProfileList } from '../../providers/ProfileListProvider';
+import Spinner from '../../components/Spinner';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -213,7 +214,11 @@ export default function() {
                 className="center"
                 color="primary"
                 disabled={isSubmitting}
-              >Save</Button>
+              >
+                {
+                  isSubmitting ? <Spinner size="25px" /> : `Save`
+                }
+              </Button>
               {failedToSubmit &&
                 <Box color="error.main" className="mt2">{failedToSubmit}</Box>
               }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
+import Spinner from './Spinner';
 
 export default function({ onClick, children, ...props }) {
   const [ waiting, setWaiting ] = useState();
@@ -13,5 +14,9 @@ export default function({ onClick, children, ...props }) {
     }
   }
 
-  return <Button {...props} onClick={_onClick} disabled={waiting}>{children}</Button>;
+  return <Button {...props} onClick={_onClick} disabled={waiting}>
+    {
+      waiting ? <Spinner size="25px" /> : children
+    }
+  </Button>;
 };

@@ -9,6 +9,7 @@ import { Button, Box } from '@material-ui/core';
 import Container from "@material-ui/core/Container";
 
 import { useAuth } from '../../providers/AuthProvider';
+import Spinner from '../../components/Spinner';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -87,7 +88,17 @@ export default function InputWithIcon() {
                 </Grid>
               </Grid>
             </div>
-            <Button type="submit" variant="contained" className="center" color="primary" disabled={isSubmitting}>Sign In</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              className="center"
+              color="primary"
+              disabled={isSubmitting}
+            >
+              {
+                isSubmitting ? <Spinner size="25px" /> : `Sign In`
+              }
+            </Button>
             <Box className="mt4">Don't have an account? Contact us at <a href="mailto:info@makeuc.io">info@makeuc.io</a> for an invite link</Box>
           </div>
         </div>
