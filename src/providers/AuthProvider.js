@@ -3,6 +3,7 @@ import AuthService from '../services/AuthService';
 import PushService from '../services/PushService';
 
 const tokenStorageKey = `lattice-token`;
+const subscriptionStorageKey = `push-subscription-id`;
 
 const context = createContext({ 
   token: ``, 
@@ -24,7 +25,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     (async function() {
       try {
-        token && await PushService.createSubscription(token);
+        if(!token) return;
+
+        const id = localStorage.getItem(subscriptionStorageKey);
+        if(id) return;
+
+        const subscription = await PushService.subscribe({ token });
+        localStorage.setItem(subscriptionStorageKey, subscription.id);
       } catch(err) {
         console.error(err);
       }
@@ -45,9 +52,17 @@ export function AuthProvider({ children }) {
     setToken(token);
   };
 
-  const logout = () => {
-    localStorage.removeItem(tokenStorageKey);
-    setToken(null);
+  const logout = async () => {
+    try {
+      localStorage.removeItem(tokenStorageKey);
+      setToken(null);
+
+      const id = localStorage.getItem(subscriptionStorageKey);
+      await PushService.unsubscribe({ token, id });
+      localStorage.removeItem(subscriptionStorageKey);
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   const contextValue = {

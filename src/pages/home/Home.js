@@ -121,13 +121,13 @@ function ErrorText() {
   return (
     profileState.failedToLoad ?
     <TextBox>
-      There was an error fetching your profile
+      There was an error fetching your profile <br />
       <Button variant="contained" color="primary" onClick={profileState.getProfile}>Retry</Button>
     </TextBox> :
 
     profileListState.failedToLoad ?
     <TextBox>
-      There was an error fetching hackers
+      There was an error fetching hackers <br />
       <Button variant="contained" color="primary" onClick={profileListState.getProfiles}>Retry</Button>
     </TextBox> : null
   );

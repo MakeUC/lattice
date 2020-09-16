@@ -27,12 +27,21 @@ const getSubscription = async () => {
   return registration.pushManager.subscribe(options);
 };
 
+const removeSubscription = async () => {
+  const registration = await navigator.serviceWorker.ready;
+
+  const subscription = await registration.pushManager.getSubscription();
+  if(!subscription) throw new Error(`Push subscription does not exist`);
+
+  return subscription.unsubscribe();
+};
+
 export default {
-  async createSubscription(token) {
+  async subscribe({ token }) {
     try {
       const sub = await getSubscription();
-  
-      return Axios({
+
+      const res = await Axios({
         url: `${apiUrl}/subscribe`,
         method: `POST`,
         data: sub,
@@ -40,6 +49,25 @@ export default {
           Authorization: `Bearer ${token}`
         }
       });
+
+      return res.data;
+    } catch(err) {
+      throw new Error(err.response?.data?.message || err.message);
+    }
+  },
+  async unsubscribe({ token, id }) {
+    try {
+      await removeSubscription();
+  
+      await Axios({
+        url: `${apiUrl}/subscribe/${id}`,
+        method: `DELETE`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      return;
     } catch(err) {
       throw new Error(err.response?.data?.message || err.message);
     }
