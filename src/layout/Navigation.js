@@ -6,9 +6,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PersonIcon from '@material-ui/icons/Person';
 
-import '../styles/Navigation.css';
 import { Badge } from '@material-ui/core';
 import { useNotification } from '../providers/NotificationProvider';
+
+import '../styles/Navigation.css';
 
 function NavAction({ navigate, ...rest }) {
   return <BottomNavigationAction {...rest} />;
@@ -17,13 +18,13 @@ function NavAction({ navigate, ...rest }) {
 export default function() {
   return <>
     <BottomNavigation className="bottomNavigation" >
-      <Link to="/notifications">
+      <Link to="/notifications" className="notifications-link">
         <NavAction icon={<NotificationAction />} />
       </Link>
-      <Link to="/">
+      <Link to="/" className="home-link">
         <NavAction icon={<HomeIcon />} />
       </Link>
-      <Link to="/profile">
+      <Link to="/profile" className="profile-link">
         <NavAction icon={<PersonIcon />} />
       </Link>
     </BottomNavigation>

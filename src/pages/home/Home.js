@@ -4,10 +4,12 @@ import { Container, Button } from "@material-ui/core";
 
 import { useProfile } from "../../providers/ProfileProvider";
 import { useProfileList } from "../../providers/ProfileListProvider";
-import Deck from "./Deck";
 import { useMatch } from "../../providers/MatchProvider";
 import PromiseButton from "../../components/PromiseButton";
 import Spinner from "../../components/Spinner";
+import HomeTour from '../../tours/HomeTour';
+import ResetTour from "../../tours/ResetTour";
+import Deck from "./Deck";
 
 export default function () {
   const profileState = useProfile();
@@ -39,8 +41,12 @@ export default function () {
       <ErrorText />
 
       {profile?.visible && !isLoading && !!hydratedProfiles?.length &&
-        <Deck data={hydratedProfiles} />
+        <>
+          <Deck data={hydratedProfiles} />
+          <HomeTour />
+        </>
       }
+
     </>
   );
 };
@@ -104,12 +110,18 @@ function ResetText() {
       <p>
         That's everybody! If you still haven't found your teammates, you can reset all your left swipes and start over.
       </p>
-      <PromiseButton variant="contained" color="primary" onClick={reset}>Reset</PromiseButton>
+      <PromiseButton className="reset-button" variant="contained" color="primary" onClick={reset}>Reset</PromiseButton>
 
       <p>
         Or if you have already found your teammates, you can mark your profile as not visible.
       </p>
-      <Button variant="contained" color="primary">Mark not visible</Button>
+      <Button className="mark-not-visibile-button" variant="contained" color="primary">Mark not visible</Button>
+
+      <p className="wait-text">
+        Or you can just wait for more people to join Lattice!
+      </p>
+
+      <ResetTour />
     </TextBox> : null
   );
 };

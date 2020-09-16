@@ -100,5 +100,21 @@ export default {
     } catch (err) {
       throw new Error(err.response.data.message);
     }
+  },
+
+  async completeTour({ token, tour }) {
+    try {
+      await Axios({
+        url: `${apiUrl}/tour/${tour}`,
+        method: `POST`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      return;
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
   }
 };

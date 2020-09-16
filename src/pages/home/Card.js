@@ -33,7 +33,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
           )
         }}
       >
-        <div className="font-opensans"
+        <div className="font-opensans hacker-profile-card"
           style={{
             textAlign: `center`,
           }}

@@ -63,17 +63,20 @@ export default function() {
             <Button variant="contained" color="primary" onClick={getNotifications}>Try again</Button>
           </TextBox> :
 
+        notifications.length ?
           <div className="pa4">
             {notifications.map(notification =>
               <SnackbarContent
                 key={notification.id}
                 className={classes.snackbar}
-                message={`You matched with ${notification.to.name} ${notification.notification.read ? `` : `(NEW)`}`}
+                message={`You matched with ${notification.to?.name} ${notification.notification?.read ? `` : `(NEW)`}`}
                 action={action}
                 onClick={() => openNotificationDetails(notification)}
               />
             )}
-          </div>
+          </div> :
+
+          <TextBox>No notifications</TextBox>
       }
       <NotificationDetailsDialog
         show={dialogControl.show}

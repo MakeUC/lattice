@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import NotificationTour from '../../../tours/NotificationTour';
 
 export default function ({ show, onClose, matchedUser = {} }) {
   const { skills, name, idea, lookingFor, email, slack } = matchedUser;
@@ -90,11 +91,12 @@ export default function ({ show, onClose, matchedUser = {} }) {
                   ></i>
                 ))}
               </div>
-              <Button fullWidth={true} color="primary">Email: {email}</Button>
-              <Button fullWidth={true} color="primary">Slack: @{slack}</Button>
+              <Button className="slack-button" fullWidth={true} color="primary">Slack: @{slack}</Button>
+              <Button className="email-button" fullWidth={true} color="primary">Email: {email}</Button>
             </div>
           }
         </div>
+        <NotificationTour />
       </Dialog>
     </div>
   );

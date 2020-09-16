@@ -4,7 +4,7 @@ import { useAuth } from './AuthProvider';
 
 const context = createContext({
   isLoading: true, failedToLoad: null, profile: {},
-  getProfile() {}, updateProfile() {}, toggleVisibility() {}
+  getProfile() {}, updateProfile() {}, toggleVisibility() {}, completeTour() {}
 });
 
 export function ProfileProvider({ children }) {
@@ -47,9 +47,18 @@ export function ProfileProvider({ children }) {
     setProfile(newProfile);
   };
 
+  const completeTour = async tour => {
+    try {
+      await ProfileService.completeTour({ token, tour });
+      await getProfile();
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
   const contextValue = {
     isLoading, failedToLoad, profile,
-    getProfile, updateProfile, toggleVisibility
+    getProfile, updateProfile, toggleVisibility, completeTour
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

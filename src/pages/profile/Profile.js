@@ -11,6 +11,7 @@ import { Button, Container } from '@material-ui/core';
 import { useAuth } from '../../providers/AuthProvider';
 import { useProfile } from '../../providers/ProfileProvider';
 import useDialogControl from '../../components/DialogControl.hook';
+import ProfileTour from '../../tours/ProfileTour';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
@@ -68,14 +69,14 @@ export default function() {
 
               <Button
                 variant="contained"
-                className="center profile-button"
+                className="center profile-button edit-profile-button"
                 color="primary"
                 onClick={redirectToProfileForm}
               >Edit Profile</Button>
 
               <Button
                 variant="contained"
-                className="center profile-button"
+                className="center profile-button toggle-visibility-button"
                 color="primary"
                 onClick={toggleVisibilityConfirmationDialog.open}
               >
@@ -121,6 +122,7 @@ export default function() {
           />
           {redirect && <Redirect to={redirect} />}
       </div>
+      <ProfileTour />
     </Container>
   );
 };
