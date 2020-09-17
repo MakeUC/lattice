@@ -121,9 +121,16 @@ export default function() {
                       id="input-with-icon-grid"
                       variant="outlined"
                       placeholder="A coronavirus map"
-                      inputRef={register({ required: `This field is required` })}
+                      inputRef={register({ required: `This field is required`, maxLength: 250 })}
                       error={!!errors.idea}
-                      helperText={errors.idea?.message || `Share your innovative idea. It's fine if you don't have one.`}
+                      helperText={
+                        errors.idea?.message ||
+                        (
+                          errors.idea?.type === `maxLength` ?
+                          `Please write no more than 250 characters` :
+                          `Share your innovative idea. It's fine if you don't have one.`
+                        )
+                      }
                     />
                   </Grid>
                 </Grid>
