@@ -2,30 +2,30 @@
   "theme_color": "black",
   "background_color": "black",
   "display": "standalone",
-  "scope": "https://makeuc.io/lattice/",
-  "start_url": "https://makeuc.io/lattice/",
+  "scope": ".",
+  "start_url": ".",
   "short_name": "Lattice",
   "app_name": "Lattice Hacker Matching App",
   "description": "An application to help hackathon participants find other hackers to team up with",
   "icons": [
     {
-      "src": "/icon-192x192.png",
-      "sizes": "192x",
+      "src": "/lattice/icon-192x192.png",
+      "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icon-256x256.png",
-      "sizes": "256x",
+      "src": "/lattice/icon-256x256.png",
+      "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/icon-384x384.png",
-      "sizes": "384x",
+      "src": "/lattice/icon-384x384.png",
+      "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/icon-512x512.png",
-      "sizes": "512x",
+      "src": "/lattice/icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
