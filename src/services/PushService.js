@@ -37,6 +37,9 @@ const removeSubscription = async () => {
 };
 
 export default {
+  requestPermission() {
+    return window.Notification.requestPermission();
+  },
   async subscribe({ token }) {
     try {
       const sub = await getSubscription();

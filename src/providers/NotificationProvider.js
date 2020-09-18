@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import NotificationService from '../services/NotificationService';
+import PushService from '../services/PushService';
 import { useAuth } from './AuthProvider';
 
 const context = createContext({
-  isLoading: false, failedToLoad: null, notifications: [],
-  getNotifications() {}, readNotifications() {}
+  isLoading: false, failedToLoad: null, notifications: [], pushPermission: `default`,
+  getNotifications() {}, readNotifications() {}, requestNotificationPermission() {}
 });
 
 export function NotificationProvider({ children }) {
   const { token } = useAuth();
 
+  const [ pushPermission, setPushPermission ] = useState(`default`);
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
   const [ notifications, setNotifications ] = useState([]);
@@ -53,9 +55,21 @@ export function NotificationProvider({ children }) {
     }
   };
 
+  const requestNotificationPermission = async () => {
+    if(!token) return;
+
+    const permission = await PushService.requestPermission();
+    setPushPermission(permission);
+  }
+
+  useEffect(() => {
+    requestNotificationPermission();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ token ]);
+
   const contextValue = {
-    isLoading, failedToLoad, notifications,
-    getNotifications, readNotifications
+    isLoading, failedToLoad, notifications, pushPermission,
+    getNotifications, readNotifications, requestNotificationPermission
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

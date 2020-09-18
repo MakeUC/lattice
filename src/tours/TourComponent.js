@@ -11,10 +11,12 @@ export default function({ name, steps }) {
     await completeTour(name);
   };
 
-  return profile.completedTours?.includes(name) ? null :
+  const showTour = profile.completedTours && !profile.completedTours?.includes(name);
+
+  return showTour ?
     <Tour
       steps={steps}
       isOpen={isOpen}
       onRequestClose={onTourComplete}
-    />
+    /> : null
 };

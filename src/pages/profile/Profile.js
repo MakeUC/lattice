@@ -10,7 +10,9 @@ import { Button, Container } from '@material-ui/core';
 
 import { useAuth } from '../../providers/AuthProvider';
 import { useProfile } from '../../providers/ProfileProvider';
+import { useNotification } from '../../providers/NotificationProvider';
 import useDialogControl from '../../components/DialogControl.hook';
+import PromiseButton from '../../components/PromiseButton';
 import ProfileTour from '../../tours/ProfileTour';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
@@ -21,6 +23,7 @@ import '../../styles/Profile.scss'
 export default function() {
   const { isLoading, profile, toggleVisibility } = useProfile();
   const { logout } = useAuth();
+  const { pushPermission, requestNotificationPermission } = useNotification();
 
   const [ redirect, setRedirect ] = useState();
   const toggleVisibilityConfirmationDialog = useDialogControl();
@@ -89,6 +92,23 @@ export default function() {
                   </>
                 }
               </Button>
+
+              {
+                pushPermission === `granted` ? null :
+                  <PromiseButton
+                    variant="contained"
+                    className="center profile-button notification-request-button"
+                    color={pushPermission === `denied` ? `secondary` : `primary`}
+                    onClick={requestNotificationPermission}
+                    disabled={pushPermission === `denied`}
+                  >
+                    {
+                      pushPermission === `default` ?
+                        `Enable Push Notification` :
+                        `Push Notification Permission Denied`
+                    }
+                  </PromiseButton>
+              }
 
               <Button
                 variant="contained"
