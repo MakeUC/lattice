@@ -9,7 +9,10 @@ import { Button, Box } from '@material-ui/core';
 import Container from "@material-ui/core/Container";
 
 import { useAuth } from '../../providers/AuthProvider';
+import useDialogControl from '../../components/DialogControl.hook';
 import Spinner from '../../components/Spinner';
+import ResetRequest from './dialogs/reset-request';
+import ResetRequestAlert from './dialogs/reset-request-alert';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -19,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InputWithIcon() {
   const classes = useStyles();
-  const { token, login } = useAuth();
+  const { token, login, sendResetLink } = useAuth();
+  const resetRequestDialog = useDialogControl();
+  const resetRequestAlertDialog = useDialogControl();
+
   const [ errors, setErrors ] = useState({});
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState(null);
@@ -49,6 +55,17 @@ export default function InputWithIcon() {
       setFailedToSubmit(err);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const requestReset = async ({ email }) => {
+    try {
+      await sendResetLink(email);
+    } catch(err) {
+      resetRequestAlertDialog.setState(err);
+    } finally {
+      resetRequestDialog.dismiss();
+      resetRequestAlertDialog.open();
     }
   };
 
@@ -99,10 +116,28 @@ export default function InputWithIcon() {
                 isSubmitting ? <Spinner size="25px" /> : `Sign In`
               }
             </Button>
+            <Box m={1} />
+            <Button
+              type="button"
+              variant="contained"
+              className="center"
+              color="primary"
+              onClick={resetRequestDialog.open}
+            >Forgot Password</Button>
             <Box className="mt4">Don't have an account? Contact us at <a href="mailto:info@makeuc.io">info@makeuc.io</a> for an invite link</Box>
           </div>
         </div>
       </form>
+      <ResetRequest
+        show={resetRequestDialog.show}
+        onClose={resetRequestDialog.dismiss}
+        onSuccess={requestReset}
+      />
+      <ResetRequestAlert
+        show={resetRequestAlertDialog.show}
+        onClose={resetRequestAlertDialog.dismiss}
+        error={resetRequestAlertDialog.state}
+      />
       {redirect && <Redirect to={redirect} />}
     </Container>
   );

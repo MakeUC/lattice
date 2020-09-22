@@ -11,7 +11,11 @@ const context = createContext({
   getRegistrantEmail() {}, 
   register() {},
   login() {},
-  logout() {}
+  logout() {},
+  changePassword() {},
+  sendResetLink() {},
+  getResetInfo() {},
+  resetPassword() {}
 });
 
 export function AuthProvider({ children }) {
@@ -65,8 +69,17 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const changePassword = ({ oldPassword, newPassword }) => AuthService.changePassword({ token, oldPassword, newPassword });
+
+  const sendResetLink = email => AuthService.sendResetLink(email);
+
+  const getResetInfo = resetToken => AuthService.getResetInfo(resetToken);
+
+  const resetPassword = (resetToken, password) => AuthService.resetPassword(resetToken, password);
+
   const contextValue = {
-    token, getRegistrantEmail, register, login, logout
+    token, getRegistrantEmail, register, login,
+    logout, changePassword, sendResetLink, getResetInfo, resetPassword
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

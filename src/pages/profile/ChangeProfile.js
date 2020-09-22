@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function() {
   const classes = useStyles();
-  const { register, setValue, handleSubmit, errors, reset, watch } = useForm();
   const { isLoading, profile, updateProfile } = useProfile();
   const { skills } = useProfileList();
+  const { register, setValue, handleSubmit, errors, reset, watch } = useForm();
 
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState(``);

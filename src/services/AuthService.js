@@ -14,7 +14,7 @@ export default {
   
       return res.data;
     } catch (err) {
-      throw new Error(err.response.data.message);
+      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
     }
   },
 
@@ -28,7 +28,7 @@ export default {
   
       return res.data;
     } catch (err) {
-      throw new Error(err.response.data.message);
+      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
     }
   },
 
@@ -43,6 +43,64 @@ export default {
       return res.data;
     } catch (err) {
       throw new Error(err.response?.data.message || `Cannot reach server, please try again later`);
+    }
+  },
+
+  async changePassword({ token, oldPassword, newPassword }) {
+    try {
+      await Axios({
+        url: `${apiUrl}/password`,
+        method: `PUT`,
+        data: { oldPassword, newPassword },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return;
+    } catch (err) {
+      throw new Error(err.response?.data.message || `Cannot reach server, please try again later`);
+    }
+  },
+
+  async sendResetLink(email) {
+    try {
+      const res = await Axios({
+        url: `${apiUrl}/reset`,
+        method: `POST`,
+        data: { email }
+      });
+  
+      return res.data;
+    } catch (err) {
+      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+    }
+  },
+
+  async getResetInfo(resetToken) {
+    try {
+      const res = await Axios({
+        url: `${apiUrl}/reset/${resetToken}`,
+        method: `GET`
+      });
+  
+      return res.data;
+    } catch (err) {
+      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+    }
+  },
+
+  async resetPassword(resetToken, password) {
+    try {
+      await Axios({
+        url: `${apiUrl}/reset`,
+        method: `PUT`,
+        data: { resetToken, password }
+      });
+  
+      return;
+    } catch (err) {
+      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
     }
   }
 };

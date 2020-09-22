@@ -4,9 +4,9 @@ import Register from '../pages/auth/Register';
 import Login from '../pages/auth/Login';
 import Notifications from '../pages/notifications/Notifications';
 import Profile from '../pages/profile/Profile';
+import ChangeProfile from '../pages/profile/ChangeProfile';
 import Home from '../pages/home/Home';
-import ForgotPassword from "../pages/auth/ForgotPassword";
-import ChangeProfile from "../pages/profile/ChangeProfile";
+import Reset from '../pages/auth/Reset';
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
 
@@ -24,9 +24,9 @@ export default function() {
             <Login />
           </AuthRoute>
         </Route>
-        <Route path="/auth/reset">
+        <Route path="/auth/reset/:resetToken">
           <AuthRoute>
-            <ForgotPassword />
+            <Reset />
           </AuthRoute>
         </Route>
         <Route path="/notifications">

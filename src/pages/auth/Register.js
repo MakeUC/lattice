@@ -10,6 +10,7 @@ import { Button, Container, Box } from '@material-ui/core';
 import { useAuth } from '../../providers/AuthProvider';
 
 import "../../styles/Form.scss"
+import Spinner from '../../components/Spinner';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -22,13 +23,13 @@ export default function () {
   const { token, getRegistrantEmail, register } = useAuth();
   const { registrantId } = useParams();
 
-  const [isLoading, setLoading] = useState(true);
-  const [failedToLoad, setFailedToLoad] = useState(null);
-  const [email, setEmail] = useState(``);
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setSubmitting] = useState(false);
-  const [failedToSubmit, setFailedToSubmit] = useState(null);
-  const [redirect, setRedirect] = useState(``);
+  const [ isLoading, setLoading ] = useState(true);
+  const [ failedToLoad, setFailedToLoad ] = useState(null);
+  const [ email, setEmail ] = useState(``);
+  const [ errors, setErrors ] = useState({});
+  const [ isSubmitting, setSubmitting ] = useState(false);
+  const [ failedToSubmit, setFailedToSubmit ] = useState(null);
+  const [ redirect, setRedirect ] = useState(``);
 
   useEffect(() => {
     (async function () {
@@ -41,7 +42,7 @@ export default function () {
         setLoading(false);
       }
     })();
-  }, [getRegistrantEmail, registrantId]);
+  }, [ getRegistrantEmail, registrantId ]);
 
   useEffect(() => { token && setRedirect(`/`) }, [token]);
 
@@ -129,7 +130,17 @@ export default function () {
                     </Grid>
                   </Grid>
                   <input type="hidden" name="registrantId" value={registrantId} />
-                  <Button type="submit" variant="contained" className="center" color="primary" disabled={isSubmitting}>Sign Up</Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    className="center"
+                    color="primary"
+                    disabled={isSubmitting}
+                  >
+                    {
+                      isSubmitting ? <Spinner size="25px" /> : `Sign Up`
+                    }
+                  </Button>
                   <Box className="mt4">Already registered? Log in <Link to="/auth/login">here</Link></Box>
                 </div>
               </>

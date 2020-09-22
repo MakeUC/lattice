@@ -16,19 +16,24 @@ import PromiseButton from '../../components/PromiseButton';
 import ProfileTour from '../../tours/ProfileTour';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
+import ChangePassword from './dialogs/change-password';
+import ChangePasswordAlert from './dialogs/change-password-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
 
 import '../../styles/Profile.scss'
 
 export default function() {
+  const { logout, changePassword } = useAuth();
   const { isLoading, profile, toggleVisibility } = useProfile();
-  const { logout } = useAuth();
   const { pushPermission, requestNotificationPermission } = useNotification();
 
-  const [ redirect, setRedirect ] = useState();
   const toggleVisibilityConfirmationDialog = useDialogControl();
   const toggleVisibilityAlertDialog = useDialogControl();
+  const changePasswordDialog = useDialogControl();
+  const changePasswordAlertDialog = useDialogControl();
   const logoutConfirmationDialog = useDialogControl();
+
+  const [ redirect, setRedirect ] = useState();
 
   const redirectToProfileForm = () => setRedirect(`/profile/edit`);
 
@@ -36,6 +41,17 @@ export default function() {
     await toggleVisibility();
     toggleVisibilityConfirmationDialog.dismiss();
     toggleVisibilityAlertDialog.open();
+  };
+
+  const onPasswordChange = async data => {
+    try {
+      await changePassword(data);
+    } catch(err) {
+      changePasswordAlertDialog.setState(err);
+    } finally {
+      changePasswordDialog.dismiss();
+      changePasswordAlertDialog.open();
+    }
   };
 
   const onLogout = async () => {
@@ -114,6 +130,7 @@ export default function() {
                 variant="contained"
                 className="center profile-button"
                 color="primary"
+                onClick={changePasswordDialog.open}
               >Change Password</Button>
 
               <Button
@@ -134,6 +151,16 @@ export default function() {
             show={toggleVisibilityAlertDialog.show}
             onClose={toggleVisibilityAlertDialog.dismiss}
             visible={profile.visible}
+          />
+          <ChangePassword
+            show={changePasswordDialog.show}
+            onClose={changePasswordDialog.dismiss}
+            onSuccess={onPasswordChange}
+          />
+          <ChangePasswordAlert
+            show={changePasswordAlertDialog.show}
+            onClose={changePasswordAlertDialog.dismiss}
+            error={changePasswordAlertDialog.state}
           />
           <LogoutConfirmation
             show={logoutConfirmationDialog.show}
