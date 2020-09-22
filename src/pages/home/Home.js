@@ -5,11 +5,15 @@ import { Container, Button } from "@material-ui/core";
 import { useProfile } from "../../providers/ProfileProvider";
 import { useProfileList } from "../../providers/ProfileListProvider";
 import { useMatch } from "../../providers/MatchProvider";
-import PromiseButton from "../../components/PromiseButton";
 import Spinner from "../../components/Spinner";
+import useDialogControl from '../../components/DialogControl.hook';
 import HomeTour from '../../tours/HomeTour';
 import ResetTour from "../../tours/ResetTour";
 import Deck from "./Deck";
+import ResetConfirmation from './dialogs/reset-confirmation';
+import ResetAlert from './dialogs/reset-alert';
+import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
+import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
 
 export default function () {
   const profileState = useProfile();
@@ -100,29 +104,76 @@ function LoadingText() {
 };
 
 function ResetText() {
-  const { profile } = useProfile();
+  const { profile, toggleVisibility } = useProfile();
   const { isLoading, profiles } = useProfileList();
   const { reset } = useMatch();
 
+  const resetConfirmationDialog = useDialogControl();
+  const resetAlertDialog = useDialogControl();
+  const toggleVisibilityConfirmationDialog = useDialogControl();
+  const toggleVisibilityAlertDialog = useDialogControl();
+
+  const onReset = async () => {
+    await reset();
+    resetConfirmationDialog.dismiss();
+    resetAlertDialog.open();
+  };
+
+  const onToggleVisibility = async () => {
+    await toggleVisibility();
+    toggleVisibilityConfirmationDialog.dismiss();
+    toggleVisibilityAlertDialog.open();
+  };
+
   return (
     (profile?.visible && !isLoading && !profiles.length) ?
-    <TextBox>
-      <p>
-        That's everybody! If you still haven't found your teammates, you can reset all your left swipes and start over.
-      </p>
-      <PromiseButton className="reset-button" variant="contained" color="primary" onClick={reset}>Reset</PromiseButton>
+    <>
+      <TextBox>
+        <p>
+          That's everybody! If you still haven't found your teammates, you can reset all your left swipes and start over.
+        </p>
+        <Button
+          className="reset-button"
+          variant="contained"
+          color="primary"
+          onClick={resetConfirmationDialog.open}
+        >Reset</Button>
 
-      <p>
-        Or if you have already found your teammates, you can mark your profile as not visible.
-      </p>
-      <Button className="mark-not-visibile-button" variant="contained" color="primary">Mark not visible</Button>
+        <p>
+          Or if you have already found your teammates, you can mark your profile as not visible.
+        </p>
+        <Button
+          className="mark-not-visibile-button"
+          variant="contained"
+          color="primary"
+          onClick={toggleVisibilityConfirmationDialog.open}
+        >Mark not visible</Button>
 
-      <p className="wait-text">
-        Or you can just wait for more people to join Lattice!
-      </p>
+        <p className="wait-text">
+          Or you can just wait for more people to join Lattice!
+        </p>
 
-      <ResetTour />
-    </TextBox> : null
+        <ResetTour />
+      </TextBox>
+      <ResetConfirmation
+        show={resetConfirmationDialog.show}
+        onClose={resetConfirmationDialog.dismiss}
+        onSuccess={onReset}
+      />
+      <ResetAlert
+        show={resetAlertDialog.show}
+        onClose={resetAlertDialog.dismiss}
+      />
+      <ToggleVisibilityConfirmation
+        show={toggleVisibilityConfirmationDialog.show}
+        onClose={toggleVisibilityConfirmationDialog.dismiss}
+        onSuccess={onToggleVisibility}
+      />
+      <ToggleVisibilityAlert
+        show={toggleVisibilityAlertDialog.show}
+        onClose={toggleVisibilityAlertDialog.dismiss}
+      />
+    </>: null
   );
 };
 

@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import NotificationTour from '../../../tours/NotificationTour';
 
-export default function ({ show, onClose, matchedUser = {} }) {
+export default function ({ show, onClose, matchedUser = {}, onContactClick }) {
   const { skills, name, idea, lookingFor, email, slack } = matchedUser;
 
   const skillRows = [skills?.slice(0, 3), skills?.slice(3, 6)];
@@ -91,8 +91,20 @@ export default function ({ show, onClose, matchedUser = {} }) {
                   ></i>
                 ))}
               </div>
-              <Button className="slack-button" fullWidth={true} color="primary">Slack: @{slack}</Button>
-              <Button className="email-button" fullWidth={true} color="primary">Email: {email}</Button>
+
+              <Button
+                className="slack-button"
+                fullWidth={true}
+                color="primary"
+                onClick={() => onContactClick([`Slack handler`, `@${slack}`])}
+              >Slack: @{slack}</Button>
+
+              <Button
+                className="email-button"
+                fullWidth={true}
+                color="primary"
+                onClick={() => onContactClick([`Email`, email])}
+              >Email: {email}</Button>
             </div>
           }
         </div>

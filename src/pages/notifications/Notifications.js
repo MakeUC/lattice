@@ -8,7 +8,8 @@ import Container from "@material-ui/core/Container";
 import { useNotification } from '../../providers/NotificationProvider';
 import { useProfileList } from '../../providers/ProfileListProvider';
 import useDialogControl from '../../components/DialogControl.hook';
-import NotificationDetailsDialog from './dialogs/notification-details';
+import NotificationDetails from './dialogs/notification-details';
+import CopiedAlert from './dialogs/copied-alert';
 import Spinner from '../../components/Spinner';
 
 const action = (
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 export default function() {
   const classes = useStyles();
   const { isLoading, failedToLoad, notifications, getNotifications, readNotifications } = useNotification();
-  const dialogControl = useDialogControl();
+  const notificationDetailsDialog = useDialogControl();
+  const copiedAlertDialog = useDialogControl();
   const { skills } = useProfileList();
   
   const [ openNotification, setOpenNotification ] = useState(null);
@@ -48,7 +50,14 @@ export default function() {
     const hydratedProfile = { ...profile, skills: profileSkills, lookingFor: profileLookingFor };
 
     setOpenNotification({ ...notification, hydratedProfile });
-    dialogControl.open();
+    notificationDetailsDialog.open();
+  };
+
+  const openCopiedAlert = async ([ content, text ]) => {
+    console.log([ content, text ]);
+    await navigator.clipboard.writeText(text);
+    copiedAlertDialog.setState([ content, text ]);
+    copiedAlertDialog.open();
   };
 
   return (
@@ -72,16 +81,23 @@ export default function() {
                 message={`You matched with ${notification.to?.name} ${notification.notification?.read ? `` : `(NEW)`}`}
                 action={action}
                 onClick={() => openNotificationDetails(notification)}
+                style={{ marginBottom: `10px` }}
               />
             )}
           </div> :
 
           <TextBox>No notifications</TextBox>
       }
-      <NotificationDetailsDialog
-        show={dialogControl.show}
-        onClose={dialogControl.dismiss}
+      <NotificationDetails
+        show={notificationDetailsDialog.show}
+        onClose={notificationDetailsDialog.dismiss}
         matchedUser={openNotification?.hydratedProfile}
+        onContactClick={openCopiedAlert}
+      />
+      <CopiedAlert
+        show={copiedAlertDialog.show}
+        onClose={copiedAlertDialog.dismiss}
+        state={copiedAlertDialog.state}
       />
     </Container>
   );
