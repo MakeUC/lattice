@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 import NotificationService from '../services/NotificationService';
 import PushService from '../services/PushService';
 import { useAuth } from './AuthProvider';
+import { useProfile } from './ProfileProvider';
 
 const context = createContext({
   isLoading: false, failedToLoad: null, notifications: [], pushPermission: `default`,
@@ -10,6 +11,7 @@ const context = createContext({
 
 export function NotificationProvider({ children }) {
   const { token } = useAuth();
+  const { profile } = useProfile();
 
   const [ pushPermission, setPushPermission ] = useState(`default`);
   const [ isLoading, setLoading ] = useState(true);
@@ -63,9 +65,9 @@ export function NotificationProvider({ children }) {
   }
 
   useEffect(() => {
-    requestNotificationPermission();
+    profile.visible && requestNotificationPermission();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ token ]);
+  }, [ token, profile.visible ]);
 
   const contextValue = {
     isLoading, failedToLoad, notifications, pushPermission,
