@@ -11,7 +11,7 @@ export default function({ name, steps }) {
     await completeTour(name);
   };
 
-  const showTour = profile.completedTours && !profile.completedTours?.includes(name);
+  const showTour = !profile.completedTours?.includes(name);
 
   return showTour ?
     <Tour
