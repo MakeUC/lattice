@@ -4,6 +4,9 @@ import PushService from '../services/PushService';
 import { useAuth } from './AuthProvider';
 import { useProfile } from './ProfileProvider';
 
+const readNotification = ({ notification, to }) =>
+  ({ notification: { ...notification, read: true }, to });
+
 const context = createContext({
   isLoading: false, failedToLoad: null, notifications: [], pushPermission: `default`,
   getNotifications() {}, readNotifications() {}, requestNotificationPermission() {}
@@ -47,11 +50,9 @@ export function NotificationProvider({ children }) {
     
     try {
       await NotificationService.readNotifications({ token });
-      setNotifications(
-        notifications => notifications.map(
-          notification => ({ ...notification, read: true })
-        )
-      );
+      setTimeout(() => {
+        setNotifications(notifications => notifications.map(readNotification));
+      }, 2000);
     } catch (err) {
       console.error(err);
     }
