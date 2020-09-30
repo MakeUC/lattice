@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/lattice/static/css/main.a4da327c.chunk.css",
-    "main.js": "/lattice/static/js/main.2995fe63.chunk.js",
-    "main.js.map": "/lattice/static/js/main.2995fe63.chunk.js.map",
+    "main.css": "/lattice/static/css/main.93a8f292.chunk.css",
+    "main.js": "/lattice/static/js/main.087b9e0b.chunk.js",
+    "main.js.map": "/lattice/static/js/main.087b9e0b.chunk.js.map",
     "runtime-main.js": "/lattice/static/js/runtime-main.48f5cec4.js",
     "runtime-main.js.map": "/lattice/static/js/runtime-main.48f5cec4.js.map",
     "static/js/2.b7590653.chunk.js": "/lattice/static/js/2.b7590653.chunk.js",
     "static/js/2.b7590653.chunk.js.map": "/lattice/static/js/2.b7590653.chunk.js.map",
     "index.html": "/lattice/index.html",
-    "precache-manifest.57dac62ee01eb90293e6afe8adce72f5.js": "/lattice/precache-manifest.57dac62ee01eb90293e6afe8adce72f5.js",
+    "precache-manifest.d3edbea706a87ccfa5604cf0ee28da3e.js": "/lattice/precache-manifest.d3edbea706a87ccfa5604cf0ee28da3e.js",
     "service-worker.js": "/lattice/service-worker.js",
-    "static/css/main.a4da327c.chunk.css.map": "/lattice/static/css/main.a4da327c.chunk.css.map",
+    "static/css/main.93a8f292.chunk.css.map": "/lattice/static/css/main.93a8f292.chunk.css.map",
     "static/js/2.b7590653.chunk.js.LICENSE.txt": "/lattice/static/js/2.b7590653.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.48f5cec4.js",
     "static/js/2.b7590653.chunk.js",
-    "static/css/main.a4da327c.chunk.css",
-    "static/js/main.2995fe63.chunk.js"
+    "static/css/main.93a8f292.chunk.css",
+    "static/js/main.087b9e0b.chunk.js"
   ]
 }
