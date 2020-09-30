@@ -27,7 +27,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
             [x], (x) => {
               if(x > -5 && x < 5) return null;
               const opacity = Math.abs(x)/300;
-              const color = x > 0 ? `rgba(0, 255, 0, ${opacity})` : `rgba(255, 0, 0, ${opacity})`;
+              const color = x > 0 ? `rgba(100, 237, 136, ${opacity})` : `rgba(237, 100, 100, ${opacity})`;
               return `${x*1.5}px 0 80px -80px ${color} inset`;
             }
           )
@@ -77,14 +77,17 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
                   }}
                 >
                   {row.map((skill) => (
-                    <i
-                      key={skill.title}
-                      className={skill.icon}
-                      style={{
-                        padding: `10px`,
-                        fontSize: `50px`,
-                      }}
-                    />
+                      <div>
+                        <i
+                          key={skill.title}
+                          className={skill.icon}
+                          style={{
+                            padding: `10px`,
+                            fontSize: `50px`,
+                          }}
+                        />
+                          <p className="card-skill-title font-black"> {skill.title} </p>
+                      </div>
                   ))}
                 </div>
               )
@@ -101,14 +104,17 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
             }}
           >
             {lookingFor.map((look) => (
-              <i
-                key={look.title}
-                className={look.icon}
-                style={{
-                  padding: `10px`,
-                  fontSize: `50px`,
-                }}
-              ></i>
+              <div>
+                  <i
+                    key={look.title}
+                    className={look.icon}
+                    style={{
+                      padding: `10px`,
+                      fontSize: `50px`,
+                    }}
+                  />
+                  <p className="card-skill-title font-black"> {look.title} </p>
+              </div>
             ))}
           </div>
         </div>
