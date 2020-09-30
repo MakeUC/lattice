@@ -54,7 +54,6 @@ export default function() {
   };
 
   const openCopiedAlert = async ([ content, text ]) => {
-    console.log([ content, text ]);
     await navigator.clipboard.writeText(text);
     copiedAlertDialog.setState([ content, text ]);
     copiedAlertDialog.open();
