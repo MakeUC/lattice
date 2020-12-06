@@ -21,7 +21,7 @@ const getSubscription = async () => {
   if(existing) throw new Error(`Push subscription already exists`);
 
   const applicationServerKey = urlB64ToUint8Array(
-    `BBZjBy7vm7QXjZGm8FefmDDFahC2hZOTNMGeJTH1tO1ZT4Rji6wMSBEKzxg8HML4PozPQYRF1ga8EqLFGFDCl0E`
+    `BHCuHf6XCh7_akWexWbU5zQfIg-pfNlXgtBdQXjdT3ERWVbd8SCIAKC-VhBHoKHc8cI9I27dodZF2iZZB9EpOFs`
   )
   const options = { applicationServerKey, userVisibleOnly: true }
   return registration.pushManager.subscribe(options);

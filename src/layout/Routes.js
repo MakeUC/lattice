@@ -2,17 +2,17 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Register from '../pages/auth/Register';
 import Login from '../pages/auth/Login';
+import Reset from '../pages/auth/Reset';
 import Notifications from '../pages/notifications/Notifications';
 import Profile from '../pages/profile/Profile';
 import ChangeProfile from '../pages/profile/ChangeProfile';
 import Home from '../pages/home/Home';
-import Reset from '../pages/auth/Reset';
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
 
 export default function() {
   return (
-    <BrowserRouter basename="/lattice">
+    <BrowserRouter>
       <Switch>
         <Route path="/auth/register/:registrantId">
           <AuthRoute>

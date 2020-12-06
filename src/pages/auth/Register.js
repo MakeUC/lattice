@@ -99,7 +99,15 @@ export default function () {
                     </Grid>
                     <p className="lattice-form-label mb0 font-gray">Email Address</p>
                     <Grid item className="lattice-form-input">
-                      <TextField name="email" type="email" id="input-with-icon-grid" fullWidth variant="outlined" value={email} disabled={true} />
+                      <TextField
+                        name="email"
+                        type="email"
+                        id="input-with-icon-grid"
+                        variant="outlined"
+                        value={email}
+                        disabled={true}
+                        fullWidth
+                      />
                       {errors.email &&
                         <Box color="error.main">{errors.email}</Box>
                       }
@@ -111,7 +119,13 @@ export default function () {
                     </Grid>
                     <p className="lattice-form-label mb0 font-gray">Password</p>
                     <Grid item className="lattice-form-input">
-                      <TextField name="password" type="password" id="input-with-icon-grid" fullWidth variant="outlined" />
+                      <TextField
+                        name="password"
+                        type="password"
+                        id="input-with-icon-grid"
+                        fullWidth
+                        variant="outlined"
+                      />
                       {errors.password &&
                         <Box color="error.main">{errors.password}</Box>
                       }
@@ -123,7 +137,13 @@ export default function () {
                     </Grid>
                     <p className="lattice-form-label mb0 font-gray">Confirm Password</p>
                     <Grid item className="lattice-form-input">
-                      <TextField name="confirmPassword" type="password" id="input-with-icon-grid" fullWidth variant="outlined" />
+                      <TextField
+                        name="confirmPassword"
+                        type="password"
+                        id="input-with-icon-grid"
+                        fullWidth
+                        variant="outlined"
+                      />
                       {errors.confirmPassword &&
                         <Box color="error.main">{errors.confirmPassword}</Box>
                       }
@@ -141,7 +161,9 @@ export default function () {
                       isSubmitting ? <Spinner size="25px" /> : `Sign Up`
                     }
                   </Button>
-                  <Box className="mt4">Already registered? Log in <Link to="/auth/login">here</Link></Box>
+                  <Box className="mt4">
+                    Already registered? Log in <Link to="/auth/login">here</Link>
+                  </Box>
                 </div>
               </>
           }
