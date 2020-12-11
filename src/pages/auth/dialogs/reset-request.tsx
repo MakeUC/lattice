@@ -7,8 +7,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function({ show, onClose, onSuccess }) {
-  const { register, handleSubmit, errors } = useForm();
+interface ResetRequestForm { email: string }
+
+export default function({ show, onClose, onSuccess }:
+  { 
+    show: boolean,
+    onClose: () => void,
+    onSuccess: (data: ResetRequestForm) => Promise<void>
+  }
+) {
+  const { register, handleSubmit, errors } = useForm<ResetRequestForm>();
 
   return (
     <div>

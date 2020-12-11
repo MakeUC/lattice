@@ -1,30 +1,39 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { Profile } from '../interfaces/profile';
+import { WrapperComponent } from '../interfaces/wrapper';
 import ProfileService from '../services/ProfileService';
 import { useAuth } from './AuthProvider';
 
-const context = createContext({
-  isLoading: true, failedToLoad: null, profile: {},
-  getProfile() {}, updateProfile() {}, toggleVisibility() {}, completeTour() {}
-});
+interface contextType {
+  isLoading: boolean,
+  failedToLoad: any,
+  profile?: Profile,
+  getProfile: () => Promise<void>,
+  updateProfile: (profile: Profile) => void,
+  toggleVisibility: () => Promise<void>,
+  completeTour: (tour: string) => Promise<void>
+};
 
-export function ProfileProvider({ children }) {
+const context = createContext<contextType| null>(null);
+
+export const ProfileProvider: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
 
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ profile, setProfile ] = useState({});
+  const [ profile, setProfile ] = useState<Profile>();
 
   const getProfile = useCallback(async () => {
     try {
       setLoading(true);
       setFailedToLoad(null);
 
-      const profile = await ProfileService.getProfile({ token });
+      const profile = await ProfileService.getProfile(token!);
 
       setProfile(profile);
 
       if(!profile.started) {
-        ProfileService.startProfile({ token });
+        ProfileService.startProfile(token!);
       }
     } catch (err) {
       setFailedToLoad(err);
@@ -37,26 +46,26 @@ export function ProfileProvider({ children }) {
     token && getProfile();
   }, [ token, getProfile ]);
 
-  const updateProfile = async profile => {
-    const newProfile = await ProfileService.updateProfile({ token, profile });
+  const updateProfile = async (profile: Profile) => {
+    const newProfile = await ProfileService.updateProfile(token!, profile);
     setProfile(newProfile);
   };
 
   const toggleVisibility = async () => {
-    const newProfile = await ProfileService.setVisible({ token, visible: !profile.visible });
+    const newProfile = await ProfileService.setVisible(token!, !profile?.visible);
     setProfile(newProfile);
   };
 
-  const completeTour = async tour => {
+  const completeTour = async (tour: string) => {
     try {
-      await ProfileService.completeTour({ token, tour });
+      await ProfileService.completeTour(token!, tour);
       await getProfile();
     } catch(err) {
       console.error(err);
     }
   };
 
-  const contextValue = {
+  const contextValue: contextType = {
     isLoading, failedToLoad, profile,
     getProfile, updateProfile, toggleVisibility, completeTour
   };
@@ -64,4 +73,4 @@ export function ProfileProvider({ children }) {
   return <context.Provider value={contextValue}>{children}</context.Provider>;
 };
 
-export const useProfile = () => useContext(context);
+export const useProfile = () => useContext(context)!;

@@ -1,25 +1,34 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { NotificationDetails } from '../interfaces/notification';
+import { WrapperComponent } from '../interfaces/wrapper';
 import NotificationService from '../services/NotificationService';
 import PushService from '../services/PushService';
 import { useAuth } from './AuthProvider';
 import { useProfile } from './ProfileProvider';
 
-const readNotification = ({ notification, to }) =>
+interface contextType {
+  isLoading: boolean,
+  failedToLoad: any,
+  notifications: Array<NotificationDetails>,
+  pushPermission: NotificationPermission,
+  getNotifications: () => Promise<void>,
+  readNotifications: () => Promise<void>,
+  requestNotificationPermission: () => Promise<void>
+}
+
+const readNotification = ({ notification, to }: NotificationDetails): NotificationDetails =>
   ({ notification: { ...notification, read: true }, to });
 
-const context = createContext({
-  isLoading: false, failedToLoad: null, notifications: [], pushPermission: `default`,
-  getNotifications() {}, readNotifications() {}, requestNotificationPermission() {}
-});
+const context = createContext<contextType | null>(null);
 
-export function NotificationProvider({ children }) {
+export const NotificationProvider: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
   const { profile } = useProfile();
 
-  const [ pushPermission, setPushPermission ] = useState(`default`);
+  const [ pushPermission, setPushPermission ] = useState<NotificationPermission>(`default`);
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ notifications, setNotifications ] = useState([]);
+  const [ notifications, setNotifications ] = useState<Array<NotificationDetails>>([]);
 
   const getNotifications = useCallback(async () => {
     if(!token) return;
@@ -28,7 +37,7 @@ export function NotificationProvider({ children }) {
       setLoading(true);
       setFailedToLoad(null);
 
-      const notifications = await NotificationService.getNotifications({ token });
+      const notifications = await NotificationService.getNotifications(token);
 
       setNotifications(notifications);
     } catch (err) {
@@ -49,7 +58,7 @@ export function NotificationProvider({ children }) {
     if(!unreadCount) return;
     
     try {
-      await NotificationService.readNotifications({ token });
+      await NotificationService.readNotifications(token);
       setTimeout(() => {
         setNotifications(notifications => notifications.map(readNotification));
       }, 2000);
@@ -58,19 +67,18 @@ export function NotificationProvider({ children }) {
     }
   };
 
-  const requestNotificationPermission = async () => {
+  const requestNotificationPermission = useCallback(async () => {
     if(!token) return;
 
     const permission = await PushService.requestPermission();
     setPushPermission(permission);
-  }
+  }, [token])
 
   useEffect(() => {
-    profile.visible && requestNotificationPermission();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ token, profile.visible ]);
+    profile?.visible && requestNotificationPermission();
+  }, [profile, requestNotificationPermission]);
 
-  const contextValue = {
+  const contextValue: contextType = {
     isLoading, failedToLoad, notifications, pushPermission,
     getNotifications, readNotifications, requestNotificationPermission
   };
@@ -78,4 +86,4 @@ export function NotificationProvider({ children }) {
   return <context.Provider value={contextValue}>{children}</context.Provider>;
 };
 
-export const useNotification = () => useContext(context);
+export const useNotification = () => useContext(context)!;

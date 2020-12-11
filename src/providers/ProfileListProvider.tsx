@@ -1,15 +1,22 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { ScoredProfile } from '../interfaces/profile';
+import { WrapperComponent } from '../interfaces/wrapper';
 import ProfileService from '../services/ProfileService';
 import { useAuth } from './AuthProvider';
 import { useProfile } from './ProfileProvider';
 
-const context = createContext({
-  isLoading: true, failedToLoad: null,
-  skills: [], profiles: [],
-  getSkills() {}, getProfiles() {}
-});
+interface contextType {
+  isLoading: boolean,
+  failedToLoad: any,
+  skills: Array<string>,
+  profiles: Array<ScoredProfile>,
+  getSkills: () => Promise<void>,
+  getProfiles: () => Promise<void>
+};
 
-export function ProfileListProvider({ children }) {
+const context = createContext<contextType | null>(null);
+
+export const ProfileListProvider: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
   const { profile } = useProfile();
 
@@ -17,11 +24,11 @@ export function ProfileListProvider({ children }) {
   const [ failedToLoad, setFailedToLoad ] = useState(null);
   const [ skills, setSkills ] = useState([]);
 
-  const [ profiles, setProfiles ] = useState([]);
+  const [ profiles, setProfiles ] = useState<Array<ScoredProfile>>([]);
 
   const getSkills = useCallback(async () => {
     try {
-      const skills = await ProfileService.getSkills({ token });
+      const skills = await ProfileService.getSkills(token!);
       setSkills(skills);
     } catch (err) {
       console.error(err);
@@ -34,7 +41,7 @@ export function ProfileListProvider({ children }) {
       setLoading(true);
       setFailedToLoad(null);
 
-      const profiles = await ProfileService.getProfiles({ token });
+      const profiles = await ProfileService.getProfiles(token!);
 
       setProfiles(profiles);
     } catch (err) {
@@ -42,7 +49,7 @@ export function ProfileListProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [ profile.visible, token ]);
+  }, [profile, token]);
 
   useEffect(() => {
     token && getSkills();
@@ -52,7 +59,7 @@ export function ProfileListProvider({ children }) {
     token && getProfiles();
   }, [ token, getProfiles ]);
 
-  const contextValue = {
+  const contextValue: contextType = {
     isLoading, failedToLoad,
     skills, profiles,
     getSkills, getProfiles
@@ -61,4 +68,4 @@ export function ProfileListProvider({ children }) {
   return <context.Provider value={contextValue}>{children}</context.Provider>;
 };
 
-export const useProfileList = () => useContext(context);
+export const useProfileList = () => useContext(context)!;

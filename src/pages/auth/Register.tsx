@@ -11,6 +11,13 @@ import { useAuth } from '../../providers/AuthProvider';
 
 import "../../styles/Form.scss"
 import Spinner from '../../components/Spinner';
+import { useForm } from 'react-hook-form';
+
+interface RegisterForm {
+  email: string
+  password: string
+  confirmPassword: string
+};
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -21,58 +28,38 @@ const useStyles = makeStyles((theme) => ({
 export default function () {
   const classes = useStyles();
   const { token, getRegistrantEmail, register } = useAuth();
-  const { registrantId } = useParams();
+  const { registrantId } = useParams<{ registrantId: string }>();
+
+  const { register: registerInput, handleSubmit, setValue, errors, watch } = useForm<RegisterForm>();
 
   const [ isLoading, setLoading ] = useState(true);
-  const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ email, setEmail ] = useState(``);
-  const [ errors, setErrors ] = useState({});
+  const [ failedToLoad, setFailedToLoad ] = useState<Error>();
+  // const [ email, setEmail ] = useState(``);
+  // const [ errors, setErrors ] = useState<RegisterForm>();
   const [ isSubmitting, setSubmitting ] = useState(false);
-  const [ failedToSubmit, setFailedToSubmit ] = useState(null);
+  const [ failedToSubmit, setFailedToSubmit ] = useState<Error>();
   const [ redirect, setRedirect ] = useState(``);
 
   useEffect(() => {
     (async function () {
       try {
         const email = await getRegistrantEmail(registrantId);
-        setEmail(email);
+        setValue(`email`, email);
       } catch (err) {
         setFailedToLoad(err);
       } finally {
         setLoading(false);
       }
     })();
-  }, [ getRegistrantEmail, registrantId ]);
+  }, [getRegistrantEmail, registrantId, setValue]);
 
   useEffect(() => { token && setRedirect(`/`) }, [token]);
 
-  const onSubmit = async e => {
+  const onSubmit = async (data: RegisterForm) => {
     try {
-      e.preventDefault();
       setSubmitting(true);
-      setErrors({});
 
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-      const confirmPassword = e.target.confirmPassword.value;
-
-      if (!email) {
-        return setErrors({ email: `Invalid email, please check the link provided` });
-      }
-
-      if (!password) {
-        return setErrors({ password: `Please provide a password` });
-      }
-
-      if (password.length < 6) {
-        return setErrors({ password: `Password must be atleast 6 characters long` });
-      }
-
-      if (password !== confirmPassword) {
-        return setErrors({ confirmPassword: `Passwords don't match` });
-      }
-
-      await register(registrantId, password);
+      await register(registrantId, data.password);
     } catch (err) {
       setFailedToSubmit(err);
     } finally {
@@ -80,9 +67,11 @@ export default function () {
     }
   };
 
+  const password = watch(`password`);
+
   return (
-    <Container className={classes.root}>
-      <form onSubmit={onSubmit}>
+    <Container /* className={classes.root} */>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
           {isLoading ? <h1 className="title">Loading...</h1> :
             failedToLoad ?
@@ -104,8 +93,8 @@ export default function () {
                         type="email"
                         id="input-with-icon-grid"
                         variant="outlined"
-                        value={email}
                         disabled={true}
+                        inputRef={registerInput({ required: `Invalid email, please check the link provided` })}
                         fullWidth
                       />
                       {errors.email &&
@@ -123,8 +112,12 @@ export default function () {
                         name="password"
                         type="password"
                         id="input-with-icon-grid"
-                        fullWidth
                         variant="outlined"
+                        fullWidth
+                        inputRef={registerInput({
+                          required: `Please provide a password`,
+                          minLength: 6
+                        })}
                       />
                       {errors.password &&
                         <Box color="error.main">{errors.password}</Box>
@@ -141,8 +134,9 @@ export default function () {
                         name="confirmPassword"
                         type="password"
                         id="input-with-icon-grid"
-                        fullWidth
                         variant="outlined"
+                        fullWidth
+                        inputRef={registerInput({})}
                       />
                       {errors.confirmPassword &&
                         <Box color="error.main">{errors.confirmPassword}</Box>

@@ -1,14 +1,16 @@
 import Axios from 'axios';
+import { Swipe } from '../interfaces/match';
 import { apiHost } from './Api';
 
-const apiUrl = `${apiHost}/notification`;
+const apiUrl = `${apiHost}/match`;
 
 export default {
-  async getNotifications({ token }) {
+  async swipe(token: string, swipe: Pick<Swipe, 'to' | 'like'>) {
     try {
       const res = await Axios({
         url: `${apiUrl}`,
-        method: `GET`,
+        method: `POST`,
+        data: swipe,
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -19,11 +21,11 @@ export default {
       throw new Error(err.response.data.message);
     }
   },
-  async readNotifications({ token }) {
+  async reset(token: string): Promise<void> {
     try {
       await Axios({
-        url: `${apiUrl}/read`,
-        method: `POST`,
+        url: `${apiUrl}`,
+        method: `DELETE`,
         headers: {
           Authorization: `Bearer ${token}`
         }

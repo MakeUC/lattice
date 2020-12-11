@@ -6,7 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function({ show, onClose, error }) {
+export default function({ show, onClose, error }:
+  { show: boolean, onClose: () => void, error?: Error }
+) {
   return (
     <div>
       <Dialog

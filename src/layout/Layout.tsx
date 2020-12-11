@@ -2,10 +2,12 @@ import React from 'react';
 import Providers from './Providers';
 import Routes from './Routes';
 
-export default function() {
+const Layout = () => {
   return <>
     <Providers>
       <Routes />
     </Providers>
   </>;
-}
+};
+
+export default Layout;

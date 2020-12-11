@@ -1,0 +1,1 @@
+export type WrapperComponent = (props: { children: JSX.Element }) => JSX.Element

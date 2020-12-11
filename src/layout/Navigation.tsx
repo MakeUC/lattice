@@ -11,25 +11,9 @@ import { useNotification } from '../providers/NotificationProvider';
 
 import '../styles/Navigation.css';
 
-function NavAction({ navigate, ...rest }) {
+const NavAction = ({ navigate, ...rest }: any) => {
   return <BottomNavigationAction {...rest} />;
 }
-
-export default function() {
-  return <>
-    <BottomNavigation className="bottomNavigation" >
-      <Link to="/notifications" className="notifications-link">
-        <NavAction icon={<NotificationAction />} />
-      </Link>
-      <Link to="/" className="home-link">
-        <NavAction icon={<HomeIcon />} />
-      </Link>
-      <Link to="/profile" className="profile-link">
-        <NavAction icon={<PersonIcon />} />
-      </Link>
-    </BottomNavigation>
-  </>;
-};
 
 const NotificationAction = () => {
   const { failedToLoad, notifications } = useNotification();
@@ -49,3 +33,21 @@ const NotificationAction = () => {
     </Badge>
   );
 };
+
+const Navigation = () => {
+  return <>
+    <BottomNavigation className="bottomNavigation" >
+      <Link to="/notifications" className="notifications-link">
+        <NavAction icon={<NotificationAction />} />
+      </Link>
+      <Link to="/" className="home-link">
+        <NavAction icon={<HomeIcon />} />
+      </Link>
+      <Link to="/profile" className="profile-link">
+        <NavAction icon={<PersonIcon />} />
+      </Link>
+    </BottomNavigation>
+  </>;
+};
+
+export default Navigation;

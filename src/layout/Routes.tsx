@@ -10,7 +10,7 @@ import Home from '../pages/home/Home';
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
 
-export default function() {
+const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
@@ -52,4 +52,6 @@ export default function() {
       </Switch>
     </BrowserRouter>
   );
-}
+};
+
+export default Routes;

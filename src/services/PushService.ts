@@ -1,9 +1,10 @@
 import Axios from 'axios';
+import { Subscription } from '../interfaces/notification';
 import { apiHost } from './Api';
 
 const apiUrl = `${apiHost}/notification`;
 
-const urlB64ToUint8Array = base64String => {
+const urlB64ToUint8Array = (base64String: string) => {
   const padding = `=`.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, `+`).replace(/_/g, `/`);
   const rawData = atob(base64);
@@ -40,7 +41,7 @@ export default {
   requestPermission() {
     return window.Notification.requestPermission();
   },
-  async subscribe({ token }) {
+  async subscribe(token: string): Promise<Subscription> {
     try {
       const sub = await getSubscription();
 
@@ -58,7 +59,7 @@ export default {
       throw new Error(err.response?.data?.message || err.message);
     }
   },
-  async unsubscribe({ token, id }) {
+  async unsubscribe(token: string, id: string) {
     try {
       await removeSubscription();
   

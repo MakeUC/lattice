@@ -5,7 +5,7 @@ const apiUrl = `${apiHost}/auth`;
 
 export default {
 
-  async getRegistrantEmail(id) {
+  async getRegistrantEmail(id: string): Promise<string> {
     try {
       const res = await Axios({
         url: `${apiUrl}/email/${id}`,
@@ -18,7 +18,7 @@ export default {
     }
   },
 
-  async register(registrantId, password) {
+  async register(registrantId: string, password: string) {
     try {
       const res = await Axios({
         url: `${apiUrl}/register`,
@@ -32,7 +32,7 @@ export default {
     }
   },
 
-  async login(email, password) {
+  async login(email: string, password: string) {
     try {
       const res = await Axios({
         url: `${apiUrl}/login`,
@@ -46,7 +46,7 @@ export default {
     }
   },
 
-  async changePassword({ token, oldPassword, newPassword }) {
+  async changePassword(token: string, oldPassword: string, newPassword: string) {
     try {
       await Axios({
         url: `${apiUrl}/password`,
@@ -63,21 +63,21 @@ export default {
     }
   },
 
-  async sendResetLink(email) {
+  async sendResetLink(email: string): Promise<void> {
     try {
-      const res = await Axios({
+      await Axios({
         url: `${apiUrl}/reset`,
         method: `POST`,
         data: { email }
       });
   
-      return res.data;
+      return;
     } catch (err) {
       throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
     }
   },
 
-  async getResetInfo(resetToken) {
+  async getResetInfo(resetToken: string) {
     try {
       const res = await Axios({
         url: `${apiUrl}/reset/${resetToken}`,
@@ -90,7 +90,7 @@ export default {
     }
   },
 
-  async resetPassword(resetToken, password) {
+  async resetPassword(resetToken: string, password: string) {
     try {
       await Axios({
         url: `${apiUrl}/reset`,

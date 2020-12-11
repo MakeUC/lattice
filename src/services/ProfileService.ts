@@ -1,10 +1,11 @@
 import Axios from 'axios';
+import { Profile, ScoredProfile } from '../interfaces/profile';
 import { apiHost } from './Api';
 
 const apiUrl = `${apiHost}/profile`;
 
 export default {
-  async getProfiles({ token }) {
+  async getProfiles(token: string): Promise<Array<ScoredProfile>> {
     try {
       const res = await Axios({
         url: `${apiUrl}/list`,
@@ -20,7 +21,7 @@ export default {
     }
   },
 
-  async getProfile({ token }) {
+  async getProfile(token: string): Promise<Profile> {
     try {
       const res = await Axios({
         url: `${apiUrl}/`,
@@ -36,7 +37,7 @@ export default {
     }
   },
 
-  async startProfile({ token }) {
+  async startProfile(token: string): Promise<void> {
     try {
       await Axios({
         url: `${apiUrl}/start`,
@@ -52,7 +53,7 @@ export default {
     }
   },
 
-  async updateProfile({ token, profile }) {
+  async updateProfile(token: string, profile: Profile): Promise<Profile> {
     try {
       const res = await Axios({
         url: `${apiUrl}/`,
@@ -69,7 +70,7 @@ export default {
     }
   },
 
-  async setVisible({ token, visible }) {
+  async setVisible(token: string, visible: boolean): Promise<Profile> {
     try {
       const res = await Axios({
         url: `${apiUrl}/visible`,
@@ -86,7 +87,7 @@ export default {
     }
   },
 
-  async getSkills({ token }) {
+  async getSkills(token: string) {
     try {
       const res = await Axios({
         url: `${apiUrl}/skills`,
@@ -102,7 +103,7 @@ export default {
     }
   },
 
-  async completeTour({ token, tour }) {
+  async completeTour(token: string, tour: string): Promise<void> {
     try {
       await Axios({
         url: `${apiUrl}/tour/${tour}`,

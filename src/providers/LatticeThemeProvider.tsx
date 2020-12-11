@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { WrapperComponent } from '../interfaces/wrapper';
 
 const theme = createMuiTheme({
   palette: { 
@@ -9,6 +10,6 @@ const theme = createMuiTheme({
   }
 });
 
-export function LatticeThemeProvider({ children }) {
+export const LatticeThemeProvider: WrapperComponent = ({ children }) => {
   return  <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

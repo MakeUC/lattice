@@ -5,8 +5,9 @@ import { MatchProvider } from '../providers/MatchProvider';
 import { ProfileListProvider } from '../providers/ProfileListProvider';
 import { NotificationProvider } from '../providers/NotificationProvider';
 import { LatticeThemeProvider } from '../providers/LatticeThemeProvider';
+import { WrapperComponent } from '../interfaces/wrapper';
 
-export default function({ children }) {
+const Providers: WrapperComponent = ({ children }) => {
   return <>
     <AuthProvider>
       <ProfileProvider>
@@ -22,4 +23,6 @@ export default function({ children }) {
       </ProfileProvider>
     </AuthProvider>
   </>;
-}
+};
+
+export default Providers;
