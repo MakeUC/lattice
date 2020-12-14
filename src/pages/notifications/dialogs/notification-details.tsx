@@ -1,10 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import NotificationTour from '../../../tours/NotificationTour';
+import { HydratedProfile } from '../../../interfaces/profile';
 
-export default function ({ show, onClose, matchedUser = {}, onContactClick }) {
-  const { skills, name, idea, lookingFor, email, slack } = matchedUser;
+export default function ({ show, onClose, matchedUser, onContactClick }:
+  { show: boolean, onClose: () => void, matchedUser: HydratedProfile, onContactClick?: () => void }
+) {
+  const { skills, name, idea, lookingFor, /* email, slack */ } = matchedUser;
 
   const skillRows = [skills?.slice(0, 3), skills?.slice(3, 6)];
 
@@ -91,20 +94,21 @@ export default function ({ show, onClose, matchedUser = {}, onContactClick }) {
                   ></i>
                 ))}
               </div>
+              {/*
+                <Button
+                  className="slack-button"
+                  fullWidth={true}
+                  color="primary"
+                  onClick={() => onContactClick([`Slack handler`, `@${slack}`])}
+                >Slack: @{slack}</Button>
 
-              <Button
-                className="slack-button"
-                fullWidth={true}
-                color="primary"
-                onClick={() => onContactClick([`Slack handler`, `@${slack}`])}
-              >Slack: @{slack}</Button>
-
-              <Button
-                className="email-button"
-                fullWidth={true}
-                color="primary"
-                onClick={() => onContactClick([`Email`, email])}
-              >Email: {email}</Button>
+                <Button
+                  className="email-button"
+                  fullWidth={true}
+                  color="primary"
+                  onClick={() => onContactClick([`Email`, email])}
+                >Email: {email}</Button>
+              */}
             </div>
           }
         </div>
@@ -112,4 +116,4 @@ export default function ({ show, onClose, matchedUser = {}, onContactClick }) {
       </Dialog>
     </div>
   );
-}
+};

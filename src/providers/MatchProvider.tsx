@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Profile } from '../interfaces/profile';
+import { HydratedProfile, Profile } from '../interfaces/profile';
 import { WrapperComponent } from '../interfaces/wrapper';
 import MatchService from '../services/MatchService';
 import { useAuth } from './AuthProvider';
 import { useProfileList } from './ProfileListProvider';
 
 interface contextType {
-  swipeProfile: (to: Profile, like: boolean) => Promise<void>,
+  swipeProfile: (to: Profile | HydratedProfile, like: boolean) => Promise<void>,
   reset: () => Promise<void>
 };
 
@@ -18,7 +18,7 @@ export const MatchProvider: WrapperComponent = ({ children }) => {
 
   const [ swipedProfiles, setSwipedProfiles ] = useState<string[]>([]);
 
-  const swipeProfile = async (to: Profile, like: boolean) => {
+  const swipeProfile = async (to: Profile | HydratedProfile, like: boolean) => {
     if(swipedProfiles.includes(to.id)) return;
 
     await MatchService.swipe(token!, { to: to.id, like });

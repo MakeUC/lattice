@@ -7,7 +7,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import PromiseButton from '../../../components/PromiseButton';
 
-export default function({ show, onSuccess, onClose }) {
+export default function({ show, onSuccess, onClose }:
+  { show: boolean, onSuccess: () => Promise<any>, onClose: () => void }
+) {
   return (
     <div>
       <Dialog

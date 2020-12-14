@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// @ts-ignore 
 import { useSprings } from 'react-spring/hooks';
 import { useGesture } from 'react-with-gesture';
 
@@ -6,8 +7,9 @@ import { useMatch } from '../../providers/MatchProvider';
 import { useProfileList } from '../../providers/ProfileListProvider';
 import Card from './Card';
 import '../../styles/Deck.css';
+import { HydratedProfile } from '../../interfaces/profile';
 
-const to = (i) => ({
+const to = (i: number) => ({
   x: 0,
   y: i * -3,
   scale: 1,
@@ -15,26 +17,28 @@ const to = (i) => ({
   delay: i * 100,
 });
 
-const from = (i) => ({ rot: 0, scale: 1.5, y: -1000 });
+const from = () => ({ rot: 0, scale: 1.5, y: -1000 });
 
-const trans = (r, s) =>
+const trans = (r: number, s: number) =>
   `perspective(1500px) rotateX(10deg) rotateY(${
     r / 10
   }deg) rotateZ(${r}deg) scale(${s})`;
 
-function Deck({ data }) {
+function Deck({ data }: {
+  data: Array<HydratedProfile>
+}) {
   const { getProfiles } = useProfileList();
   const { swipeProfile } = useMatch();
 
   const [gone] = useState(() => new Set());
 
-  const [props, set] = useSprings(data.length, (i) => ({
+  const [props, set] = useSprings(data.length, (i: number) => ({
     ...to(i),
-    from: from(i),
+    from: from(),
   }));
 
-  const onSwipe = async (profile, direction) => {
-    await swipeProfile(profile, (direction === 1));
+  const onSwipe = async (profile: HydratedProfile, like: boolean) => {
+    await swipeProfile(profile, like);
   };
 
   const onFinish = () => {
@@ -54,14 +58,14 @@ function Deck({ data }) {
       const trigger = velocity > 0.2;
       const dir = xDir < 0 ? -1 : 1;
 
-      let swipePromise = null;
+      let swipePromise: Promise<void> | null = null;
 
       if (!down && trigger) {
-        swipePromise = onSwipe(data[index], dir).then(() => console.log(`swiped`));
+        swipePromise = onSwipe(data[index], (dir === 1)).then(() => console.log(`swiped`));
         gone.add(index);
       }
 
-      set((i) => {
+      set((i: number) => {
         if (index !== i) {
           return;
         }
@@ -88,7 +92,7 @@ function Deck({ data }) {
   );
 
   return <div className="deck" style={{ position: `fixed` }}>
-    {props.map(({ x, y, rot, scale }, i) => (
+    {props.map(({ x, y, rot, scale }: any, i: number) => (
       <Card
         key={i}
         i={i}

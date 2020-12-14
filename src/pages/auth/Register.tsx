@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Redirect, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +12,6 @@ import { useAuth } from '../../providers/AuthProvider';
 
 import "../../styles/Form.scss"
 import Spinner from '../../components/Spinner';
-import { useForm } from 'react-hook-form';
 
 interface RegisterForm {
   email: string
@@ -27,18 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function () {
   const classes = useStyles();
-  const { token, getRegistrantEmail, register } = useAuth();
+  const { getRegistrantEmail, register } = useAuth();
   const { registrantId } = useParams<{ registrantId: string }>();
 
   const { register: registerInput, handleSubmit, setValue, errors, watch } = useForm<RegisterForm>();
 
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState<Error>();
-  // const [ email, setEmail ] = useState(``);
-  // const [ errors, setErrors ] = useState<RegisterForm>();
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState<Error>();
-  const [ redirect, setRedirect ] = useState(``);
 
   useEffect(() => {
     (async function () {
@@ -53,12 +50,9 @@ export default function () {
     })();
   }, [getRegistrantEmail, registrantId, setValue]);
 
-  useEffect(() => { token && setRedirect(`/`) }, [token]);
-
   const onSubmit = async (data: RegisterForm) => {
     try {
       setSubmitting(true);
-
       await register(registrantId, data.password);
     } catch (err) {
       setFailedToSubmit(err);
@@ -120,7 +114,9 @@ export default function () {
                         })}
                       />
                       {errors.password &&
-                        <Box color="error.main">{errors.password}</Box>
+                        <Box color="error.main">
+                          {errors.password?.message || `Password must be atleast 6 characters.`}
+                        </Box>
                       }
                     </Grid>
                   </Grid>
@@ -136,10 +132,14 @@ export default function () {
                         id="input-with-icon-grid"
                         variant="outlined"
                         fullWidth
-                        inputRef={registerInput({})}
+                        inputRef={registerInput({
+                          validate: confirmPassword => password === confirmPassword
+                        })}
                       />
                       {errors.confirmPassword &&
-                        <Box color="error.main">{errors.confirmPassword}</Box>
+                        <Box color="error.main">
+                          {errors.confirmPassword?.message || `Passwords must match.`}
+                        </Box>
                       }
                     </Grid>
                   </Grid>
@@ -163,7 +163,6 @@ export default function () {
           }
         </div>
       </form>
-      {redirect && <Redirect to={redirect} />}
     </Container>
   );
 }

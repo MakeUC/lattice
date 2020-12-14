@@ -14,19 +14,21 @@ import ResetConfirmation from './dialogs/reset-confirmation';
 import ResetAlert from './dialogs/reset-alert';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
+import { HydratedProfile } from "../../interfaces/profile";
+import { WrapperComponent } from "../../interfaces/wrapper";
 
 export default function () {
   const profileState = useProfile();
   const profileListState = useProfileList();
 
-  const [ hydratedProfiles, setHydratedProfiles ] = useState();
+  const [ hydratedProfiles, setHydratedProfiles ] = useState<Array<HydratedProfile>>();
 
   const { profile } = profileState;
   const { isLoading, skills, profiles } = profileListState;
 
   useEffect(() => {
     if(skills.length) {
-      const hydratedProfiles = profiles.map(profile => {
+      const hydratedProfiles = profiles.map((profile): HydratedProfile => {
         const profileSkills = skills.filter(skill => profile?.skills?.includes(skill.title));
         const profileLookingFor = skills.filter(skill => profile?.lookingFor?.includes(skill.title));
     
@@ -55,7 +57,7 @@ export default function () {
   );
 };
 
-function TextBox({ children }) {
+const TextBox: WrapperComponent = ({ children }) => {
   return <Container className="nav-bar-margin">
     <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
       {children}
@@ -63,12 +65,12 @@ function TextBox({ children }) {
   </Container>;
 };
 
-function SetupText() {
+const SetupText = () => {
   const { isLoading, failedToLoad, profile } = useProfile();
 
   return (
     (!isLoading && !failedToLoad) ? (
-      !profile.started ? 
+      !profile?.started ? 
       <TextBox>
         Welcome! Let's get you set up. Head over to your <Link to="/profile/edit">profile page</Link> to get started.
       </TextBox> :

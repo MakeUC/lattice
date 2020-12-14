@@ -1,11 +1,11 @@
 import React from "react";
-import { string, array } from "prop-types";
 import { animated, interpolate } from "react-spring/hooks";
+import { HydratedProfile } from "../../interfaces/profile";
 
 import "../../styles/Card.scss";
 
-const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
-  const { skills, name, idea, lookingFor } = data[i];
+const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
+  const { skills, name, idea, lookingFor }: HydratedProfile = data[i];
 
   const skillRows = [skills.slice(0, 3), skills.slice(3, 6)];
 
@@ -121,13 +121,6 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }) => {
       </animated.div>
     </animated.div>
   );
-};
-
-Card.propTypes = {
-  skills: array,
-  name: string,
-  idea: string,
-  lookingFor: array,
 };
 
 export default Card;

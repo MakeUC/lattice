@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
-import SlackIcon from '@material-ui/icons/AlternateEmail';
+// import SlackIcon from '@material-ui/icons/AlternateEmail';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+// import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Button, Container } from '@material-ui/core';
 
 import { useAuth } from '../../providers/AuthProvider';
@@ -16,7 +16,7 @@ import PromiseButton from '../../components/PromiseButton';
 import ProfileTour from '../../tours/ProfileTour';
 import ToggleVisibilityConfirmation from './dialogs/toggle-visibility-confirmation';
 import ToggleVisibilityAlert from './dialogs/toggle-visibility-alert';
-import ChangePassword from './dialogs/change-password';
+import ChangePassword, { ChangePasswordForm } from './dialogs/change-password';
 import ChangePasswordAlert from './dialogs/change-password-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
 
@@ -33,7 +33,7 @@ export default function() {
   const changePasswordAlertDialog = useDialogControl();
   const logoutConfirmationDialog = useDialogControl();
 
-  const [ redirect, setRedirect ] = useState();
+  const [ redirect, setRedirect ] = useState<string>();
 
   const redirectToProfileForm = () => setRedirect(`/profile/edit`);
 
@@ -43,9 +43,9 @@ export default function() {
     toggleVisibilityAlertDialog.open();
   };
 
-  const onPasswordChange = async data => {
+  const onPasswordChange = async (data: ChangePasswordForm) => {
     try {
-      await changePassword(data);
+      await changePassword(data.oldPassword, data.newPassword);
     } catch(err) {
       changePasswordAlertDialog.setState(err);
     } finally {
@@ -72,7 +72,7 @@ export default function() {
                   </Grid>
                   <p className="lattice-form-label mb0 font-gray">{profile?.name}</p>
                 </Grid>
-                <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                {/* <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid className="lattice-icon" item>
                     <MailOutlineIcon />
                   </Grid>
@@ -83,7 +83,7 @@ export default function() {
                     <SlackIcon />
                   </Grid>
                   <p className="lattice-form-label mb0 font-gray">{profile?.slack}</p>
-                </Grid>
+                </Grid> */}
               </div>
 
               <Button
@@ -99,7 +99,7 @@ export default function() {
                 color="primary"
                 onClick={toggleVisibilityConfirmationDialog.open}
               >
-                {profile.visible ?
+                {profile?.visible ?
                   <>
                     <VisibilityIcon /> &nbsp; Mark Not Visible
                   </> :
@@ -145,12 +145,12 @@ export default function() {
             show={toggleVisibilityConfirmationDialog.show}
             onClose={toggleVisibilityConfirmationDialog.dismiss}
             onSuccess={onToggleVisibility}
-            visible={profile.visible}
+            visible={profile?.visible}
           />
           <ToggleVisibilityAlert
             show={toggleVisibilityAlertDialog.show}
             onClose={toggleVisibilityAlertDialog.dismiss}
-            visible={profile.visible}
+            visible={profile?.visible}
           />
           <ChangePassword
             show={changePasswordDialog.show}

@@ -2,7 +2,7 @@ import React from "react";
 
 import '../styles/Spinner.css';
 
-export default function({ size = `100px` }) {
+const Spinner = ({ size = `100px` }) => {
   return <div id="spinner-container">
     <img
       id="spinner"
@@ -11,4 +11,6 @@ export default function({ size = `100px` }) {
       style={{ width: size, height: size }}
     />
   </div>;
-}
+};
+
+export default Spinner;

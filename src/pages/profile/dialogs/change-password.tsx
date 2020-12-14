@@ -8,12 +8,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Spinner from '../../../components/Spinner';
 
-export default function({ show, onClose, onSuccess }) {
-  const { register, getValues, handleSubmit, errors } = useForm();
+export interface ChangePasswordForm {
+  oldPassword: string
+  newPassword: string
+  confirmNewPassword: string
+}
+
+export default function({ show, onClose, onSuccess }:
+  { show: boolean, onClose: () => void, onSuccess: (data: ChangePasswordForm) => Promise<any> }
+) {
+  const { register, getValues, handleSubmit, errors } = useForm<ChangePasswordForm>();
 
   const [ isSubmitting, setSubmitting ] = useState(false);
 
-  const onSubmit = async data => {
+  const onSubmit = async (data: ChangePasswordForm) => {
     try {
       setSubmitting(true);
       await onSuccess(data);

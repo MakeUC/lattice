@@ -31,9 +31,9 @@ export default function() {
   const { register, setValue, handleSubmit, errors, reset, watch } = useForm();
 
   const [ isSubmitting, setSubmitting ] = useState(false);
-  const [ failedToSubmit, setFailedToSubmit ] = useState(``);
+  const [ failedToSubmit, setFailedToSubmit ] = useState<string>();
   const [ showConfirmationModal, setShowModal ] = useState(false);
-  const [ redirect, setRedirect ] = useState();
+  const [ redirect, setRedirect ] = useState<string>();
 
   useEffect(()=> {
     register({ name: `skills` }, {
@@ -54,7 +54,7 @@ export default function() {
   }, [ reset, skills, profile ]);
 
   useEffect(() => {
-    setFailedToSubmit(!!Object.keys(errors).length && `Please fix the above errors`);
+    setFailedToSubmit((!!Object.keys(errors).length) ? `Please fix the above errors` : undefined);
   }, [ errors ]);
 
   const onSubmit = async data => {
@@ -83,7 +83,7 @@ export default function() {
   const profileLookingFor = watch(`lookingFor`)|| [];
 
   return (
-    <Container className={classes.root + " nav-bar-margin"}>
+    <Container className={/* classes.root +  */" nav-bar-margin"}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
           <h1 className="title">Your Profile</h1>
@@ -233,16 +233,7 @@ export default function() {
           }
         </div>
       </form>
-      <ConfirmationDialog show={showConfirmationModal} onClose={onModalDismiss}>
-        <h2>Success</h2>
-        <p>Your profile was sucessfully updated.</p>
-        <Button
-          variant="contained"
-          className="center"
-          color="primary"
-          onClick={onModalDismiss}
-        >Next</Button>
-      </ConfirmationDialog>
+      <ConfirmationDialog show={showConfirmationModal} onClose={onModalDismiss} />
       {redirect && <Redirect to={redirect} />}
     </Container>
   );

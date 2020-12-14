@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export default function(defaultShow = false) {
+export default function<T>(defaultShow = false) {
   const [ show, setShow ] = useState(defaultShow);
-  const [ state, setState ] = useState(null);
+  const [ state, setState ] = useState<T>();
   
   const open = () => setShow(true);
   const dismiss = () => {
-    setState(null);
+    setState(undefined);
     setShow(false);
   };
 

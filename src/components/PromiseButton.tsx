@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import Spinner from './Spinner';
 
-export default function({ onClick, children, ...props }) {
-  const [ waiting, setWaiting ] = useState();
+const PromiseButton = ({ onClick, children, ...props }: {
+  onClick: (...args: any[]) => Promise<any>
+  children: string | JSX.Element
+  [key: string]: any
+}) => {
+  const [ waiting, setWaiting ] = useState<boolean>();
 
-  const _onClick = async (...args) => {
+  const _onClick = async (...args: any[]) => {
     try {
       setWaiting(true);
       await onClick(...args);
@@ -20,3 +24,5 @@ export default function({ onClick, children, ...props }) {
     }
   </Button>;
 };
+
+export default PromiseButton;

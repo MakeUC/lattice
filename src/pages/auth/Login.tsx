@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -11,8 +10,14 @@ import Container from "@material-ui/core/Container";
 import { useAuth } from '../../providers/AuthProvider';
 import useDialogControl from '../../components/DialogControl.hook';
 import Spinner from '../../components/Spinner';
-import ResetRequest from './dialogs/reset-request';
+import ResetRequest, { ResetRequestForm } from './dialogs/reset-request';
 import ResetRequestAlert from './dialogs/reset-request-alert';
+import { useForm } from 'react-hook-form';
+
+interface LoginForm {
+  email: string
+  password: string
+};
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -22,35 +27,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InputWithIcon() {
   const classes = useStyles();
-  const { token, login, sendResetLink } = useAuth();
+  const { login, sendResetLink } = useAuth();
   const resetRequestDialog = useDialogControl();
-  const resetRequestAlertDialog = useDialogControl();
+  const resetRequestAlertDialog = useDialogControl<Error | undefined>();
+  const { register, handleSubmit, errors } = useForm<LoginForm>();
 
-  const [ errors, setErrors ] = useState({});
   const [ isSubmitting, setSubmitting ] = useState(false);
-  const [ failedToSubmit, setFailedToSubmit ] = useState(null);
-  const [ redirect, setRedirect ] = useState(``);
+  const [ failedToSubmit, setFailedToSubmit ] = useState<Error>();
   
-  useEffect(() => {token && setRedirect(`/`)}, [ token ]);
-
-  const onSubmit = async e => {
+  const onSubmit = async (data: LoginForm) => {
     try {
-      e.preventDefault();
       setSubmitting(true);
-      setErrors({});
-
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-
-      if(!email) {
-        return setErrors({ email: `Please provide an email` });
-      }
-
-      if(!password) {
-        return setErrors({ password: `Please provide a password` });
-      }
-
-      await login(email, password);
+      await login(data.email, data.password);
     } catch(err) {
       setFailedToSubmit(err);
     } finally {
@@ -58,7 +46,7 @@ export default function InputWithIcon() {
     }
   };
 
-  const requestReset = async ({ email }) => {
+  const requestReset = async ({ email }: ResetRequestForm) => {
     try {
       await sendResetLink(email);
     } catch(err) {
@@ -71,7 +59,7 @@ export default function InputWithIcon() {
 
   return (
     <Container>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
           <h1 className="title">Lattice Log In</h1>
           <div className="font-opensans tc mb3">
@@ -86,7 +74,14 @@ export default function InputWithIcon() {
                 </Grid>
                 <p className="lattice-form-label mb0 font-gray">Email Address</p>
                 <Grid item className="lattice-form-input">
-                  <TextField name="email" type="email" id="input-with-icon-grid" fullWidth variant="outlined" />
+                  <TextField
+                    name="email"
+                    type="email"
+                    id="input-with-icon-grid"
+                    fullWidth
+                    variant="outlined"
+                    inputRef={register({ required: `Please provide an email` })}
+                  />
                     {errors.email &&
                       <Box color="error.main">{errors.email}</Box>
                     }
@@ -98,7 +93,14 @@ export default function InputWithIcon() {
                 </Grid>
                 <p className="lattice-form-label mb0 font-gray">Password</p>
                 <Grid item className="lattice-form-input">
-                  <TextField name="password" type="password" id="input-with-icon-grid" fullWidth variant="outlined" />
+                  <TextField
+                    name="password"
+                    type="password"
+                    id="input-with-icon-grid"
+                    fullWidth
+                    variant="outlined"
+                    inputRef={register({ required: `Please provide an password` })}
+                  />
                     {errors.password &&
                       <Box color="error.main">{errors.password}</Box>
                     }
@@ -138,7 +140,6 @@ export default function InputWithIcon() {
         onClose={resetRequestAlertDialog.dismiss}
         error={resetRequestAlertDialog.state}
       />
-      {redirect && <Redirect to={redirect} />}
     </Container>
   );
 }

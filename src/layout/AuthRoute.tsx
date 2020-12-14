@@ -8,7 +8,7 @@ const AuthRoute: WrapperComponent = ({ children }) => {
 
   if(token) return <Redirect to="/" />
 
-  return children;
-};;
+  return <>{children}</>;
+};
 
 export default AuthRoute;

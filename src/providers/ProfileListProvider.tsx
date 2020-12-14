@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { ScoredProfile } from '../interfaces/profile';
+import { ScoredProfile, Skill } from '../interfaces/profile';
 import { WrapperComponent } from '../interfaces/wrapper';
 import ProfileService from '../services/ProfileService';
 import { useAuth } from './AuthProvider';
@@ -8,7 +8,7 @@ import { useProfile } from './ProfileProvider';
 interface contextType {
   isLoading: boolean,
   failedToLoad: any,
-  skills: Array<string>,
+  skills: Array<Skill>,
   profiles: Array<ScoredProfile>,
   getSkills: () => Promise<void>,
   getProfiles: () => Promise<void>
@@ -22,7 +22,7 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
 
   const [ isLoading, setLoading ] = useState(false);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ skills, setSkills ] = useState([]);
+  const [ skills, setSkills ] = useState<Array<Skill>>([]);
 
   const [ profiles, setProfiles ] = useState<Array<ScoredProfile>>([]);
 

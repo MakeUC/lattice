@@ -11,6 +11,8 @@ import useDialogControl from '../../components/DialogControl.hook';
 import NotificationDetails from './dialogs/notification-details';
 import CopiedAlert from './dialogs/copied-alert';
 import Spinner from '../../components/Spinner';
+import { NotificationDetails as INotificationDetails } from '../../interfaces/notification';
+import { HydratedProfile } from '../../interfaces/profile';
 
 const action = (
   <Button className="font-secondary-dark" size="small">
@@ -38,26 +40,26 @@ export default function() {
   const copiedAlertDialog = useDialogControl();
   const { skills } = useProfileList();
   
-  const [ openNotification, setOpenNotification ] = useState(null);
+  const [ openNotification, setOpenNotification ] = useState<INotificationDetails & { hydratedProfile: HydratedProfile }>();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { readNotifications() }, []);
 
-  const openNotificationDetails = notification => {
+  const openNotificationDetails = (notification: INotificationDetails) => {
     const profile = notification.to;
     const profileSkills = skills.filter(skill => profile.skills?.includes(skill.title));
     const profileLookingFor = skills.filter(skill => profile.lookingFor?.includes(skill.title));
-    const hydratedProfile = { ...profile, skills: profileSkills, lookingFor: profileLookingFor };
+    const hydratedProfile: HydratedProfile = { ...profile, skills: profileSkills, lookingFor: profileLookingFor };
 
     setOpenNotification({ ...notification, hydratedProfile });
     notificationDetailsDialog.open();
   };
 
-  const openCopiedAlert = async ([ content, text ]) => {
+  /* const openCopiedAlert = async ([ content, text ]) => {
     await navigator.clipboard.writeText(text);
     copiedAlertDialog.setState([ content, text ]);
     copiedAlertDialog.open();
-  };
+  }; */
 
   return (
     <Container className={classes.root + " nav-bar-margin"}>
@@ -75,7 +77,7 @@ export default function() {
           <div className="pa4">
             {notifications.map(notification =>
               <SnackbarContent
-                key={notification.id}
+                key={notification.notification.id}
                 className={classes.snackbar}
                 message={`You matched with ${notification.to?.name} ${notification.notification?.read ? `` : `(NEW)`}`}
                 action={action}
@@ -87,12 +89,15 @@ export default function() {
 
           <TextBox>No notifications</TextBox>
       }
-      <NotificationDetails
-        show={notificationDetailsDialog.show}
-        onClose={notificationDetailsDialog.dismiss}
-        matchedUser={openNotification?.hydratedProfile}
-        onContactClick={openCopiedAlert}
-      />
+      {openNotification &&
+        <NotificationDetails
+          show={notificationDetailsDialog.show}
+          onClose={notificationDetailsDialog.dismiss}
+          matchedUser={openNotification.hydratedProfile}
+          // onContactClick={openCopiedAlert}
+        />
+      }
+      
       <CopiedAlert
         show={copiedAlertDialog.show}
         onClose={copiedAlertDialog.dismiss}

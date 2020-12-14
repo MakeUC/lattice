@@ -1,1 +1,3 @@
-export type WrapperComponent = (props: { children: JSX.Element }) => JSX.Element
+export type WrapperComponent =
+  (props: { children: string | JSX.Element | Array<string | JSX.Element> }) =>
+    JSX.Element
