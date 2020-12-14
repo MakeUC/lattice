@@ -34,6 +34,7 @@ export default function () {
 
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState<Error>();
+  const [ email, setEmail ] = useState<string>();
   const [ isSubmitting, setSubmitting ] = useState(false);
   const [ failedToSubmit, setFailedToSubmit ] = useState<Error>();
 
@@ -41,7 +42,7 @@ export default function () {
     (async function () {
       try {
         const email = await getRegistrantEmail(registrantId);
-        setValue(`email`, email);
+        setEmail(email);
       } catch (err) {
         setFailedToLoad(err);
       } finally {
@@ -88,11 +89,12 @@ export default function () {
                         id="input-with-icon-grid"
                         variant="outlined"
                         disabled={true}
+                        value={email}
                         inputRef={registerInput({ required: `Invalid email, please check the link provided` })}
                         fullWidth
                       />
                       {errors.email &&
-                        <Box color="error.main">{errors.email}</Box>
+                        <Box color="error.main">{errors.email.message}</Box>
                       }
                     </Grid>
                   </Grid>

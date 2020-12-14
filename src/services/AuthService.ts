@@ -18,7 +18,7 @@ export default {
     }
   },
 
-  async register(registrantId: string, password: string) {
+  async register(registrantId: string, password: string): Promise<string> {
     try {
       const res = await Axios({
         url: `${apiUrl}/register`,
@@ -32,7 +32,7 @@ export default {
     }
   },
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<string> {
     try {
       const res = await Axios({
         url: `${apiUrl}/login`,
@@ -46,7 +46,7 @@ export default {
     }
   },
 
-  async changePassword(token: string, oldPassword: string, newPassword: string) {
+  async changePassword(token: string, oldPassword: string, newPassword: string): Promise<void> {
     try {
       await Axios({
         url: `${apiUrl}/password`,
