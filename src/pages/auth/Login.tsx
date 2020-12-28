@@ -99,7 +99,7 @@ export default function InputWithIcon() {
                     id="input-with-icon-grid"
                     fullWidth
                     variant="outlined"
-                    inputRef={register({ required: `Please provide an password` })}
+                    inputRef={register({ required: `Please provide a password` })}
                   />
                     {errors.password &&
                       <Box color="error.main">{errors.password}</Box>
