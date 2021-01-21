@@ -76,9 +76,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                     borderRadius: `10px`,
                   }}
                 >
-                  {console.log({ row })}
-                  {row.map((skill) => (
-                      <div>
+                  {row.map((skill, index) => (
+                      <div key={index}>
                         <img
                           src={skill.icon}
                           alt={skill.title}
@@ -102,8 +101,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
               borderRadius: `10px`,
             }}
           >
-            {lookingFor.map((look) => (
-              <div>
+            {lookingFor.map((look, index) => (
+              <div key={index}>
                 <img
                   src={look.icon}
                   alt={look.title}
