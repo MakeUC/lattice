@@ -31,7 +31,6 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
   const getSkills = useCallback(async () => {
     try {
       const skills = await SkillService.getSkills(token!);
-      console.log({ skills });
       setSkills(skills);
     } catch (err) {
       console.error(err);

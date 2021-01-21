@@ -7,7 +7,7 @@ import "../../styles/Card.scss";
 const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
   const { skills, name, idea, lookingFor }: HydratedProfile = data[i];
 
-  const skillRows = [skills.slice(0, 3), skills.slice(3, 6)];
+  const skillRows = [skills.slice(0, 5), skills.slice(5, 10)];
 
   return (
     <animated.div
@@ -38,7 +38,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
             textAlign: `center`,
           }}
         >
-          <h2 className="name">
+          <h2 className="name" style={{ margin: `1rem` }}>
             {name}
           </h2>
           <h3>Project Idea</h3>
@@ -47,9 +47,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
               marginTop: `-5px`,
               marginLeft: `15px`,
               marginRight: `15px`,
-              marginBottom: `35px`,
+              marginBottom: `25px`,
               borderRadius: `10px`,
-              paddingBottom: `0px`,
             }}
           >
             <p
@@ -67,26 +66,25 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                 <div
                   key={index}
                   style={{
-                    padding: `25px`,
-                    paddingBottom: `10px`,
-                    marginTop: `-45px`,
+                    paddingTop: `25px`,
+                    paddingBottom: `5px`,
+                    marginTop: `-35px`,
                     marginLeft: `15px`,
                     marginRight: `15px`,
                     display: `flex`,
+                    justifyContent: `center`,
                     borderRadius: `10px`,
                   }}
                 >
+                  {console.log({ row })}
                   {row.map((skill) => (
                       <div>
-                        <i
-                          key={skill.title}
-                          className={skill.icon}
-                          style={{
-                            padding: `10px`,
-                            fontSize: `50px`,
-                          }}
+                        <img
+                          src={skill.icon}
+                          alt={skill.title}
+                          className="card-skill-image"
                         />
-                          <p className="card-skill-title font-black"> {skill.title} </p>
+                        <p className="card-skill-title font-black"> {skill.title} </p>
                       </div>
                   ))}
                 </div>
@@ -95,25 +93,23 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
           <h3>Looking For</h3>
           <div
             style={{
-              padding: `25px`,
-              marginTop: `-45px`,
+              paddingTop: `25px`,
+              marginTop: `-35px`,
               marginLeft: `15px`,
               marginRight: `15px`,
               display: `flex`,
+              justifyContent: `center`,
               borderRadius: `10px`,
             }}
           >
             {lookingFor.map((look) => (
               <div>
-                  <i
-                    key={look.title}
-                    className={look.icon}
-                    style={{
-                      padding: `10px`,
-                      fontSize: `50px`,
-                    }}
-                  />
-                  <p className="card-skill-title font-black"> {look.title} </p>
+                <img
+                  src={look.icon}
+                  alt={look.title}
+                  className="card-skill-image"
+                />
+                <p className="card-skill-title font-black"> {look.title} </p>
               </div>
             ))}
           </div>
