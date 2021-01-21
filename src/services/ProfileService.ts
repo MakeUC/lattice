@@ -87,22 +87,6 @@ export default {
     }
   },
 
-  async getSkills(token: string) {
-    try {
-      const res = await Axios({
-        url: `${apiUrl}/skills`,
-        method: `GET`,
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      return res.data;
-    } catch (err) {
-      throw new Error(err.response.data.message);
-    }
-  },
-
   async completeTour(token: string, tour: string): Promise<void> {
     try {
       await Axios({

@@ -38,11 +38,11 @@ export default function() {
   useEffect(()=> {
     register({ name: `skills` }, {
       required: true,
-      validate: value => value.length <= 6
+      validate: value => value.length <= 10
     });
     register({ name: `lookingFor` }, {
       required: true,
-      validate: value => value.length <= 3
+      validate: value => value.length <= 5
     });
   }, [ register ]);
 
@@ -83,7 +83,7 @@ export default function() {
   const profileLookingFor = watch(`lookingFor`)|| [];
 
   return (
-    <Container className={/* classes.root +  */" nav-bar-margin"}>
+    <Container className="nav-bar-margin">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
           <h1 className="title">Your Profile</h1>
@@ -144,7 +144,7 @@ export default function() {
                       multiple
                       filterSelectedOptions
                       id="tags-outlined"
-                      options={skills} // TODO: Need to be taken from DB ideally
+                      options={skills}
                       getOptionLabel={(option) => option.title}
                       value={profileSkills}
                       renderInput={(params) => (
@@ -156,7 +156,7 @@ export default function() {
                           error={!!errors.skills}
                           helperText={(errors.skills?.type === `required`) ?
                             `Please select atleast one` :
-                            `Please select no more than 6`
+                            `Please select no more than 10`
                           }
                         />
                       )}
@@ -186,7 +186,7 @@ export default function() {
                           error={!!errors.lookingFor}
                           helperText={(errors.lookingFor?.type === `required`) ?
                             `Please select atleast one` :
-                            `Please select no more than 3`
+                            `Please select no more than 5`
                           }
                         />
                       )}

@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { ScoredProfile, Skill } from '../interfaces/profile';
+import { ScoredProfile } from '../interfaces/profile';
+import { Skill } from '../interfaces/skill';
 import { WrapperComponent } from '../interfaces/wrapper';
 import ProfileService from '../services/ProfileService';
+import SkillService from '../services/SkillService';
 import { useAuth } from './AuthProvider';
 import { useProfile } from './ProfileProvider';
 
@@ -28,7 +30,8 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
 
   const getSkills = useCallback(async () => {
     try {
-      const skills = await ProfileService.getSkills(token!);
+      const skills = await SkillService.getSkills(token!);
+      console.log({ skills });
       setSkills(skills);
     } catch (err) {
       console.error(err);

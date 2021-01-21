@@ -1,4 +1,4 @@
-import { Omit } from "@material-ui/core";
+import { Skill } from "./skill";
 
 export interface Profile {
   id: string
@@ -19,9 +19,4 @@ export interface ScoredProfile extends Profile {
 export interface HydratedProfile extends Omit<ScoredProfile, 'skills' | 'lookingFor'> {
   skills: Array<Skill>
   lookingFor: Array<Skill>
-}
-
-export interface Skill {
-  title: string
-  icon: string
 }
