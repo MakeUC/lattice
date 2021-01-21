@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import SlackIcon from '@material-ui/icons/AlternateEmail';
+import DiscordIcon from '@material-ui/icons/AlternateEmail';
 import PersonIcon from '@material-ui/icons/Person';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { Button, Container, InputAdornment, Box } from '@material-ui/core';
@@ -196,21 +196,21 @@ export default function() {
                 </Grid>
                 <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid item className="lattice-icon">
-                    <SlackIcon />
+                    <DiscordIcon />
                   </Grid>
-                  <p className="lattice-form-label mb0 font-gray">Slack handle</p>
+                  <p className="lattice-form-label mb0 font-gray">Discord tag</p>
                   <Grid item className="lattice-form-input">
                     <TextField
                       fullWidth
-                      name="slack"
+                      name="discord"
                       id="input-with-icon-grid"
                       variant="outlined"
                       inputRef={register({ required: `This field is required` })}
                       InputProps={{
                         startAdornment: <InputAdornment position="start">@</InputAdornment>
                       }}
-                      error={!!errors.slack}
-                      helperText={errors.slack?.message || `Please provide the handle you have on the MakeUC Slack. Your matches will use this to contact you.`}
+                      error={!!errors.discord}
+                      helperText={errors.discord?.message || `Please provide your discord tag. Your matches will use this to contact you.`}
                     />
                   </Grid>
                 </Grid>

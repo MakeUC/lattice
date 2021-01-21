@@ -9,6 +9,7 @@ export interface Profile {
   started: boolean
   completed: boolean
   visible: boolean
+  discord: string
   completedTours?: string[]
 }
 
