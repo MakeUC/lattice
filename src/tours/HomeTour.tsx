@@ -32,6 +32,6 @@ const steps = [
   },
   {
     selector: '.deck',
-    content: `That is all I have for you today. Hope you have a great time at MakeUC. Happy swiping!`
+    content: `That is all I have for you today. Hope you have a great time at RevolutionUC. Happy swiping!`
   }
 ];

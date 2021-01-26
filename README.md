@@ -5,7 +5,7 @@ React PWA to match developers for team formation purposes.
 ## Getting Started
 
 ```sh
-git clone https://github.com/makeuc/lattice.git
+git clone https://github.com/RevolutionUC/lattice.git
 cd lattice
 npm install
 npm start
