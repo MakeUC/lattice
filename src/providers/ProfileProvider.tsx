@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { Profile } from '../interfaces/profile';
+import { Profile, ProfileWithEmail } from '../interfaces/profile';
 import { WrapperComponent } from '../interfaces/wrapper';
 import ProfileService from '../services/ProfileService';
 import { useAuth } from './AuthProvider';
@@ -7,9 +7,9 @@ import { useAuth } from './AuthProvider';
 interface contextType {
   isLoading: boolean,
   failedToLoad: any,
-  profile?: Profile,
+  profile?: ProfileWithEmail,
   getProfile: () => Promise<void>,
-  updateProfile: (profile: Profile) => void,
+  updateProfile: (profile: ProfileWithEmail) => void,
   toggleVisibility: () => Promise<void>,
   completeTour: (tour: string) => Promise<void>
 };
@@ -21,7 +21,7 @@ export const ProfileProvider: WrapperComponent = ({ children }) => {
 
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ profile, setProfile ] = useState<Profile>();
+  const [ profile, setProfile ] = useState<ProfileWithEmail>();
 
   const getProfile = useCallback(async () => {
     try {

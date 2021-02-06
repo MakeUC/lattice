@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { Profile, ScoredProfile } from '../interfaces/profile';
+import { Profile, ProfileWithEmail, ScoredProfile } from '../interfaces/profile';
 import { apiHost } from './Api';
 
 const apiUrl = `${apiHost}/profile`;
@@ -21,7 +21,7 @@ export default {
     }
   },
 
-  async getProfile(token: string): Promise<Profile> {
+  async getProfile(token: string): Promise<ProfileWithEmail> {
     try {
       const res = await Axios({
         url: `${apiUrl}/`,
@@ -53,7 +53,7 @@ export default {
     }
   },
 
-  async updateProfile(token: string, profile: Profile): Promise<Profile> {
+  async updateProfile(token: string, profile: Profile): Promise<ProfileWithEmail> {
     try {
       const res = await Axios({
         url: `${apiUrl}/`,
@@ -70,7 +70,7 @@ export default {
     }
   },
 
-  async setVisible(token: string, visible: boolean): Promise<Profile> {
+  async setVisible(token: string, visible: boolean): Promise<ProfileWithEmail> {
     try {
       const res = await Axios({
         url: `${apiUrl}/visible`,

@@ -11,6 +11,11 @@ export interface Profile {
   visible: boolean
   discord: string
   completedTours?: string[]
+  email?: string;
+}
+
+export interface ProfileWithEmail extends Profile {
+  email: string;
 }
 
 export interface ScoredProfile extends Profile {

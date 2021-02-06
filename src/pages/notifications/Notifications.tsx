@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   snackbar: {
     backgroundColor: '#8174ff',
-    fontFamily: 'Open Sans'
+    // fontFamily: 'Open Sans'
   }
 }));
 
@@ -55,11 +55,11 @@ export default function() {
     notificationDetailsDialog.open();
   };
 
-  /* const openCopiedAlert = async ([ content, text ]) => {
+  const openCopiedAlert = async ([ content, text ]: string[]) => {
     await navigator.clipboard.writeText(text);
     copiedAlertDialog.setState([ content, text ]);
     copiedAlertDialog.open();
-  }; */
+  };
 
   return (
     <Container className={classes.root + " nav-bar-margin"}>
@@ -67,7 +67,7 @@ export default function() {
         isLoading ?
           <TextBox>Fetching notifications... <br /> <Spinner /></TextBox> :
 
-        failedToLoad ? 
+        failedToLoad ?
           <TextBox>
             <p>Error fetching notifications</p>
             <Button variant="contained" color="primary" onClick={getNotifications}>Try again</Button>
@@ -94,10 +94,10 @@ export default function() {
           show={notificationDetailsDialog.show}
           onClose={notificationDetailsDialog.dismiss}
           matchedUser={openNotification.hydratedProfile}
-          // onContactClick={openCopiedAlert}
+          onContactClick={openCopiedAlert}
         />
       }
-      
+
       <CopiedAlert
         show={copiedAlertDialog.show}
         onClose={copiedAlertDialog.dismiss}

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
-// import SlackIcon from '@material-ui/icons/AlternateEmail';
+import DiscordIcon from '@material-ui/icons/AlternateEmail';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-// import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Button, Container } from '@material-ui/core';
 
 import { useAuth } from '../../providers/AuthProvider';
@@ -72,7 +72,7 @@ export default function() {
                   </Grid>
                   <p className="lattice-form-label mb0 font-gray">{profile?.name}</p>
                 </Grid>
-                {/* <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid className="lattice-icon" item>
                     <MailOutlineIcon />
                   </Grid>
@@ -80,10 +80,10 @@ export default function() {
                 </Grid>
                 <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid item className="lattice-icon">
-                    <SlackIcon />
+                    <DiscordIcon />
                   </Grid>
-                  <p className="lattice-form-label mb0 font-gray">{profile?.slack}</p>
-                </Grid> */}
+                  <p className="lattice-form-label mb0 font-gray">{profile?.discord}</p>
+                </Grid>
               </div>
 
               <Button

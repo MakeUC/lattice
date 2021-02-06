@@ -9,7 +9,7 @@ export interface Notification {
 
 export interface NotificationDetails {
   notification: Notification
-  to: Profile
+  to: Profile & { email: string }
 }
 
 export interface Subscription {

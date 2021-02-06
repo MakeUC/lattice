@@ -3,13 +3,14 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import NotificationTour from '../../../tours/NotificationTour';
 import { HydratedProfile } from '../../../interfaces/profile';
+import { Button } from '@material-ui/core';
 
 export default function ({ show, onClose, matchedUser, onContactClick }:
-  { show: boolean, onClose: () => void, matchedUser: HydratedProfile, onContactClick?: () => void }
+  { show: boolean, onClose: () => void, matchedUser: HydratedProfile, onContactClick: (props: string[]) => void | Promise<void> }
 ) {
-  const { skills, name, idea, lookingFor, /* email, slack */ } = matchedUser;
-
-  const skillRows = [skills?.slice(0, 3), skills?.slice(3, 6)];
+  const { skills, name, idea, lookingFor, email, discord } = matchedUser;
+  console.log({matchedUser});
+  const skillRows = [skills?.slice(0, 5), skills?.slice(5, 10)];
 
   return (
     <div>
@@ -50,24 +51,25 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
                     <div
                       key={index}
                       style={{
-                        padding: `25px`,
-                        paddingBottom: `10px`,
-                        marginTop: `-45px`,
+                        paddingTop: `25px`,
+                        paddingBottom: `5px`,
+                        marginTop: `-35px`,
                         marginLeft: `15px`,
                         marginRight: `15px`,
                         display: `flex`,
+                        justifyContent: `center`,
                         borderRadius: `10px`,
                       }}
                     >
-                      {row.map((skill) => (
-                        <i
-                          key={skill.title}
-                          className={skill.icon}
-                          style={{
-                            padding: `10px`,
-                            fontSize: `50px`,
-                          }}
-                        />
+                      {row.map((skill, index) => (
+                        <div key={index}>
+                          <img
+                            src={skill.icon}
+                            alt={skill.title}
+                            className="card-skill-image"
+                          />
+                          <p className="card-skill-title font-black"> {skill.title} </p>
+                        </div>
                       ))}
                     </div>
                   )
@@ -75,40 +77,40 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
               <h3>Looking For</h3>
               <div
                 style={{
-                  padding: `25px`,
-                  marginTop: `-45px`,
+                  paddingTop: `25px`,
+                  marginTop: `-35px`,
                   marginLeft: `15px`,
                   marginRight: `15px`,
                   display: `flex`,
+                  justifyContent: `center`,
                   borderRadius: `10px`,
                 }}
               >
-                {lookingFor.map((look) => (
-                  <i
-                    key={look.title}
-                    className={look.icon}
-                    style={{
-                      padding: `10px`,
-                      fontSize: `50px`,
-                    }}
-                  ></i>
+                {lookingFor.map((look, index) => (
+                  <div key={index}>
+                    <img
+                      src={look.icon}
+                      alt={look.title}
+                      className="card-skill-image"
+                    />
+                    <p className="card-skill-title font-black"> {look.title} </p>
+                  </div>
                 ))}
               </div>
-              {/*
+
                 <Button
                   className="slack-button"
                   fullWidth={true}
                   color="primary"
-                  onClick={() => onContactClick([`Slack handler`, `@${slack}`])}
-                >Slack: @{slack}</Button>
+                  onClick={() => onContactClick([`Discord username`, `@${discord}`])}
+                >Discord: @{discord}</Button>
 
                 <Button
                   className="email-button"
                   fullWidth={true}
                   color="primary"
-                  onClick={() => onContactClick([`Email`, email])}
+                  onClick={() => onContactClick([`Email`, email!])}
                 >Email: {email}</Button>
-              */}
             </div>
           }
         </div>

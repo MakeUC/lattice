@@ -77,7 +77,7 @@ export default {
     }
   },
 
-  async getResetInfo(resetToken: string) {
+  async getResetInfo(resetToken: string): Promise<string> {
     try {
       const res = await Axios({
         url: `${apiUrl}/reset/${resetToken}`,
@@ -90,7 +90,7 @@ export default {
     }
   },
 
-  async resetPassword(resetToken: string, password: string) {
+  async resetPassword(resetToken: string, password: string): Promise<void> {
     try {
       await Axios({
         url: `${apiUrl}/reset`,

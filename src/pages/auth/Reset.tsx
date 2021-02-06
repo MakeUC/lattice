@@ -22,7 +22,7 @@ export default function () {
   const { getResetInfo, resetPassword } = useAuth();
   const resetAlertDialog = useDialogControl();
 
-  const { register, handleSubmit, setValue, errors, watch } = useForm<ResetPasswordForm>();
+  const { register, handleSubmit, errors, watch, reset } = useForm<ResetPasswordForm>();
 
   const [ isLoading, setLoading ] = useState(true);
   const [ failedToLoad, setFailedToLoad ] = useState<Error>();
@@ -51,14 +51,14 @@ export default function () {
     (async function () {
       try {
         const email = await getResetInfo(resetToken);
-        setValue(`email`, email);
+        reset({ email });
       } catch (err) {
         setFailedToLoad(err);
       } finally {
         setLoading(false);
       }
     })();
-  }, [getResetInfo, resetToken, setValue]);
+  }, [getResetInfo, resetToken, reset]);
 
   const password = watch(`password`);
 
