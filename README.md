@@ -10,6 +10,11 @@ npm install
 npm start
 ```
 
+## Lattice at Hackathons
+- MakeUC 2020 (Beta)
+- RevolutionUC 2021
+- MakeUC 2021
+
 ## Contributors
 **Launched By:**
 
