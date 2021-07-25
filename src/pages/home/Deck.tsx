@@ -42,7 +42,6 @@ function Deck({ data }: {
   };
 
   const onFinish = () => {
-    console.log(`onFinish: End of cards`);
     getProfiles();
   };
 
@@ -61,7 +60,7 @@ function Deck({ data }: {
       let swipePromise: Promise<void> | null = null;
 
       if (!down && trigger) {
-        swipePromise = onSwipe(data[index], (dir === 1)).then(() => console.log(`swiped`));
+        swipePromise = onSwipe(data[index], (dir === 1));
         gone.add(index);
       }
 

@@ -77,7 +77,6 @@ export default function InputWithIcon() {
                   <TextField
                     name="email"
                     type="email"
-                    id="input-with-icon-grid"
                     fullWidth
                     variant="outlined"
                     inputRef={register({ required: `Please provide an email` })}
@@ -96,7 +95,6 @@ export default function InputWithIcon() {
                   <TextField
                     name="password"
                     type="password"
-                    id="input-with-icon-grid"
                     fullWidth
                     variant="outlined"
                     inputRef={register({ required: `Please provide an password` })}

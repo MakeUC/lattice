@@ -9,7 +9,7 @@ interface contextType {
   failedToLoad: any,
   profile?: ProfileWithEmail,
   getProfile: () => Promise<void>,
-  updateProfile: (profile: ProfileWithEmail) => void,
+  updateProfile: (profile: ProfileWithEmail) => Promise<void>,
   toggleVisibility: () => Promise<void>,
   completeTour: (tour: string) => Promise<void>
 };

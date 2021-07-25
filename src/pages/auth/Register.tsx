@@ -86,7 +86,6 @@ export default function () {
                       <TextField
                         name="email"
                         type="email"
-                        id="input-with-icon-grid"
                         variant="outlined"
                         disabled={true}
                         value={email}
@@ -107,7 +106,6 @@ export default function () {
                       <TextField
                         name="password"
                         type="password"
-                        id="input-with-icon-grid"
                         variant="outlined"
                         fullWidth
                         inputRef={registerInput({
@@ -131,7 +129,6 @@ export default function () {
                       <TextField
                         name="confirmPassword"
                         type="password"
-                        id="input-with-icon-grid"
                         variant="outlined"
                         fullWidth
                         inputRef={registerInput({

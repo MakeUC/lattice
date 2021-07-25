@@ -8,8 +8,8 @@ import { Button } from '@material-ui/core';
 export default function ({ show, onClose, matchedUser, onContactClick }:
   { show: boolean, onClose: () => void, matchedUser: HydratedProfile, onContactClick: (props: string[]) => void | Promise<void> }
 ) {
-  const { skills, name, idea, lookingFor, email, discord } = matchedUser;
-  console.log({matchedUser});
+  const { skills, name, idea, lookingFor, email, discord, inPerson } = matchedUser;
+
   const skillRows = [skills?.slice(0, 5), skills?.slice(5, 10)];
 
   return (
@@ -25,6 +25,9 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
               <h2 className="name">
                 <small>You matched with</small> <br /> {name}!
               </h2>
+              <h6 style={{ margin: `0` }}>
+                Participation: <strong>{inPerson? `In-Person` : `Virtual`}</strong>
+              </h6>
               <h3>Project Idea</h3>
               <div
                 style={{
@@ -45,34 +48,33 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
                 </p>
               </div>
               <h3>Offering</h3>
-              {skillRows.map(
-                (row, index) =>
-                  !!row.length && (
-                    <div
-                      key={index}
-                      style={{
-                        paddingTop: `25px`,
-                        paddingBottom: `5px`,
-                        marginTop: `-35px`,
-                        marginLeft: `15px`,
-                        marginRight: `15px`,
-                        display: `flex`,
-                        justifyContent: `center`,
-                        borderRadius: `10px`,
-                      }}
-                    >
-                      {row.map((skill, index) => (
-                        <div key={index}>
-                          <img
-                            src={skill.icon}
-                            alt={skill.title}
-                            className="card-skill-image"
-                          />
-                          <p className="card-skill-title font-black"> {skill.title} </p>
-                        </div>
-                      ))}
-                    </div>
-                  )
+              {skillRows.map((row, index) =>
+                !!row.length && (
+                  <div
+                    key={index}
+                    style={{
+                      paddingTop: `25px`,
+                      paddingBottom: `5px`,
+                      marginTop: `-35px`,
+                      marginLeft: `15px`,
+                      marginRight: `15px`,
+                      display: `flex`,
+                      justifyContent: `center`,
+                      borderRadius: `10px`,
+                    }}
+                  >
+                    {row.map((skill, index) => (
+                      <div key={index}>
+                        <img
+                          src={skill.icon}
+                          alt={skill.title}
+                          className="card-skill-image"
+                        />
+                        <p className="card-skill-title font-black"> {skill.title} </p>
+                      </div>
+                    ))}
+                  </div>
+                )
               )}
               <h3>Looking For</h3>
               <div

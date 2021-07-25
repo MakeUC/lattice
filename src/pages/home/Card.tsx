@@ -5,7 +5,7 @@ import { HydratedProfile } from "../../interfaces/profile";
 import "../../styles/Card.scss";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
-  const { skills, name, idea, lookingFor }: HydratedProfile = data[i];
+  const { skills, name, idea, lookingFor, inPerson }: HydratedProfile = data[i];
 
   const skillRows = [skills.slice(0, 5), skills.slice(5, 10)];
 
@@ -38,9 +38,12 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
             textAlign: `center`,
           }}
         >
-          <h2 className="name" style={{ margin: `1rem` }}>
+          <h2 className="name" style={{ margin: `1rem`, marginBottom: `0.5rem` }}>
             {name}
           </h2>
+          <h6 style={{ margin: `0` }}>
+            Participation: <strong>{inPerson? `In-Person` : `Virtual`}</strong>
+          </h6>
           <h3>Project Idea</h3>
           <div
             style={{

@@ -12,6 +12,7 @@ export interface Profile {
   discord: string
   completedTours?: string[]
   email?: string;
+  inPerson: boolean;
 }
 
 export interface ProfileWithEmail extends Profile {

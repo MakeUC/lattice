@@ -3,10 +3,13 @@ import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DiscordIcon from '@material-ui/icons/AlternateEmail';
 import PersonIcon from '@material-ui/icons/Person';
 import DescriptionIcon from '@material-ui/icons/Description';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 import { Button, Container, InputAdornment, Box } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { AssignmentTurnedIn } from "@material-ui/icons";
@@ -44,13 +47,19 @@ export default function() {
       required: true,
       validate: value => value.length <= 5
     });
+    register({ name: `inPerson` });
   }, [ register ]);
 
   useEffect(() => {
     const profileSkills = skills?.filter(skill => profile?.skills?.includes(skill.title));
     const profileLookingFor = skills?.filter(skill => profile?.lookingFor?.includes(skill.title));
 
-    reset({ ...profile, skills: profileSkills, lookingFor: profileLookingFor });
+    reset({
+      ...profile,
+      skills: profileSkills,
+      lookingFor: profileLookingFor,
+      inPerson: profile?.inPerson
+    });
   }, [ reset, skills, profile ]);
 
   useEffect(() => {
@@ -80,7 +89,8 @@ export default function() {
   };
 
   const profileSkills = watch(`skills`) || [];
-  const profileLookingFor = watch(`lookingFor`)|| [];
+  const profileLookingFor = watch(`lookingFor`) || [];
+  const inPerson = watch(`inPerson`) || false;
 
   return (
     <Container className="nav-bar-margin">
@@ -99,7 +109,6 @@ export default function() {
                     <TextField
                       fullWidth
                       name="name"
-                      id="input-with-icon-grid"
                       variant="outlined" 
                       placeholder="John Doe"
                       inputRef={register({ required: `This field is required` })}
@@ -118,7 +127,6 @@ export default function() {
                       fullWidth
                       multiline
                       name="idea"
-                      id="input-with-icon-grid"
                       variant="outlined"
                       placeholder="A coronavirus map"
                       inputRef={register({ required: `This field is required`, maxLength: 250 })}
@@ -203,7 +211,6 @@ export default function() {
                     <TextField
                       fullWidth
                       name="discord"
-                      id="input-with-icon-grid"
                       variant="outlined"
                       inputRef={register({ required: `This field is required` })}
                       InputProps={{
@@ -212,6 +219,24 @@ export default function() {
                       error={!!errors.discord}
                       helperText={errors.discord?.message || `Please provide your discord tag. Your matches will use this to contact you.`}
                     />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
+                  <Grid item className="lattice-icon">
+                    <PersonPinIcon />
+                  </Grid>
+                  <p className="lattice-form-label mb0 font-gray">Are you attending in-person?</p>
+                  <Grid item className="lattice-form-input">
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        name="inPerson"
+                        checked={inPerson}
+                        onChange={e => setValue(`inPerson`, e.target.checked)}
+                      />
+                    }
+                    label={inPerson ? `Yes` : `No`}
+                  />
                   </Grid>
                 </Grid>
               </div>
