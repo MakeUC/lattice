@@ -18,7 +18,7 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
         open={show}
         onClose={onClose}
       >
-        <div style={{ width: `300px` }}>
+        <div className="hacker-profile-card" style={{ width: `300px` }}>
           {
             !!name &&
             <div className="font-opensans" style={{ textAlign: `center` }}>
@@ -56,8 +56,8 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
                       paddingTop: `25px`,
                       paddingBottom: `5px`,
                       marginTop: `-35px`,
-                      marginLeft: `15px`,
-                      marginRight: `15px`,
+                      marginLeft: `5px`,
+                      marginRight: `5px`,
                       display: `flex`,
                       justifyContent: `center`,
                       borderRadius: `10px`,
@@ -70,7 +70,7 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
                           alt={skill.title}
                           className="card-skill-image"
                         />
-                        <p className="card-skill-title font-black"> {skill.title} </p>
+                        <p className="card-skill-title"> {skill.title} </p>
                       </div>
                     ))}
                   </div>
@@ -81,8 +81,8 @@ export default function ({ show, onClose, matchedUser, onContactClick }:
                 style={{
                   paddingTop: `25px`,
                   marginTop: `-35px`,
-                  marginLeft: `15px`,
-                  marginRight: `15px`,
+                  marginLeft: `5px`,
+                  marginRight: `5px`,
                   display: `flex`,
                   justifyContent: `center`,
                   borderRadius: `10px`,

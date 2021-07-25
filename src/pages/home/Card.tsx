@@ -47,20 +47,14 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
           <h3>Project Idea</h3>
           <div
             style={{
-              marginTop: `-5px`,
+              marginTop: `0`,
               marginLeft: `15px`,
               marginRight: `15px`,
               marginBottom: `25px`,
               borderRadius: `10px`,
             }}
           >
-            <p
-              style={{
-                fontSize: `13px`,
-              }}
-            >
-              {idea}
-            </p>
+            <p>{idea}</p>
           </div>
           <h3>Offering</h3>
           {skillRows.map(
@@ -68,12 +62,11 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
               !!row.length && (
                 <div
                   key={index}
+                  className="skill-row"
                   style={{
-                    paddingTop: `25px`,
-                    paddingBottom: `5px`,
                     marginTop: `-35px`,
-                    marginLeft: `15px`,
-                    marginRight: `15px`,
+                    marginLeft: `5px`,
+                    marginRight: `5px`,
                     display: `flex`,
                     justifyContent: `center`,
                     borderRadius: `10px`,
@@ -86,7 +79,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                           alt={skill.title}
                           className="card-skill-image"
                         />
-                        <p className="card-skill-title font-black"> {skill.title} </p>
+                        <p className="card-skill-title"> {skill.title} </p>
                       </div>
                   ))}
                 </div>
@@ -94,8 +87,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
           )}
           <h3>Looking For</h3>
           <div
+            className="skill-row"
             style={{
-              paddingTop: `25px`,
               marginTop: `-35px`,
               marginLeft: `15px`,
               marginRight: `15px`,

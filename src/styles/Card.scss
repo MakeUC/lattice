@@ -9,26 +9,39 @@
   text-decoration-color: $secondary-dark;
 }
 
-h2 {
-  margin-left: 10px;
-  margin-right: 10px;
-}
+.hacker-profile-card {
+  h2 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
-h3 {
-  font-size: 16px;
-  font-weight: 600;
-}
+  h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
 
-.card-skill-title {
-  font-size: 0.5rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  width: 50px;
-  padding: 0 2px;
-}
+  p {
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+  }
 
-.card-skill-image {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
+  .skill-row {
+    padding-top: 25px;
+  }
+
+  .card-skill-title {
+    font-size: 0.4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    width: 50px;
+    padding: 0 2px;
+    text-align: center;
+  }
+
+  .card-skill-image {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+  }
 }

@@ -10,9 +10,10 @@ body {
   /* height: 100%; */
   width: 100%;
   user-select: none;
-  font-family: "Lato", sans-serif;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 0.9rem;
   /* position: fixed; */
-  background: #4F3287;
+  background: #2121de;
 }
 
 .deck {
