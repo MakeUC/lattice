@@ -64,7 +64,7 @@ export default function InputWithIcon() {
           <h1 className="title">Lattice Log In</h1>
           <div className="font-opensans tc mb3">
             <p className="mb4">
-              Discover and connect with RevolutionUC 2021 hackers from across the world!
+              Discover and connect with MakeUC 2021 hackers from across the world!
             </p>
             <Box color="error.main" textAlign="center">{failedToSubmit && failedToSubmit.message}</Box>
             <div className={classes.margin}>
@@ -82,7 +82,7 @@ export default function InputWithIcon() {
                     inputRef={register({ required: `Please provide an email` })}
                   />
                     {errors.email &&
-                      <Box color="error.main">{errors.email}</Box>
+                      <Box color="error.main">{errors.email.message}</Box>
                     }
                 </Grid>
               </Grid>
@@ -100,7 +100,7 @@ export default function InputWithIcon() {
                     inputRef={register({ required: `Please provide an password` })}
                   />
                     {errors.password &&
-                      <Box color="error.main">{errors.password}</Box>
+                      <Box color="error.main">{errors.password.message}</Box>
                     }
                 </Grid>
               </Grid>
@@ -124,7 +124,7 @@ export default function InputWithIcon() {
               color="primary"
               onClick={resetRequestDialog.open}
             >Forgot Password</Button>
-            <Box className="mt4">Don't have an account? Contact us at <a href="mailto:info@revolutionuc.com">info@revolutionuc.com</a> for an invite link</Box>
+            <Box className="mt4">Don't have an account? Contact us at <a href="mailto:info@makeuc.io">info@makeuc.io</a> for an invite link</Box>
           </div>
         </div>
       </form>

@@ -65,8 +65,8 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                   className="skill-row"
                   style={{
                     marginTop: `-35px`,
-                    marginLeft: `5px`,
-                    marginRight: `5px`,
+                    marginLeft: `20px`,
+                    marginRight: `20px`,
                     display: `flex`,
                     justifyContent: `center`,
                     borderRadius: `10px`,
@@ -90,15 +90,15 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
             className="skill-row"
             style={{
               marginTop: `-35px`,
-              marginLeft: `15px`,
-              marginRight: `15px`,
+              marginLeft: `20px`,
+              marginRight: `20px`,
               display: `flex`,
               justifyContent: `center`,
               borderRadius: `10px`,
             }}
           >
             {lookingFor.map((look, index) => (
-              <div key={index}>
+              <div key={index} style={{marginLeft: '5px', marginRight: '5px'}}>
                 <img
                   src={look.icon}
                   alt={look.title}
