@@ -73,7 +73,7 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                   }}
                 >
                   {row.map((skill, index) => (
-                      <div key={index}>
+                      <div key={index} style={{marginLeft: '5px', marginRight: '5px'}}>
                         <img
                           src={skill.icon}
                           alt={skill.title}
