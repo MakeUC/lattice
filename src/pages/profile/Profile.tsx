@@ -21,6 +21,7 @@ import ChangePasswordAlert from './dialogs/change-password-alert';
 import LogoutConfirmation from './dialogs/logout-confirmation';
 
 import '../../styles/Profile.scss'
+import "nes.css/css/nes.min.css";
 
 export default function() {
   const { logout, changePassword } = useAuth();
@@ -70,19 +71,19 @@ export default function() {
                   <Grid className="lattice-icon" item>
                     <PersonIcon />
                   </Grid>
-                  <p className="lattice-form-label mb0 font-gray">{profile?.name}</p>
+                  <p className="lattice-form-label mb0 font-gray" style={{fontSize: "9px"}}>{profile?.name}</p>
                 </Grid>
                 <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid className="lattice-icon" item>
                     <MailOutlineIcon />
                   </Grid>
-                  <p className="lattice-form-label mb0 font-gray">{profile?.email}</p>
+                  <p className="lattice-form-label mb0 font-gray" style={{fontSize: "9px"}}>{profile?.email}</p>
                 </Grid>
                 <Grid container spacing={4} className="mb3 lattice-form-band" alignItems="flex-end">
                   <Grid item className="lattice-icon">
                     <DiscordIcon />
                   </Grid>
-                  <p className="lattice-form-label mb0 font-gray">{profile?.discord}</p>
+                  <p className="lattice-form-label mb0 font-gray" style={{fontSize: "9px"}}>{profile?.discord}</p>
                 </Grid>
               </div>
 

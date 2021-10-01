@@ -139,8 +139,9 @@ function ResetText() {
           variant="contained"
           color="primary"
           onClick={resetConfirmationDialog.open}
+          style={{ marginBottom: "20px"}}
         >Reset</Button>
-
+        <br></br>
         <p>
           Or if you have already found your teammates, you can mark your profile as not visible.
         </p>
@@ -149,8 +150,8 @@ function ResetText() {
           variant="contained"
           color="primary"
           onClick={toggleVisibilityConfirmationDialog.open}
+          style={{ marginBottom: "20px"}}
         >Mark not visible</Button>
-
         <p className="wait-text">
           Or you can just wait for more people to join Lattice!
         </p>

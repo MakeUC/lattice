@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   snackbar: {
-    backgroundColor: '#1a1aaa',
+    backgroundColor: '#211d39',
     // fontFamily: 'Open Sans'
   }
 }));

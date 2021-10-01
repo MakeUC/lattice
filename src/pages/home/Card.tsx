@@ -3,6 +3,7 @@ import { animated, interpolate } from "react-spring/hooks";
 import { HydratedProfile } from "../../interfaces/profile";
 
 import "../../styles/Card.scss";
+import "nes.css/css/nes.min.css";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
   const { skills, name, idea, lookingFor, inPerson }: HydratedProfile = data[i];
