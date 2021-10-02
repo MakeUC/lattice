@@ -63,7 +63,7 @@ export default function() {
   return (
     <Container className="nav-bar-margin">
       <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
-        <h1 className="title">Lattice Account</h1>
+        <h1 className="title font-black">Lattice Account</h1>
           {isLoading ? `Loading...` :
             <>
               <div className="mb4">
