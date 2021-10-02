@@ -11,6 +11,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "axios": "^0.21.1",
     "material-ui-popup-state": "^1.6.1",
+    "nes.css": "^2.3.0",
     "node": "^14.8.0",
     "prop-types": "^15.7.2",
     "react": "16.8.0",

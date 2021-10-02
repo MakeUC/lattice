@@ -3,6 +3,7 @@ import { animated, interpolate } from "react-spring/hooks";
 import { HydratedProfile } from "../../interfaces/profile";
 
 import "../../styles/Card.scss";
+import "nes.css/css/nes.min.css";
 
 const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
   const { skills, name, idea, lookingFor, inPerson }: HydratedProfile = data[i];
@@ -65,15 +66,15 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
                   className="skill-row"
                   style={{
                     marginTop: `-35px`,
-                    marginLeft: `5px`,
-                    marginRight: `5px`,
+                    marginLeft: `20px`,
+                    marginRight: `20px`,
                     display: `flex`,
                     justifyContent: `center`,
                     borderRadius: `10px`,
                   }}
                 >
                   {row.map((skill, index) => (
-                      <div key={index}>
+                      <div key={index} style={{marginLeft: '5px', marginRight: '5px'}}>
                         <img
                           src={skill.icon}
                           alt={skill.title}
@@ -90,15 +91,15 @@ const Card = ({ i, x, y, rot, scale, trans, bind, data }: any) => {
             className="skill-row"
             style={{
               marginTop: `-35px`,
-              marginLeft: `15px`,
-              marginRight: `15px`,
+              marginLeft: `20px`,
+              marginRight: `20px`,
               display: `flex`,
               justifyContent: `center`,
               borderRadius: `10px`,
             }}
           >
             {lookingFor.map((look, index) => (
-              <div key={index}>
+              <div key={index} style={{marginLeft: '5px', marginRight: '5px'}}>
                 <img
                   src={look.icon}
                   alt={look.title}

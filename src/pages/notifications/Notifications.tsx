@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   snackbar: {
-    backgroundColor: '#1a1aaa',
+    backgroundColor: '#211d39',
     // fontFamily: 'Open Sans'
   }
 }));
@@ -82,7 +82,7 @@ export default function() {
                 message={`You matched with ${notification.to?.name} ${notification.notification?.read ? `` : `(NEW)`}`}
                 action={action}
                 onClick={() => openNotificationDetails(notification)}
-                style={{ marginBottom: `10px` }}
+                style={{ marginBottom: `10px`, backgroundColor: "#fff", color: "#000" }}
               />
             )}
           </div> :
