@@ -5,7 +5,7 @@ import { WrapperComponent } from '../interfaces/wrapper';
 const theme = createMuiTheme({
   palette: { 
     primary: {
-      main: `#4F3287`
+      main: `#FC7F3F`
     }
   }
 });
