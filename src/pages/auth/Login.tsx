@@ -64,7 +64,7 @@ export default function InputWithIcon() {
           <h1 className="title">Lattice Log In</h1>
           <div className="font-opensans tc mb3">
             <p className="mb4">
-              Discover and connect with RevolutionUC 2021 hackers from across the world!
+              Discover and connect with RevolutionUC 2022 hackers from across the world!
             </p>
             <Box color="error.main" textAlign="center">{failedToSubmit && failedToSubmit.message}</Box>
             <div className={classes.margin}>
