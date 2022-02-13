@@ -6,7 +6,7 @@ const Spinner = ({ size = `100px` }) => {
   return <div id="spinner-container">
     <img
       id="spinner"
-      src="/logo.png"
+      src="/logo.svg"
       alt="Lattice logo"
       style={{ width: size, height: size }}
     />
