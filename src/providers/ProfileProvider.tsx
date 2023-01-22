@@ -1,27 +1,33 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { Profile, ProfileWithEmail } from '../interfaces/profile';
-import { WrapperComponent } from '../interfaces/wrapper';
-import ProfileService from '../services/ProfileService';
-import { useAuth } from './AuthProvider';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { Profile, ProfileWithEmail } from "../interfaces/profile";
+import { WrapperComponent } from "../interfaces/wrapper";
+import ProfileService from "../services/ProfileService";
+import { useAuth } from "./AuthProvider";
 
 interface contextType {
-  isLoading: boolean,
-  failedToLoad: any,
-  profile?: ProfileWithEmail,
-  getProfile: () => Promise<void>,
-  updateProfile: (profile: ProfileWithEmail) => void,
-  toggleVisibility: () => Promise<void>,
-  completeTour: (tour: string) => Promise<void>
-};
+  isLoading: boolean;
+  failedToLoad: any;
+  profile?: ProfileWithEmail;
+  getProfile: () => Promise<void>;
+  updateProfile: (profile: ProfileWithEmail) => void;
+  toggleVisibility: () => Promise<void>;
+  completeTour: (tour: string) => Promise<void>;
+}
 
-const context = createContext<contextType| null>(null);
+const context = createContext<contextType | null>(null);
 
 export const ProfileProvider: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
 
-  const [ isLoading, setLoading ] = useState(true);
-  const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ profile, setProfile ] = useState<ProfileWithEmail>();
+  const [isLoading, setLoading] = useState(true);
+  const [failedToLoad, setFailedToLoad] = useState<Error | null>(null);
+  const [profile, setProfile] = useState<ProfileWithEmail>();
 
   const getProfile = useCallback(async () => {
     try {
@@ -32,19 +38,21 @@ export const ProfileProvider: WrapperComponent = ({ children }) => {
 
       setProfile(profile);
 
-      if(!profile.started) {
+      if (!profile.started) {
         ProfileService.startProfile(token!);
       }
     } catch (err) {
-      setFailedToLoad(err);
+      if (err instanceof Error) {
+        setFailedToLoad(err);
+      }
     } finally {
       setLoading(false);
     }
-  }, [ token ]);
+  }, [token]);
 
   useEffect(() => {
     token && getProfile();
-  }, [ token, getProfile ]);
+  }, [token, getProfile]);
 
   const updateProfile = async (profile: Profile) => {
     const newProfile = await ProfileService.updateProfile(token!, profile);
@@ -52,7 +60,10 @@ export const ProfileProvider: WrapperComponent = ({ children }) => {
   };
 
   const toggleVisibility = async () => {
-    const newProfile = await ProfileService.setVisible(token!, !profile?.visible);
+    const newProfile = await ProfileService.setVisible(
+      token!,
+      !profile?.visible
+    );
     setProfile(newProfile);
   };
 
@@ -60,14 +71,19 @@ export const ProfileProvider: WrapperComponent = ({ children }) => {
     try {
       await ProfileService.completeTour(token!, tour);
       await getProfile();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   };
 
   const contextValue: contextType = {
-    isLoading, failedToLoad, profile,
-    getProfile, updateProfile, toggleVisibility, completeTour
+    isLoading,
+    failedToLoad,
+    profile,
+    getProfile,
+    updateProfile,
+    toggleVisibility,
+    completeTour,
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

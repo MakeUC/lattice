@@ -6,31 +6,28 @@
   "private": true,
   "homepage": "https://lattice.revolutionuc.com",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
+    "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "axios": "^0.20.0",
-    "material-ui-popup-state": "^1.6.1",
-    "node": "^14.8.0",
+    "axios": "^1.2.3",
+    "material-ui-popup-state": "^5.0.4",
     "prop-types": "^15.7.2",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-hook-form": "^6.7.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.42.1",
+    "react-router-dom": "^6.7.0",
     "react-spring": "^7.2.8",
     "react-with-gesture": "^4.0.2",
-    "reactour": "^1.18.0",
+    "reactour": "^1.19.0",
     "sass": "^1.26.10",
     "styled-components": "^4.0.0",
     "tachyons": "^4.12.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.9.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc & vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,11 +39,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/node": "^14.14.10",
-    "@types/react": "^17.0.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
-    "gh-pages": "^3.1.0"
+    "@vitejs/plugin-react": "^3.0.1",
+    "gh-pages": "^3.1.0",
+    "vite": "^4.0.4",
+    "vite-plugin-svgr": "^2.4.0",
+    "vite-tsconfig-paths": "^4.0.5"
   }
 }

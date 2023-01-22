@@ -1,20 +1,26 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { ScoredProfile } from '../interfaces/profile';
-import { Skill } from '../interfaces/skill';
-import { WrapperComponent } from '../interfaces/wrapper';
-import ProfileService from '../services/ProfileService';
-import SkillService from '../services/SkillService';
-import { useAuth } from './AuthProvider';
-import { useProfile } from './ProfileProvider';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { ScoredProfile } from "../interfaces/profile";
+import { Skill } from "../interfaces/skill";
+import { WrapperComponent } from "../interfaces/wrapper";
+import ProfileService from "../services/ProfileService";
+import SkillService from "../services/SkillService";
+import { useAuth } from "./AuthProvider";
+import { useProfile } from "./ProfileProvider";
 
 interface contextType {
-  isLoading: boolean,
-  failedToLoad: any,
-  skills: Array<Skill>,
-  profiles: Array<ScoredProfile>,
-  getSkills: () => Promise<void>,
-  getProfiles: () => Promise<void>
-};
+  isLoading: boolean;
+  failedToLoad: any;
+  skills: Array<Skill>;
+  profiles: Array<ScoredProfile>;
+  getSkills: () => Promise<void>;
+  getProfiles: () => Promise<void>;
+}
 
 const context = createContext<contextType | null>(null);
 
@@ -22,11 +28,11 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
   const { profile } = useProfile();
 
-  const [ isLoading, setLoading ] = useState(false);
-  const [ failedToLoad, setFailedToLoad ] = useState(null);
-  const [ skills, setSkills ] = useState<Array<Skill>>([]);
+  const [isLoading, setLoading] = useState(false);
+  const [failedToLoad, setFailedToLoad] = useState<Error | null>(null);
+  const [skills, setSkills] = useState<Array<Skill>>([]);
 
-  const [ profiles, setProfiles ] = useState<Array<ScoredProfile>>([]);
+  const [profiles, setProfiles] = useState<Array<ScoredProfile>>([]);
 
   const getSkills = useCallback(async () => {
     try {
@@ -35,10 +41,10 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
     } catch (err) {
       console.error(err);
     }
-  }, [ token ]);
+  }, [token]);
 
   const getProfiles = useCallback(async () => {
-    if(!profile?.visible) return;
+    if (!profile?.visible) return;
     try {
       setLoading(true);
       setFailedToLoad(null);
@@ -47,7 +53,9 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
 
       setProfiles(profiles);
     } catch (err) {
-      setFailedToLoad(err);
+      if (err instanceof Error) {
+        setFailedToLoad(err);
+      }
     } finally {
       setLoading(false);
     }
@@ -55,16 +63,19 @@ export const ProfileListProvider: WrapperComponent = ({ children }) => {
 
   useEffect(() => {
     token && getSkills();
-  }, [ token, getSkills ]);
+  }, [token, getSkills]);
 
   useEffect(() => {
     token && getProfiles();
-  }, [ token, getProfiles ]);
+  }, [token, getProfiles]);
 
   const contextValue: contextType = {
-    isLoading, failedToLoad,
-    skills, profiles,
-    getSkills, getProfiles
+    isLoading,
+    failedToLoad,
+    skills,
+    profiles,
+    getSkills,
+    getProfiles,
   };
 
   return <context.Provider value={contextValue}>{children}</context.Provider>;

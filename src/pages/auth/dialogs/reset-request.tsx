@@ -1,29 +1,34 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { TextField } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-export interface ResetRequestForm { email: string }
+export interface ResetRequestForm {
+  email: string;
+}
 
-export default function({ show, onClose, onSuccess }:
-  { 
-    show: boolean,
-    onClose: () => void,
-    onSuccess: (data: ResetRequestForm) => Promise<void>
-  }
-) {
-  const { register, handleSubmit, errors } = useForm<ResetRequestForm>();
+export default function ({
+  show,
+  onClose,
+  onSuccess,
+}: {
+  show: boolean;
+  onClose: () => void;
+  onSuccess: (data: ResetRequestForm) => Promise<void>;
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ResetRequestForm>();
 
   return (
     <div>
-      <Dialog
-        open={show}
-        onClose={onClose}
-      >
+      <Dialog open={show} onClose={onClose}>
         <form onSubmit={handleSubmit(onSuccess)}>
           <DialogTitle>Request Password Reset</DialogTitle>
           <DialogContent>
@@ -35,7 +40,7 @@ export default function({ show, onClose, onSuccess }:
               type="email"
               margin="normal"
               fullWidth
-              inputRef={register({ required: `This field is required` })}
+              {...register("email", { required: `This field is required` })}
               error={!!errors.email}
               helperText={errors.email?.message}
             />

@@ -1,12 +1,12 @@
-import React from 'react';
-import { useAuth } from '../providers/AuthProvider';
-import { Redirect } from 'react-router-dom';
-import { WrapperComponent } from '../interfaces/wrapper';
+import React from "react";
+import { useAuth } from "../providers/AuthProvider";
+import { Navigate } from "react-router-dom";
+import { WrapperComponent } from "../interfaces/wrapper";
 
 const AuthRoute: WrapperComponent = ({ children }) => {
   const { token } = useAuth();
 
-  if(token) return <Redirect to="/" />
+  if (token) return <Navigate to="/" />;
 
   return <>{children}</>;
 };

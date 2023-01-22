@@ -1,11 +1,11 @@
-@import "~tachyons";
+@import "tachyons";
 @import "variables";
 @import "font";
 
 .title {
   @extend .font-primary;
-  @extend .tc;
-  @extend .mb4;
+  margin-bottom: 2rem;
+  text-align: center;
   text-decoration: underline;
   text-decoration-color: $secondary-dark;
 }

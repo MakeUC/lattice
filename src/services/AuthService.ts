@@ -1,20 +1,27 @@
-import Axios from 'axios';
-import { apiHost } from './Api';
+import Axios from "axios";
+import { apiHost } from "./Api";
 
 const apiUrl = `${apiHost}/auth`;
 
 export default {
-
-  async getRegistrantEmail(id: string): Promise<string> {
+  async getRegistrantEmail(id: string) {
     try {
       const res = await Axios({
         url: `${apiUrl}/email/${id}`,
-        method: `GET`
+        method: `GET`,
       });
-  
-      return res.data;
+
+      return res.data! as string;
     } catch (err) {
-      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+      if (Axios.isAxiosError(err)) {
+        if (err.response) {
+          // TODO: Fix TS any
+          const error = err.response.data as any;
+          throw new Error(
+            error.message || `Cannot reach server, please try again later`
+          );
+        }
+      }
     }
   },
 
@@ -23,12 +30,15 @@ export default {
       const res = await Axios({
         url: `${apiUrl}/register`,
         method: `POST`,
-        data: { registrantId, password }
+        data: { registrantId, password },
       });
-  
+
       return res.data;
     } catch (err) {
-      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
   },
 
@@ -37,29 +47,39 @@ export default {
       const res = await Axios({
         url: `${apiUrl}/login`,
         method: `POST`,
-        data: { email, password }
+        data: { email, password },
       });
-  
+
       return res.data;
     } catch (err) {
-      throw new Error(err.response?.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response?.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
   },
 
-  async changePassword(token: string, oldPassword: string, newPassword: string): Promise<void> {
+  async changePassword(
+    token: string,
+    oldPassword: string,
+    newPassword: string
+  ): Promise<void> {
     try {
       await Axios({
         url: `${apiUrl}/password`,
         method: `PUT`,
         data: { oldPassword, newPassword },
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       return;
     } catch (err) {
-      throw new Error(err.response?.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response?.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
   },
 
@@ -68,12 +88,15 @@ export default {
       await Axios({
         url: `${apiUrl}/reset`,
         method: `POST`,
-        data: { email }
+        data: { email },
       });
-  
+
       return;
     } catch (err) {
-      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
   },
 
@@ -81,12 +104,15 @@ export default {
     try {
       const res = await Axios({
         url: `${apiUrl}/reset/${resetToken}`,
-        method: `GET`
+        method: `GET`,
       });
-  
+
       return res.data;
     } catch (err) {
-      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
   },
 
@@ -95,12 +121,15 @@ export default {
       await Axios({
         url: `${apiUrl}/reset`,
         method: `PUT`,
-        data: { resetToken, password }
+        data: { resetToken, password },
       });
-  
+
       return;
     } catch (err) {
-      throw new Error(err.response.data.message || `Cannot reach server, please try again later`);
+      throw new Error(
+        err.response.data.message ||
+          `Cannot reach server, please try again later`
+      );
     }
-  }
+  },
 };
