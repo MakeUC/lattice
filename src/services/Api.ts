@@ -1,4 +1,4 @@
-const env = import.meta.env.NODE_ENV;
+const env = import.meta.env.VITE_NODE_ENV;
 
 export const apiHost =
   env === `development`

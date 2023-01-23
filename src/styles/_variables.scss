@@ -1,7 +1,7 @@
 $black: #000;
-$primary-dark: #FC7F3F;
-$primary: #FC7F3F;
-$secondary-dark: #254441;
-$secondary: #CBFF4D;
+$primary: #fc7a1e;
+$primary-dark: darken($primary, 10%);
+$secondary: #87d9f7;
+$secondary-dark: darken($secondary, 20%);
 $white: #fff8f8;
-$gray: #43AA8B;
+$gray: #333;

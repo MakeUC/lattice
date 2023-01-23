@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
   box-sizing: border-box;
 }
@@ -10,7 +12,7 @@ body {
   width: 100%;
   user-select: none;
   font-family: "Lato", sans-serif;
-  background: #43AA8B;
+  background: $secondary-dark;
 }
 
 .deck {

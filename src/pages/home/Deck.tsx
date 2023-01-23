@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-// @ts-ignore 
-import { useSprings } from 'react-spring/hooks';
-import { useGesture } from 'react-with-gesture';
+import React, { useState } from "react";
+// @ts-ignore
+import { useSprings } from "react-spring/hooks";
+import { useGesture } from "react-with-gesture";
 
-import { useMatch } from '../../providers/MatchProvider';
-import { useProfileList } from '../../providers/ProfileListProvider';
-import Card from './Card';
-import '../../styles/Deck.css';
-import { HydratedProfile } from '../../interfaces/profile';
+import { useMatch } from "../../providers/MatchProvider";
+import { useProfileList } from "../../providers/ProfileListProvider";
+import Card from "./Card";
+import "../../styles/Deck.scss";
+import { HydratedProfile } from "../../interfaces/profile";
 
 const to = (i: number) => ({
   x: 0,
@@ -24,9 +24,7 @@ const trans = (r: number, s: number) =>
     r / 10
   }deg) rotateZ(${r}deg) scale(${s})`;
 
-function Deck({ data }: {
-  data: Array<HydratedProfile>
-}) {
+function Deck({ data }: { data: Array<HydratedProfile> }) {
   const { getProfiles } = useProfileList();
   const { swipeProfile } = useMatch();
 
@@ -61,7 +59,9 @@ function Deck({ data }: {
       let swipePromise: Promise<void> | null = null;
 
       if (!down && trigger) {
-        swipePromise = onSwipe(data[index], (dir === 1)).then(() => console.log(`swiped`));
+        swipePromise = onSwipe(data[index], dir === 1).then(() =>
+          console.log(`swiped`)
+        );
         gone.add(index);
       }
 
@@ -85,27 +85,29 @@ function Deck({ data }: {
       });
 
       if (!down && gone.size === data.length) {
-        swipePromise?.then(onFinish);   // eslint-disable-line no-unused-expressions
+        swipePromise?.then(onFinish); // eslint-disable-line no-unused-expressions
         // setTimeout(() => gone.clear() || set((i) => to(i)), 600);
       }
     }
   );
 
-  return <div className="deck" style={{ position: `fixed` }}>
-    {props.map(({ x, y, rot, scale }: any, i: number) => (
-      <Card
-        key={i}
-        i={i}
-        x={x}
-        y={y}
-        rot={rot}
-        scale={scale}
-        trans={trans}
-        data={data}
-        bind={bind}
-      />
-    ))}
-  </div>;
+  return (
+    <div className="deck" style={{ position: `fixed` }}>
+      {props.map(({ x, y, rot, scale }: any, i: number) => (
+        <Card
+          key={i}
+          i={i}
+          x={x}
+          y={y}
+          rot={rot}
+          scale={scale}
+          trans={trans}
+          data={data}
+          bind={bind}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default Deck;
