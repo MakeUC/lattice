@@ -6,13 +6,13 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PassOutlinedIcon from "@material-ui/icons/VpnKeyOutlined";
 import { Button, Box } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-
 import { useAuth } from "../../providers/AuthProvider";
 import useDialogControl from "../../components/DialogControl.hook";
 import Spinner from "../../components/Spinner";
 import ResetRequest, { ResetRequestForm } from "./dialogs/reset-request";
 import ResetRequestAlert from "./dialogs/reset-request-alert";
 import { useForm } from "react-hook-form";
+import { ParticleBackground } from "../../components/ParticleBackground";
 
 interface LoginForm {
   email: string;
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
+
+
 
 export default function InputWithIcon() {
   const classes = useStyles();
@@ -65,8 +67,9 @@ export default function InputWithIcon() {
 
   return (
     <Container>
+      <ParticleBackground />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3">
+        <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3" style={{position:'relative'}}>
           <h1 className="title">Lattice Log In</h1>
           <div className="font-opensans tc mb3">
             <p className="mb4">
