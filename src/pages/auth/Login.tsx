@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -13,6 +13,7 @@ import ResetRequest, { ResetRequestForm } from "./dialogs/reset-request";
 import ResetRequestAlert from "./dialogs/reset-request-alert";
 import { useForm } from "react-hook-form";
 import { ParticleBackground } from "../../components/ParticleBackground";
+import { loadFull } from "tsparticles";
 
 interface LoginForm {
   email: string;
@@ -65,9 +66,21 @@ export default function InputWithIcon() {
     }
   };
 
+  const particlesInit = useCallback(async engine => {
+    console.log(engine);
+    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(engine);
+}, []);
+
+const particlesLoaded = useCallback(async container => {
+  await console.log(container);
+}, []);
+
   return (
     <Container>
-      <ParticleBackground />
+      <ParticleBackground id="tsparticles" init={particlesInit} loaded={particlesLoaded}/>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white mv3 mv5-ns pa3 ph5-ns br3" style={{position:'relative'}}>
           <h1 className="title">Lattice Log In</h1>

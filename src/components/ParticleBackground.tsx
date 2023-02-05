@@ -2,13 +2,15 @@ import { useTheme } from '@material-ui/core';
 import Particles from 'react-tsparticles';
 import React from 'react';
 
-export const ParticleBackground = () => {
+export const ParticleBackground = ( {id, init, loaded} ) => {
 	const theme = useTheme()
 
 	return (
 		<Particles
+			id={id}
+			init={init}
+			loaded={loaded}
 			style={{ position: 'absolute', width: '100%', height: '100%', left: 0, top: 0, zIndex: -3 }}
-			id='tsparticles'
 			options={{
 				background: {
 					color: {
