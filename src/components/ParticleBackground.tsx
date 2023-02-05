@@ -25,10 +25,6 @@ export const ParticleBackground = ( {id, init, loaded} ) => {
 							enable: true,
 							mode: 'push',
 						},
-						onHover: {
-							enable: true,
-							mode: 'bubble',
-						},
 						resize: true,
 					},
 					modes: {
@@ -43,7 +39,7 @@ export const ParticleBackground = ( {id, init, loaded} ) => {
 						},
 						repulse: {
 							distance: 200,
-							duration: 0.4,
+							duration: 0.8,
 						},
 					},
 				},
@@ -66,7 +62,7 @@ export const ParticleBackground = ( {id, init, loaded} ) => {
 						enable: true,
 						outMode: 'out',
 						random: false,
-						speed: 2,
+						speed: 0.75,
 						straight: false,
 					},
 					number: {
