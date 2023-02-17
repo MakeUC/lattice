@@ -40,7 +40,7 @@ export default function () {
 
   const [isLoading, setLoading] = useState(true);
   const [failedToLoad, setFailedToLoad] = useState<Error>();
-  const [email, setEmail] = useState<string>();
+  const [email, setEmail] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
   const [failedToSubmit, setFailedToSubmit] = useState<Error>();
 
@@ -107,13 +107,10 @@ export default function () {
                     <TextField
                       name="email"
                       type="email"
-                      id="input-with-icon-grid"
                       variant="outlined"
                       disabled={true}
-                      value={email}
-                      {...registerInput("email", {
-                        required: `Invalid email, please check the link provided`,
-                      })}
+                      defaultValue={email}
+                      {...registerInput("email")}
                       fullWidth
                     />
                     {errors.email && (
@@ -135,7 +132,6 @@ export default function () {
                     <TextField
                       name="password"
                       type="password"
-                      id="input-with-icon-grid"
                       variant="outlined"
                       fullWidth
                       {...registerInput("password", {
@@ -167,7 +163,6 @@ export default function () {
                     <TextField
                       name="confirmPassword"
                       type="password"
-                      id="input-with-icon-grid"
                       variant="outlined"
                       fullWidth
                       {...registerInput("confirmPassword", {
